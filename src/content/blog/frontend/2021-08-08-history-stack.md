@@ -1,13 +1,9 @@
 ---
 title: "History-stack"
-post_date: '2021-08-08'
-# menu_order: 1
-post_status: publish
-post_excerpt: "或許 pushState 與 replaceState 這兩個方法你可能沒聽過，但是瀏覽器「上一頁、下一頁」功能你一定不陌生，其實這兩個 API 是瀏覽器提供給開發者操作瀏覽紀錄用的，透過這兩個 API 並搭配事件處理，我們就可以將瀏覽器預設的「上一頁下一頁」修改成我們想要的客製化結果。"
-featured_image: "/_images/frontend-use-case.jpg"
-taxonomy:
-    category: ["frontend"]
-    post_tag: ["react","javascript"]
+description: "或許 pushState 與 replaceState 這兩個方法你可能沒聽過，但是瀏覽器「上一頁、下一頁」功能你一定不陌生，其實這兩個 API 是瀏覽器提供給開發者操作瀏覽紀錄用的，透過這兩個 API 並搭配事件處理，我們就可以將瀏覽器預設的「上一頁下一頁」修改成我們想要的客製化結果。"
+date: '2021-08-08'
+tags: ["react", "javascript", "frontend"]
+cover: "/_images/frontend-use-case.jpg"
 ---
 
 或許 `pushState` 與 `replaceState` 這兩個方法你可能沒聽過，但是瀏覽器「上一頁、下一頁」功能你一定不陌生，其實這兩個 API 是瀏覽器提供給開發者操作瀏覽紀錄用的，透過這兩個 API 並搭配事件處理，我們就可以將瀏覽器預設的「上一頁下一頁」修改成我們想要的客製化結果。

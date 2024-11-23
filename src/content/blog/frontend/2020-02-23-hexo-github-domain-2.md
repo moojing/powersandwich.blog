@@ -1,14 +1,9 @@
 ---
 title: "個人技術站一把罩！部落格建置大全（二）- 將 Github Page 串上自己的域名"
-post_date: '2020-02-23'
-# menu_order: 1
-post_status: publish
-post_excerpt: "上週提到了使用 Hexo 這個工具來架設個人部落格，並放到自己 Github Page 上的方法。
-這次我們要來看看怎麼把架好部落格的 Github Page ，串上自己擁有的域名( ex. blabla.com ) "
-featured_image: "/_images/frontend-gandi-domains.png"
-taxonomy:
-    category: ["frontend"]
-    post_tag: ["github"]
+date: '2020-02-23'
+description: "上週提到了使用 Hexo 這個工具來架設個人部落格，並放到自己 Github Page 上的方法。這次我們要來看看怎麼把架好部落格的 Github Page ，串上自己擁有的域名( ex. blabla.com ) "
+cover: "/_images/frontend-gandi-domains.png"
+tags: ["github", "frontend"]
 ---
 
 上週提到了使用 Hexo 這個工具來架設個人部落格，並放到自己 Github Page 上的方法。這次我們要來看看怎麼把架好部落格的 Github Page ，串上自己擁有的域名( ex. blabla.com ) ，所以在這篇文章內將會對 DNS 與相關設定有一定部分的講解跟介紹。

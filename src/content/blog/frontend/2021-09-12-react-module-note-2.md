@@ -1,13 +1,9 @@
 ---
 title: "React 元件庫製造紀事錄 (二) – package.json 與 Webpack"
-post_date: '2021-09-12'
-# menu_order: 1
-post_status: publish
-post_excerpt: "在元件庫系列文的第二部分，會試著用 webpack 來打包模組，並把過程記錄下來。我們在前面的文章裡面提到了許多種類的 JavaScript 模組系統，而模組系統的差異在 SSR 架構下，我們要製作元件庫時可能會是一個需要處理的問題，除了把所有元件庫的程式碼直接轉換成 UMD 的模組系統，我們也可以透過 package.json 來做處理，這一點我們也會一併說明。"
-featured_image: "/_images/frontend-npm-module.png"
-taxonomy:
-    category: ["frontend"]
-    post_tag: ["react","javascript"]
+date: '2021-09-12'
+tags: ["react", "javascript", "frontend"]
+cover: "/_images/frontend-npm-module.png"
+description: "在元件庫系列文的第二部分，會試著用 webpack 來打包模組，並把過程記錄下來。我們在前面的文章裡面提到了許多種類的 JavaScript 模組系統，而模組系統的差異在 SSR 架構下，我們要製作元件庫時可能會是一個需要處理的問題，除了把所有元件庫的程式碼直接轉換成 UMD 的模組系統，我們也可以透過 package.json 來做處理，這一點我們也會一併說明。"
 ---
 
 在元件庫系列文的第二部分，會試著用 webpack 來打包模組，並把過程記錄下來。我們在前面的文章裡面提到了許多種類的 JavaScript 模組系統，而模組系統的差異在 SSR 架構下，我們要製作元件庫時可能會是一個需要處理的問題，除了把所有元件庫的程式碼直接轉換成 UMD 的模組系統，我們也可以透過 package.json 來做處理，這一點我們也會一併說明。

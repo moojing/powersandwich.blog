@@ -1,12 +1,9 @@
 ---
 title: "React 元件庫製造紀事錄 (三) – Rollup Bundler 實作，並探究 Webpack 的 Tree Shaking"
-post_date: '2021-10-12'
-# menu_order: 1
-post_status: publish
-post_excerpt: "在上一篇模組化系列文章的第二篇，我們說明了使用 webpack 來打包模組程式碼、並說明了 package.json 在我們想要打包自己的 Npm 模組時扮演了什麼樣的角色。在今天這一章節，我們會繼續看到怎麼用同樣是打包工具（ Bundler ) Rollup 來進行打包，並解釋為什麼最後會選用它來進行實作的最大來由 —— Tree Shaking。"
-taxonomy:
-    category: ["frontend"]
-    post_tag: ["react","javascript"]
+date: '2021-10-12'
+description: "在上一篇模組化系列文章的第二篇，我們說明了使用 webpack 來打包模組程式碼、並說明了 package.json 在我們想要打包自己的 Npm 模組時扮演了什麼樣的角色。在今天這一章節，我們會繼續看到怎麼用同樣是打包工具（ Bundler ) Rollup 來進行打包，並解釋為什麼最後會選用它來進行實作的最大來由 —— Tree Shaking。"
+cover: "/_images/frontend-npm-module.png"
+tags: ["react","javascript"]
 ---
 
 ## Outline

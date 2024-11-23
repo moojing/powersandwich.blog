@@ -1,13 +1,9 @@
 ---
 title: "React 元件庫製造紀事錄 (ㄧ) – 問題說明與第一個麻煩：JavaScript 的模組系統"
-post_date: '2021-08-18'
-# menu_order: 1
-post_status: publish
-post_excerpt: "這陣子為了解決了一個讓我蠻頭痛的問題，第一次接觸前端 module 的打包，也了解到原來平常我們很方便能夠用 Npm 或 Yarn 這類套件管理器裝一裝就能夠直接使用的一些第三方工具在功能開發完之後，為了要讓別人能夠使用所做的處理上並不是這麼的單純，隨著使用方式的不同，要處理的部份也會有所不一樣。"
-featured_image: "/_images/frontend-npm-module.png"
-taxonomy:
-    category: ["frontend"]
-    post_tag: ["react","javascript"]
+date: '2021-08-18'
+description: "這陣子為了解決了一個讓我蠻頭痛的問題，第一次接觸前端 module 的打包，也了解到原來平常我們很方便能夠用 Npm 或 Yarn 這類套件管理器裝一裝就能夠直接使用的一些第三方工具在功能開發完之後，為了要讓別人能夠使用所做的處理上並不是這麼的單純，隨著使用方式的不同，要處理的部份也會有所不一樣。"
+cover: "/_images/frontend-npm-module.png"
+tags: ["react", "javascript", "frontend"]
 ---
 
 這陣子為了解決了一個讓我蠻頭痛的問題，第一次接觸前端 module 的打包，也了解到原來平常我們很方便能夠用 Npm 或 Yarn 這類套件管理器裝一裝就能夠直接使用的一些第三方工具在功能開發完之後，為了要讓別人能夠使用所做的處理上並不是這麼的單純，隨著使用方式的不同，要處理的部份也會有所不一樣。
