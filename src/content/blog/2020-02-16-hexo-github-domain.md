@@ -2,7 +2,7 @@
 title: "個人技術站一把罩！部落格建置大全（一）- 使用 Hexo 搭配 Github Page 建置自己的部落格"
 date: '2020-02-16'
 description: "這是我參加六角全馬鐵人挑戰的第二週，在比賽的一開始，就讓我來分享如何在 Github Page 上面架設自己的個人頁面，並串上自己購買的網域名稱（如果有的話）。相信各位工程師們多少都會聽過或看過其他工程師們使用當作自己的部落格，對其他人分享自己經歷及技術，或是成長過程中領悟到的見解。"
-cover: "../../assets/frontend-theme.png"
+cover: "../../assets/frontend-hexo-theme.png"
 tags: ["frontend", "github", "hexo"]
 ---
 
@@ -22,7 +22,7 @@ tags: ["frontend", "github", "hexo"]
 
 Hexo 是一套可以快速幫你建置個人部落格的工具，在官方提供的[頁面](https://hexo.io/themes/)你可以找到很多別人做好的部落格模板，並直接套用到自己的專案。
 
-![Theme](../../assets/frontend-theme.png)
+![Theme](../../assets/frontend-hexo-theme.png)
 
 首先讓我們先把 hexo 的建置工具裝到系統內，使用以下指令：
 
