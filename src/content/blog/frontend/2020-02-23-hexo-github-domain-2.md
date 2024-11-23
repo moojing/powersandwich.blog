@@ -1,0 +1,123 @@
+---
+title: "個人技術站一把罩！部落格建置大全（二）- 將 Github Page 串上自己的域名"
+post_date: '2020-02-23'
+# menu_order: 1
+post_status: publish
+post_excerpt: "上週提到了使用 Hexo 這個工具來架設個人部落格，並放到自己 Github Page 上的方法。
+這次我們要來看看怎麼把架好部落格的 Github Page ，串上自己擁有的域名( ex. blabla.com ) "
+featured_image: "/_images/frontend-gandi-domains.png"
+taxonomy:
+    category: ["frontend"]
+    post_tag: ["github"]
+---
+
+上週提到了使用 Hexo 這個工具來架設個人部落格，並放到自己 Github Page 上的方法。這次我們要來看看怎麼把架好部落格的 Github Page ，串上自己擁有的域名( ex. blabla.com ) ，所以在這篇文章內將會對 DNS 與相關設定有一定部分的講解跟介紹。
+
+## Outline
+
+- 域名購買與域名商介紹
+- 什麼是 DNS ?
+- A Record 與 CNAME
+- A Record 與 CNAME 設定
+- Github Page 的域名設定
+- 總結
+- 參考資料
+
+## 域名購買與域名商介紹
+
+首先在開始進行串接之前，你要先有域名，而域名可以透過域名商來做購買，這些域名商有很多，相同域名在不同商家的價格也會不太ㄧ樣，或是某些域名只能在某些域名商買得到，這邊推薦幾個我自己用過的：[Gandi](https://www.gandi.net/en)、[網路中文](https://www.net-chinese.com.tw/nc/)、[Google Domains](https://domains.google/) 。這篇文章會用 Gandi 來做示範，但其實這些網站上購買的流程都差不多。
+
+![gandi](/_images/frontend-gandi.png)
+
+在網站上購買完域名之後，就可以在 Domains 頁面看到自己擁有的域名。點擊進入各個域名就可以前往個別的設定頁面，今天會以我之前買的多出來的域名 **[cowboybebop.space](http://cowboybebop.space)** 為例。
+
+![gandi-domains](/_images/frontend-gandi-domains.png)
+
+找到 「 DNS Records 」的分頁，會看到很多，會看到一堆很像神秘魔法咒語的設定值，今天不會逐一介紹，但這邊我們有必要先了解一下什麼是 DNS。
+
+![gandi-dnssetting](/_images/frontend-gandi-dnssetting.png)
+
+## 什麼是 DNS ?
+
+DNS (Domain Name Server) ，直翻成中文是網域名稱伺服器，可以理解為「負責處理域名的伺服器」，為什麼域名還會需要處理呢？我們在使用網際網路瀏覽網頁時所看到的內容，其實是從你使用的裝置（手機、電腦或平板）連出去對另外一台裝置（也就是伺服器）索取回來的。而兩者之間的溝通，則是以 IP 位址來找到正確的伺服器，IP 位置就像現實世界的門牌地址ㄧ樣，讓其他人可以順利找到對應的位置。
+
+但是我們每天經常使用的網站這麼多，像是 Facebook 、Gmail 、Dcard、Slack，如果世界上所有的網站，都使用 IP 位置來做位置的辨別，那麼你可以想像，我們可能要熟記好幾種數字組合才能夠維持正常的生活。
+
+DNS 的出現就是為了解決這個問題，如同我們現在在生活中所經歷的，只要在搜尋列上輸入 [facebook.com](http://facebook.com) 就能夠快速前往臉書的網站，這是因為 DNS 透過給每個 IP 位置取個名字，把這些原本只有電腦能夠理解的位置數據，變成人類也很好記憶、理解的名稱，讓各種網站應用能夠更加融入我們的生活中。
+
+![DNS-Flow](/_images/frontend-DNS-Flow.jpg)
+
+## A Record 與 CNAME
+
+DNS 相關的設定其實有很多，我們就是透過這些設定來告訴 DNS 如何將域名配對到正確的 IP 位址。今天會介紹其中最常會碰到的兩個設定值：
+
+- **A Record** : A 代表 Address ，也就是紀錄 IP Address 與網域名稱的配對，這個紀錄是在設定 Domain Name 時最重要的項目。
+
+- **CNAME** ： CNAME 是網域名稱的別名，用來將子域名指向另外一個主機的域名，最常見的就是將 **[www.abc.com](http://www.abc.com) (子域名）** 指向 **abd.com（購買的主域名）** ，避免使用者因為意外而找不到網站（夠買主域名後，就可以從域名商的設定後台，新增子域名，是不需要另外付費的）。
+
+- **ALIAS** : 與 CNAME 記錄很相像，差別在 CNAME 別名只能用於子域名，而 ALIAS 記錄能夠用在主域名，但這麼做會影響對主域名的域名解析，所以不能與 A 紀錄同時使用。
+
+在了解什麼是 A Record 與 CNAME 與 ALIAS 之後，就讓我們繼續往下設定。要達到串接域名的效果其實不只有一種方式，為了幫助理解以下提供兩種可能的方案。
+
+## 方案一：直接透過 A Record 設定
+
+因為今天的目標是要將自己的域名可以接到 Github Page。如果只是單純的想要把主域名 ( **[cowboybebop.space](http://cowboybebop.space)** ) 串到 Github Page 上，只要將它指向 [Github](http://github.com) 伺服器 的 IP ，也就是：
+
+```
+    185.199.108.153
+```
+
+就可以讓域名順利解析為 Github 主機的位址了，這部分的相關資訊可以在 [Github 官方說明文件](https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain)內找到。而因為我們不只要找到 **[github.](http://github.com)io** 還要找到我們的個人頁面 **[moojitsai.github.](http://moojitsai.github.com)io** ，這部分必須在 Github Page 的 Repo 內做對應的設定，會在接下來的內容中提到。
+
+![gandi-a-record](/_images/frontend-gandi-a-record.png)
+
+## 方案二：CNAME 搭配 ALIAS 設定
+
+設定 CNAME 的目的是因為有時候我們希望使用者是透過加上 www 前綴（[www.cowboybebop.space](http://www.cowboybebop.space/) ) 的網站域名進入我們的網站，在這種情況下只要用戶不記得或不知道要輸入 <www>. 前綴，就會沒辦法順利找到我們的網站應用，所以我們必須要將這些用戶重新導向到我們想要的域名。
+
+通常會在域名前面加上 <www>. 當作網站位置是為了提醒用戶，這是一個公開的網站，藉此提升體驗。但其實加或不加，並不影響網站的功能性，只要有對應正確的設定即可，因為加上了 <www>. 前綴的域名，相對於主域名來說只是子域名而已，只是站在 SEO 或是追蹤流量的角度，一般還是建議兩種方式選一種（要不要加上 <www>.) 並且統一使用，否則 Google 爬蟲會將這兩種域名視為兩個不同的網站。
+
+在方案二中，我想要以將原來沒有 <www>. 前綴的主域名統一導向到有 <www>. 前綴的子域名的方式來完成：
+
+```
+    cowboybebop.space/    -----自動導向到------->    www.cowboybebop.space/
+```
+
+就像上面提到的，ALIAS 記錄可以用在主域名的別名設定，這個設定剛好可以達成上面提到的導向到具有 <www>. 前綴域名的效果。因此我們要這麼做：
+
+1. 將主域名的 ALIAS 設為加上 <www>. 前綴的子域名
+2. 將加上 <www>. 前綴的子域名， CNAME 設為 Github Page 的 URL
+
+提供下圖做為參考，只要看第一跟最後一筆紀錄就可以了，其他是系統預設的設定。
+
+![gandi-cname-alias](/_images/frontend-gandi-cname-alias.png)
+
+透過這樣的方式，我們就能夠完美的將有 <www>. 與沒有 <www>. 前綴的域名都導向到 Github Page 頁面囉！而且統一使用的會是 **<www.cowboybebop.space>** ，也符合前面提到的建議使用方式！
+
+## Github Page 設定
+
+在 Github Page 對應 Repo 內的 Setting 頁面裡的 「**GitHub Pages 區塊**」，可以看到 Custom Domain 欄位，在這邊我們必需告訴 Github 我們想要將自己的 Github Page 與哪一個域名串接，才能夠讓我們自己的域名，正確對應到原來個人的 Github Page Url。
+
+設定完之後，記得把 「Enforce Http」的設定打勾，這樣一來，我們的域名就自動有了 https 憑證，不需要在自己簽發，因為 Github 幫你做掉了，這個功能超方便！
+
+![github-setting-domain](/_images/frontend-github-setting-domain.png)
+
+設定完成後應該可以在 [https://www.cowboybebop.space/](https://www.cowboybebop.space/) 看到頁面了！
+
+![result](/_images/frontend-result.png)
+
+## 總結
+
+域名相關的設定對於網頁相關工作者來說，初期並不是那麼容易了解，因為其中還有許多細節跟環節，像是 DNS 相關的設定也不只有今天介紹的三種，還有其他適用於特殊使用情境的設定，只不過比較特定。像是 ALIAS 紀錄我也是在寫這篇文章的期間才發現，並知道怎麼設定的。
+
+而因為每次 DNS 設定更新之後，必須等待 DNS 伺服器解析後才會生效，因此來來回回也失敗了好幾次才終於達成目標，這部分是我覺得最麻煩的。也感謝我的顧問 [Max](https://maxchou.dev/) 的幫助。那麼這個 Github Page 的部落格系列就暫時到這邊，希望大家都能夠有記錄自己成長過程的專屬頁面囉，那麼就下次見，有發現什麼有趣的東西再來跟大家分享！
+
+## 參考資料
+
+[Managing a custom domain for your GitHub Pages site](https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain)
+
+[CNAME 紀錄](https://docs.gandi.net/zh-hant/domain_names/faq/record_types/cname_record.html)
+
+[為什麼越來越多的網站域名不加「www」前綴？](https://www.zhihu.com/question/20414602)
+
+[我室友 Max](https://maxchou.dev/)
