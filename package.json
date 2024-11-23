@@ -2,6 +2,7 @@
   "name": "astronautical-apogee",
   "version": "1.0.0",
   "license": "MIT",
+  "packageManager": "pnpm@9.12.0",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
