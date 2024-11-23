@@ -2,7 +2,7 @@
 title: "React 元件庫製造紀事錄 (三) – Rollup Bundler 實作，並探究 Webpack 的 Tree Shaking"
 date: '2021-10-12'
 description: "在上一篇模組化系列文章的第二篇，我們說明了使用 webpack 來打包模組程式碼、並說明了 package.json 在我們想要打包自己的 Npm 模組時扮演了什麼樣的角色。在今天這一章節，我們會繼續看到怎麼用同樣是打包工具（ Bundler ) Rollup 來進行打包，並解釋為什麼最後會選用它來進行實作的最大來由 —— Tree Shaking。"
-cover: "/_images/frontend-npm-module.png"
+cover: "../../assets/frontend-npm-module.png"
 tags: ["react","javascript"]
 ---
 
@@ -166,21 +166,21 @@ rollup -c -w rollup.config.js
 - 如果是在你的專案有使用其他 module 的狀況下，通常 Tree Shaking 是專案內的 webpack 或其他 bundler 會做處理，而不是第三方的 module。
 - 另外製作的第三方 module 要負責的事情主要是確保該 module 是有能力被 Tree Shaking 的，這通常代表這個 [module 必須是 ESM 系統](https://webpack.js.org/guides/tree-shaking/)。
 
-![tree shaking doc](/_images/frontend-tree-shaking.png)
+![tree shaking doc](../../assets/frontend-tree-shaking.png)
 
 ## Webpack 真的有 Tree Shaking?
 
 這邊就以一個簡單的 React 範例來做說明。
 
-![tree shaking example](/_images/frontend-tree-shaking-example.png)
+![tree shaking example](../../assets/frontend-tree-shaking-example.png)
 
 這個專案在首頁頁面的元件引用了某個 utils 函式，這個函式又相依了另外一個 constants 檔案內的變數。它們之間的引用關係如下：
 
-![tree shaking relation](/_images/frontend-tree-shaking-relation.png)
+![tree shaking relation](../../assets/frontend-tree-shaking-relation.png)
 
 接著，仔細一看你就會發現有一些程式碼雖然放在專案裡面，但是其實是沒有真正被使用到的。
 
-![tree shaking relation1](/_images/frontend-tree-shaking-relation1.png)
+![tree shaking relation1](../../assets/frontend-tree-shaking-relation1.png)
 
 接著我們來實作看看，由於 Webpack 在打包 prod 程式碼的時候才會進行 Tree Shaking ，我們可以試著用 production mode 先打包試試看是不是真的會這樣。
 
@@ -203,7 +203,7 @@ Webpack 在做 Tree Shaking 的順序大致上是這樣子的：
 
 題外話，上述的 dependency graph ，雖然只是一種概念，並不是真的圖像，不過有興趣的人也可以照著這個 [issue](https://github.com/webpack/webpack/issues/690) 裡面提到的方法來產出自己模組圖像化後的相依關聯圖。以前一段提到的程式碼範例來看的話就會是這樣：
 
-![dependency graph](/_images/frontend-dependency-graph.png)
+![dependency graph](../../assets/frontend-dependency-graph.png)
 
 上述的解析步驟在 Webpack 文件裡面並沒有那麼清楚地被寫出來，如果想要知道確切詳細流程可能必須要去翻閱原始碼才能知道，不過我們可以從 Webpack 打包完後的程式碼來看出一些端倪。
 
@@ -220,11 +220,11 @@ Webpack 在做 Tree Shaking 的順序大致上是這樣子的：
 
 首先我們先不設定 `usedExports` ，來打包看看，接著我們搜尋某段剛剛沒有用到的程式碼 `"Hi, This is Mujing."`。
 
-![webpack with no usedExports](/_images/frontend-tree-shaking-result-code.png)
+![webpack with no usedExports](../../assets/frontend-tree-shaking-result-code.png)
 
 這邊我們可以發現 Webpack 標記了這個 `utils/index.js` 有哪些 function 被 export 。接下來讓我們把 `usedExports` 設定為 true，再來打包一版。
 
-![webpack with usedExports set to true](/_images/frontend-tree-shaking-result-code1.png)
+![webpack with usedExports set to true](../../assets/frontend-tree-shaking-result-code1.png)
 
 然後我們可以發現同樣位置的註記不一樣了！多了個 used 的標記：
 
@@ -258,11 +258,11 @@ Webpack 裡面的 sideEffects 設定則是為了讓 Tree Shaking 進行時能夠
 
 先讓我們再回頭看看前面的範例，為了方便辨識，我直接另外加入一個叫做 `sideEffect` 的檔案，並且這個檔案裡面只以 console.log 來代表一個副作用。
 
-![Side Effect Relation](/_images/frontend-side-effect-relation.png)
+![Side Effect Relation](../../assets/frontend-side-effect-relation.png)
 
 所以事實上這段 sideEffect.js 裡面的程式碼是沒有在其他地方被使用到的。如果我們再不改任何設定的情況下直接打包，會看到這段程式碼還是有被打包進來的，因為我們目前還是只用 `usedExports` 來做 Tree Shaking 的判斷：
 
-![Side Effect Code](/_images/frontend-side-effect-result-code.png)
+![Side Effect Code](../../assets/frontend-side-effect-result-code.png)
 
 接著我們再試著把 Webpack 裡面的 `sideEffects` 設定打開。
 

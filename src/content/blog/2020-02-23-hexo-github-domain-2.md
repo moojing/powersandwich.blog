@@ -1,8 +1,8 @@
 ---
 title: "個人技術站一把罩！部落格建置大全（二）- 將 Github Page 串上自己的域名"
 date: '2020-02-23'
-description: "上週提到了使用 Hexo 這個工具來架設個人部落格，並放到自己 Github Page 上的方法。這次我們要來看看怎麼把架好部落格的 Github Page ，串上自己擁有的域名( ex. blabla.com ) "
-cover: "/_images/frontend-gandi-domains.png"
+description: "上週提到了使用s Hexo 這個工具來架設個人部落格，並放到自己 Github Page 上的方法。這次我們要來看看怎麼把架好部落格的 Github Page ，串上自己擁有的域名( ex. blabla.com ) "
+cover: "../../assets/frontend-gandi-domains.png"
 tags: ["github", "frontend"]
 ---
 
@@ -22,15 +22,15 @@ tags: ["github", "frontend"]
 
 首先在開始進行串接之前，你要先有域名，而域名可以透過域名商來做購買，這些域名商有很多，相同域名在不同商家的價格也會不太ㄧ樣，或是某些域名只能在某些域名商買得到，這邊推薦幾個我自己用過的：[Gandi](https://www.gandi.net/en)、[網路中文](https://www.net-chinese.com.tw/nc/)、[Google Domains](https://domains.google/) 。這篇文章會用 Gandi 來做示範，但其實這些網站上購買的流程都差不多。
 
-![gandi](/_images/frontend-gandi.png)
+![gandi](../../assets/frontend-gandi.png)
 
 在網站上購買完域名之後，就可以在 Domains 頁面看到自己擁有的域名。點擊進入各個域名就可以前往個別的設定頁面，今天會以我之前買的多出來的域名 **[cowboybebop.space](http://cowboybebop.space)** 為例。
 
-![gandi-domains](/_images/frontend-gandi-domains.png)
+![gandi-domains](../../assets/frontend-gandi-domains.png)
 
 找到 「 DNS Records 」的分頁，會看到很多，會看到一堆很像神秘魔法咒語的設定值，今天不會逐一介紹，但這邊我們有必要先了解一下什麼是 DNS。
 
-![gandi-dnssetting](/_images/frontend-gandi-dnssetting.png)
+![gandi-dnssetting](../../assets/frontend-gandi-dnssetting.png)
 
 ## 什麼是 DNS ?
 
@@ -40,7 +40,7 @@ DNS (Domain Name Server) ，直翻成中文是網域名稱伺服器，可以理�
 
 DNS 的出現就是為了解決這個問題，如同我們現在在生活中所經歷的，只要在搜尋列上輸入 [facebook.com](http://facebook.com) 就能夠快速前往臉書的網站，這是因為 DNS 透過給每個 IP 位置取個名字，把這些原本只有電腦能夠理解的位置數據，變成人類也很好記憶、理解的名稱，讓各種網站應用能夠更加融入我們的生活中。
 
-![DNS-Flow](/_images/frontend-DNS-Flow.jpg)
+![DNS-Flow](../../assets/frontend-DNS-Flow.jpg)
 
 ## A Record 與 CNAME
 
@@ -64,7 +64,7 @@ DNS 相關的設定其實有很多，我們就是透過這些設定來告訴 DNS
 
 就可以讓域名順利解析為 Github 主機的位址了，這部分的相關資訊可以在 [Github 官方說明文件](https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain)內找到。而因為我們不只要找到 **[github.](http://github.com)io** 還要找到我們的個人頁面 **[moojitsai.github.](http://moojitsai.github.com)io** ，這部分必須在 Github Page 的 Repo 內做對應的設定，會在接下來的內容中提到。
 
-![gandi-a-record](/_images/frontend-gandi-a-record.png)
+![gandi-a-record](../../assets/frontend-gandi-a-record.png)
 
 ## 方案二：CNAME 搭配 ALIAS 設定
 
@@ -85,7 +85,7 @@ DNS 相關的設定其實有很多，我們就是透過這些設定來告訴 DNS
 
 提供下圖做為參考，只要看第一跟最後一筆紀錄就可以了，其他是系統預設的設定。
 
-![gandi-cname-alias](/_images/frontend-gandi-cname-alias.png)
+![gandi-cname-alias](../../assets/frontend-gandi-cname-alias.png)
 
 透過這樣的方式，我們就能夠完美的將有 <www>. 與沒有 <www>. 前綴的域名都導向到 Github Page 頁面囉！而且統一使用的會是 **<www.cowboybebop.space>** ，也符合前面提到的建議使用方式！
 
@@ -95,11 +95,11 @@ DNS 相關的設定其實有很多，我們就是透過這些設定來告訴 DNS
 
 設定完之後，記得把 「Enforce Http」的設定打勾，這樣一來，我們的域名就自動有了 https 憑證，不需要在自己簽發，因為 Github 幫你做掉了，這個功能超方便！
 
-![github-setting-domain](/_images/frontend-github-setting-domain.png)
+![github-setting-domain](../../assets/frontend-github-setting-domain.png)
 
 設定完成後應該可以在 [https://www.cowboybebop.space/](https://www.cowboybebop.space/) 看到頁面了！
 
-![result](/_images/frontend-result.png)
+![result](../../assets/frontend-result.png)
 
 ## 總結
 

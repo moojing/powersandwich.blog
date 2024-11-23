@@ -2,7 +2,7 @@
 title: "React 元件庫製造紀事錄 (ㄧ) – 問題說明與第一個麻煩：JavaScript 的模組系統"
 date: '2021-08-18'
 description: "這陣子為了解決了一個讓我蠻頭痛的問題，第一次接觸前端 module 的打包，也了解到原來平常我們很方便能夠用 Npm 或 Yarn 這類套件管理器裝一裝就能夠直接使用的一些第三方工具在功能開發完之後，為了要讓別人能夠使用所做的處理上並不是這麼的單純，隨著使用方式的不同，要處理的部份也會有所不一樣。"
-cover: "/_images/frontend-npm-module.png"
+cover: "../../assets/frontend-npm-module.png"
 tags: ["react", "javascript", "frontend"]
 ---
 
@@ -29,7 +29,7 @@ tags: ["react", "javascript", "frontend"]
 - 沒辦法去除沒有在使用的元件程式碼 ( 這個動作稱為 Tree Shaking )，代表這個 module 內的所有 React 元件都要統一在專案內被處理過，間接增加了專案的負擔。
   接著，因為某些原因，在原來的專案架構下後來又出現了另外一個新專案（ 以下稱為 B 專案 ），它的專案架構與上述 A 專案在 Application 內 SSR 的處理完全不一樣，**所以毫不意外的沒辦法直接使用我們的共用 module**。
 
-![problem description](/_images/frontend-problem-1.png)
+![problem description](../../assets/frontend-problem-1.png)
 
 一份原始碼，要同時在兩個不同架構的專案之下執行，最直接的方式當然是兩個專案各自去處理，這個方式可以透過 Monorepo 或是 Submodule 來達成，只是這樣或許不是最有效率的方式？在這個問題上我曾和團隊成員們有了多次的討論。
 
@@ -43,7 +43,7 @@ tags: ["react", "javascript", "frontend"]
 
 關於工具上的差異，如果你去 google 「Webpack v.s. Rollup」，應該很容易會找到「Webpack 比較適合用在應用程式，而 Rollup 比較適合用在函式庫上」這類的說法，但是我依舊是那句話「只要能達成目的就好」，工具沒有絕對的好或壞，更何況在一開始考慮太多很容易讓你躊躇不前，另外，也建議不要盲目相信這類別人歸納出的簡短結論，自己了解看看來由會比較好。不過若你真的有興趣的話，有關上述的說法可以[參考這裡](https://powersandwich.com.tw/2021/08/18/react-%e5%85%83%e4%bb%b6%e5%ba%ab%e8%a3%bd%e9%80%a0%e7%b4%80%e4%ba%8b%e9%8c%84-%e3%84%a7-%e5%95%8f%e9%a1%8c%e8%aa%aa%e6%98%8e%e8%88%87%e7%ac%ac%e4%b8%80%e5%80%8b%e9%ba%bb%e7%85%a9%ef%bc%9ajavascr/#:~:text=%E7%9A%84%E8%AA%AA%E6%B3%95%E5%8F%AF%E4%BB%A5-,%E5%8F%83%E8%80%83%E9%80%99%E8%A3%A1,-%E3%80%82)。
 
-![webpack rollup bundle flow](/_images/frontend-webpack-rollup-bundle.jpg)
+![webpack rollup bundle flow](../../assets/frontend-webpack-rollup-bundle.jpg)
 
 上述提及工具的前兩者，也就是 Webpack / Rollup 可能比較適合我所面臨的情境，因為 Parcel 雖然也是一套打包工具，不過其主張的是讓開發者不用調整任何設定就能夠直接達成目的，但是若我們未來想要針對某個特定部分做優化，可能就會比較麻煩，所以先不考慮。
 

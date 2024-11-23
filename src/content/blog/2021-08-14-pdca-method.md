@@ -2,7 +2,7 @@
 title: '作自己的腦內偵探 —— 利用 PDCA 的概念，見證每天進步 1% 的自己！'
 date: '2021-08-14'
 description: '嗨，我是 Mujing ，今天要講的跟技術比較沒有直接關係，我想要跟大家分享一個平常工作時可以逐步優化自己工作流程的方法，這個方法叫做 PDCA 筆記，最近剛好在研究。'
-cover: _images/working-pdca-method-note.png
+cover: "../../assets/working-pdca-method-note.png"
 tags: ["working", "book-reflection"]
     
 ---
@@ -39,7 +39,7 @@ PDCA 筆記其實就是一種思考的框架，PDCA 名字裡的四個英文字�
 
 我接下來將一一說明每個步驟所需要列下的資訊，現在先讓我們在紙上畫出每個步驟需要的空間：
 
-![Heading Image](/_images/working-pdca-method-intro.png)
+![Heading Image](../../assets/working-pdca-method-intro.png)
 
 ### Plan － 計畫
 
@@ -61,12 +61,12 @@ PDCA 筆記其實就是一種思考的框架，PDCA 名字裡的四個英文字�
 
 紀錄時最好使用橫向的 A4 紙，這樣才能確保你有足夠的空間來記錄，如果畫完格子之後還有其他的空白那更好，剛好可以用來記錄一些瑣事，或相關的事情。通常我在畫完 PDCA 四個格子之後，在最下面還會有一點空間，我就會拿來記一些比較不相關的或臨時出現的點子。
 
-![Heading Image](/_images/working-pdca-method-note.png)
+![Heading Image](../../assets/working-pdca-method-note.png)
 
 一個例子
 我們來看看一個使用 PDCA 時的例子，因為我個人的 PDCA 筆記幾乎都使用在工作上，所以有一些內容不太適合直接寫出來，這邊若有涉及到工作隱私的部分我會用抽象的名詞或代稱來表示。
 
-![Heading Image](/_images/working-pdca-method-example.png)
+![Heading Image](../../assets/working-pdca-method-example.png)
 
 上面是一個使用 PDCA 時可能發生的狀況（若有雷同純屬巧合），透過這樣的「思考框架」我們可以看見自己思考的順序和邏輯，讓自己能更專注在自己的目標，進而提高找到解決問題的機會，而不會花一堆時間在走冤枉路上。
 
