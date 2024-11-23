@@ -293,7 +293,7 @@ Webpack 裡面的 sideEffects 設定則是為了讓 Tree Shaking 進行時能夠
 
 如果你的模組裡面有特定某幾隻檔案真的會有副作用發生，在 pacakge.json 裡面的 `sideEffects` 除了布林值，也可以[用陣列來表示](https://webpack.js.org/guides/tree-shaking/#mark-the-file-as-side-effect-free)。
 
-```js
+```json
 // package.json
 {
 ...

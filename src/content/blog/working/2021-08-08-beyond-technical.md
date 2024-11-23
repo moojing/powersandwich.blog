@@ -1,17 +1,13 @@
 ---
-title: "職場之內、技術之外"
-post_date: '2021-08-08'
-# menu_order: 1
-post_status: publish
-post_excerpt: "在新創工作剛滿一年，覺得正值一個可以好好整理所有收穫的時間點，現在回想起來的確學到許多以前不知道的方法跟思維，但因為都是比較零散的個人經驗，所以一直在想要以什麼為主軸來跟大家分享，既然暫時沒辦法有一個比較系統性的整理，我就來說說我在這段時間所學到的幾個工作中最重要的特質好了。"
-featured_image: "/_images/working-beyond-technical-heading.png"
-taxonomy:
-    category: ["working"]
-    post_tag: ["book-reflection"]
+title: "超越技術的工作能力"
+date: '2021-08-08'
+description: "在新創工作剛滿一年，覺得正值一個可以好好整理所有收穫的時間點，現在回想起來的確學到許多以前不知道的方法跟思維，但因為都是比較零散的個人經驗，所以一直在想要以什麼為主軸來跟大家分享，既然暫時沒辦法有一個比較系統性的整理，我就來說說我在這段時間所學到的幾個工作中最重要的特質好了。"
+cover: "/_images/working/beyond-technical/beyond-technical-head.png"
+tags: ["working", "book-reflection"]
 ---
 
 
-![Heading Image](/_images/working-beyond-technical-heading.png)
+![Heading Image](/_images/working/beyond-technical/beyond-technical-head.png)
 
 在新創工作剛滿一年，覺得正值一個可以好好整理所有收穫的時間點，現在回想起來的確學到許多以前不知道的方法跟思維，但因為都是比較零散的個人經驗，所以一直在想要以什麼為主軸來跟大家分享，既然暫時沒辦法有一個比較系統性的整理，我就來說說我在這段時間所學到的幾個工作中最重要的特質好了。
 

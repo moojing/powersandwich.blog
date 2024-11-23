@@ -1,10 +1,9 @@
 ---
-title: "React 設計模式 - 複合元件"
-description: "一般來說，在進行正式的專案開發，製作可以重複被使用的元件時，常常也必須考慮到元件的彈性、與可維護性。因為我們不知道在未來，這個元件會因為產品的需求而產生怎麼樣的調整，所以最低程度地保持元件的可擴充性就可以讓開發者在這個時候比較輕鬆的以最小限度的影響來達成想要的修改。"
+title: "React Design Pattern - Compound Components"
 date: '2021-07-29'
-tags: ["react", "javascript", "frontend"]
-cover: "/_images/frontend-react-design-pattern-example1.png"
-tags: ["react", "javascript", "frontend"]
+description: "在 React 的世界中，有許多設計模式可以幫助我們寫出更好的程式碼。今天要介紹的是 Compound Components Pattern，這是一個可以讓我們的元件更具彈性和可重用性的設計模式。"
+cover: "/_images/frontend/react-design-pattern-compound/react-design-pattern-compound-head.png"
+tags: ["frontend", "react", "design-pattern"]
 ---
 
 ![Heading Image](/_images/frontend-react-design-pattern-pink-cloud.png)

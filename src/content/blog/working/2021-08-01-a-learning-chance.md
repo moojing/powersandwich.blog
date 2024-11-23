@@ -1,13 +1,9 @@
 ---
 title: "每個衝擊都是一次學習的機會"
-post_date: '2021-08-01'
-# menu_order: 1
-post_status: publish
-post_excerpt: "好久不見。各位最近過得如何呢 ? 是不是又往自己的目標前進了一點 ? 一段時間沒有寫文章了，由於轉換工作環境的緣故，自從三月以來，這是第一次可以空出時間好好寫下一些東西。"
-featured_image: "/_images/working-a-learning-chance-heading.png"
-taxonomy:
-    category: ["working"]
-    post_tag: ["book-reflection"]
+date: '2021-08-01'
+description: "好久不見。各位最近過得如何呢 ? 是不是又往自己的目標前進了一點 ? 一段時間沒有寫文章了，由於轉換工作環境的緣故，自從三月以來，這是第一次可以空出時間好好寫下一些東西。"
+cover: "/_images/working-a-learning-chance-heading.png"
+tags: ["working", "book-reflection"]
 ---
 
 ![Heading Image](/_images/working/a-learning-chance-heading.png)

@@ -3,7 +3,7 @@ title: "個人技術站一把罩！部落格建置大全（一）- 使用 Hexo �
 date: '2020-02-16'
 description: "這是我參加六角全馬鐵人挑戰的第二週，在比賽的一開始，就讓我來分享如何在 Github Page 上面架設自己的個人頁面，並串上自己購買的網域名稱（如果有的話）。相信各位工程師們多少都會聽過或看過其他工程師們使用當作自己的部落格，對其他人分享自己經歷及技術，或是成長過程中領悟到的見解。"
 cover: "/_images/frontend-theme.png"
-tags: ["github", "frontend"]
+tags: ["frontend", "github", "hexo"]
 ---
 
 這是我參加[六角全馬鐵人挑戰的第二週](https://www.hexschool.com/2019/11/14/2019-11-14-w3Hexschool-2020-challenge/?fbclid=IwAR2jnd1zwQf14xWUK4J2DztB4XpkkALumb0VS3jSjMKvkqFUhP9xlTICAeU)，在比賽的一開始，就讓我來分享如何在 Github Page 上面架設自己的個人頁面，並串上自己購買的網域名稱（如果有的話）。相信各位工程師們多少都會聽過或看過其他工程師們使用 [Medium](https://medium.com/@moojing) 當作自己的部落格，對其他人分享自己經歷及技術，或是成長過程中領悟到的見解。

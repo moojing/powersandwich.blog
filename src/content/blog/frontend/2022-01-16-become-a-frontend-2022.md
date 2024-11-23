@@ -1,9 +1,9 @@
 ---
-title: "2022 年我該如何成為前端工程師？"
+title: "2022 年成為前端工程師的學習路線"
 date: '2022-01-16'
-description: "嗨！不知不覺又過了一年！不知道大家 2021 這一年過得如何？最近開始有聽到幾個朋友也想要試著學習前端開發，剛好也看到了這一篇在講前端開發者所需要技術的整理，簡單節錄一下一起分享給有需要的讀者們。"
-cover: "/_images/frontend-heading.jpeg"
-tags: ["working","book-reflection"]
+description: "想要在 2022 年成為一名前端工程師嗎？這篇文章將為你規劃一條完整的學習路線，從基礎的 HTML、CSS、JavaScript，到進階的框架和工具，讓你能夠循序漸進地達成目標。"
+cover: "/_images/frontend/become-a-frontend-2022/become-a-frontend-2022-head.png"
+tags: ["frontend", "career", "learning"]
 ---
 
 嗨！不知不覺又過了一年！不知道大家 2021 這一年過得如何？最近開始有聽到幾個朋友也想要試著學習前端開發，剛好也看到了這一篇在講前端開發者所需要技術的整理，簡單節錄一下一起分享給有需要的讀者們。
@@ -82,7 +82,7 @@ RWD 的中文翻譯是「自適應網頁設計」，它是一種態度概念，�
 
 2022 年想學 RWD 技巧的話推薦這堂課給你參考：
 
-- [Build Responsive Websites with HTML5 and CSS3 | Udemy](https://www.udemy.com/course/design-and-develop-a-killer-website-with-html5-and-css3/?ranMID=39197&ranEAID=JVFxdTr9V80&ranSiteID=JVFxdTr9V80-1qaPlHtQ9zvpA_Eutx3fbw&LSNPUBID=JVFxdTr9V80&utm_source=aff-campaign&utm_medium=udemyads)
+- [Build Responsive Websites with HTML5 and CSS3 | Udemy](https://www.udemy.com/course/design-and-develop-a-killer-website-with-html5-and-css3/?ranMID=39197&ranEAID=JVFxdTr9V80&ranSiteID=JVFxdTr9V80-1qaPlHtQ9zvpA_Eutx3fbw&LSNPUBID=JVFxdTr9V80&utm_medium=udemyads&utm_source=aff-campaign)
 
 ![Build Responsive Websites with HTML5 and CSS3](/_images/frontend-rwd-udemy.png)
 

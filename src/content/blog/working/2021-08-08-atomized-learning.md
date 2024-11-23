@@ -1,13 +1,9 @@
 ---
 title: "原子化學習 — 程式語言中基礎知識的重要性"
-post_date: '2021-08-08'
-# menu_order: 1
-post_status: publish
-post_excerpt: "回顧一下轉為前端工程師的這一年經歷，因為一些原因，偶然讓我在將近三個月內就找到新的工作並成功轉職，而在那之前，我自認是一個毫無實戰經驗的打雜工讀生 (在公司只接觸 CMS 系統後端，並不斷重複造輪子)。這篇文章旨在分析並強調學習基礎知識的重要性，以及分享我這一年來學習的心得 ，希望你能夠從這之中得到一些東西，如果有什麼疑問，也歡迎隨時和我一起討論。"
-featured_image: "/_images/working/atomized-learning/atomized-learning-head.png"
-taxonomy:
-    category: ["working"]
-    post_tag: ["book-reflection"]
+date: '2021-08-08'
+description: "回顧一下轉為前端工程師的這一年經歷，因為一些原因，偶然讓我在將近三個月內就找到新的工作並成功轉職，而在那之前，我自認是一個毫無實戰經驗的打雜工讀生 (在公司只接觸 CMS 系統後端，並不斷重複造輪子)。這篇文章旨在分析並強調學習基礎知識的重要性，以及分享我這一年來學習的心得 ，希望你能夠從這之中得到一些東西，如果有什麼疑問，也歡迎隨時和我一起討論。"
+cover: "/_images/working/atomized-learning/atomized-learning-head.png"
+tags: ["working", "book-reflection"]
 ---
 
 
