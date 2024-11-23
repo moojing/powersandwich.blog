@@ -20,6 +20,10 @@ type Props = {
 };
 
 const { post } = Astro.props;
+
+const cover = post.data.cover ?? "";
+const isCoverObject = typeof cover === "object" && cover?.src;
+const coverSrc = isCoverObject ? `${cover.src}` : `${cover}`;
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
@@ -32,11 +36,7 @@ const { post } = Astro.props;
       </div>
       <p class="text-lg text-center text-zinc-700 max-w-[480px]">{post.data.description}</p>
     </div>
-    {
-      post.data.cover && (
-        <img src={`${post.data.cover}?w=1200&q=80`} alt="cover" class="w-full max-w-screen-md mx-auto rounded-lg" />
-      )
-    }
+    {coverSrc && <img src={coverSrc} alt="cover" class="w-full max-w-screen-md mx-auto rounded-lg" />}
   </div>
   <div class="relative flex flex-col gap-2 max-w-screen-md mx-auto px-4 sm:px-6 text-base text-zinc-700">
     <PostContent post={post} />
