@@ -36,7 +36,7 @@ const coverSrc = isCoverObject ? `${cover.src}` : `${cover}`;
       </div>
       <p class="text-lg text-center text-zinc-700 max-w-[480px]">{post.data.description}</p>
     </div>
-    {coverSrc && <img src={coverSrc} alt="cover" class="w-full max-w-screen-md mx-auto rounded-lg" />}
+    {coverSrc && <img src={coverSrc} alt={post.data.title} class="w-full max-w-screen-md mx-auto rounded-lg" />}
   </div>
   <div class="relative flex flex-col gap-2 max-w-screen-md mx-auto px-4 sm:px-6 text-base text-zinc-700">
     <PostContent post={post} />

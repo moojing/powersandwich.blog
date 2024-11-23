@@ -6,8 +6,6 @@ tags: ["regex"]
 cover: "../../assets/frontend-javascript-regex.jpg"
 ---
 
-![Regex Heading](../../assets/frontend-javascript-regex.jpg)
-
 正規表達式英文全名 Regular Expression，
 想必一定曾是每個工程師的惡夢，在新手眼裡彷彿精靈語一樣神秘又難親近，
 Regex 是一把複雜卻威力強大的武器。如果可以活用，在很多場合可以幫助你少寫很多的 if 判斷式，今天這篇文章就要來幫助理解正規表達式。

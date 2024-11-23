@@ -6,8 +6,6 @@ cover: "../../assets/working-a-learning-chance-heading.png"
 tags: ["working", "book-reflection"]
 ---
 
-![Heading Image](../../assets/working-a-learning-chance-heading.png)
-
 好久不見。各位最近過得如何呢 ? 是不是又往自己的目標前進了一點 ? 一段時間沒有寫文章了，由於轉換工作環境的緣故，自從三月以來，這是第一次可以空出時間好好寫下一些東西。
 
 我目前在 Snapask 任職，這是我第一次到比較有規模的團隊裡面，有很多專案流程的細節是以前沒有接觸過的，所以這幾個月來相對於技術學習上。我在思考方式以及工作方法等方面比較有心得，所以這篇文章不會有技術內容，而是會跟大家分享我近期的收穫，或許能夠給未來也跟我面臨相似問題的人一個參考。
