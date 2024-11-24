@@ -41,10 +41,10 @@
     renderer.setClearColor(new THREE.Color("#1c1d24"));
     // renderer.setClearColor(new THREE.Color("#7788f3"));
 
-    const fov = 100,
+    const fov = 500,
       aspect = 2,
       near = 2,
-      far = 10;
+      far = 5;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     camera.position.z = 2;
 
@@ -59,26 +59,28 @@
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load("/dot.svg");
 
-    const material = new THREE.PointsMaterial({
-      size: 0.15,
+    const material = new THREE.SpriteMaterial({
+      size: 0.05,
       map: texture,
       transparent: true,
+      rotation: 0,
     });
 
-    const geometry = new THREE.BufferGeometry();
+    const particles = new THREE.Group();
 
-    const getRandomParticlePos = (particleCount: number) => {
-      const arr = new Float32Array(particleCount * 3);
-      for (let i = 0; i < particleCount; i++) {
-        arr[i] = (Math.random() - 0.5) * 15;
-      }
-      return arr;
-    };
+    const particleCount = 100;
+    for (let i = 0; i < particleCount; i++) {
+      const sprite = new THREE.Sprite(material);
+      sprite.position.set(
+        (Math.random() - 0.5) * 15, // X 位置
+        Math.random() * 10 - 5, // Y 位置
+        (Math.random() - 0.5) * 5, // Z 位置
+      );
+      sprite.material.rotation = Math.random() * 10 * Math.PI * 2;
+      particles.add(sprite);
+    }
 
-    geometry.setAttribute("position", new THREE.BufferAttribute(getRandomParticlePos(500), 3));
-
-    const points = new THREE.Points(geometry, material);
-    scene.add(points);
+    scene.add(particles);
 
     const render = (time: number) => {
       time *= 0.001;
@@ -89,21 +91,24 @@
         camera.updateProjectionMatrix();
       }
 
-      points.position.x = mouseX * 0.0001;
-      points.position.y = mouseY * -0.0001;
+      particles.position.x = mouseX * 0.0001;
+      particles.position.y = mouseY * -0.0001;
+      particles.rotation.y += 0.0001;
+
+      // 更新粒子的旋转
+      particles.children.forEach((particle: any) => {
+        particle.material.rotation += 0.00001; // 控制旋转速度
+      });
 
       // 更新粒子的位置，使它们向上移动
-      const positions = points.geometry.attributes.position.array;
-      for (let i = 0; i < positions.length; i++) {
-        positions[i * 3 + 1] += 0.001; // Y 方向上移动
+      particles.children.forEach((particle: any) => {
+        particle.position.y += 0.001; // 向上移动
 
         // 如果粒子移出屏幕，则将其重置到初始位置
-        if (positions[i * 3 + 1] > 5) {
-          positions[i * 3 + 1] = -5;
+        if (particle.position.y > 5) {
+          particle.position.y = -5;
         }
-      }
-
-      points.geometry.attributes.position.needsUpdate = true; // 告诉 Three.js 更新位置属性
+      });
 
       renderer.render(scene, camera);
       // loop
