@@ -3,11 +3,12 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../../components/layout.astro";
 import PostListing from "../../components/post/post-list.astro";
 import SlugList from "../../components/slug-list.astro";
+import { CollectionType } from "../../types";
 
-type Post = CollectionEntry<"blog">;
+type Post = CollectionEntry<CollectionType.Blog>;
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getCollection(CollectionType.Blog);
   const yearSet = new Set<string>();
   const yearMap = posts.reduce(
     (map, post) => {

@@ -2,9 +2,9 @@
 import type { CollectionEntry } from "astro:content";
 import DateTag from "../date-tag.astro";
 import Tag from "../tag.astro";
-
+import { CollectionType } from "../../types";
 type Props = {
-  post: CollectionEntry<"blog">;
+  post: CollectionEntry<CollectionType.Blog>;
 };
 
 const { post } = Astro.props;
