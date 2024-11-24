@@ -3,6 +3,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
 import Footer from "./footer.astro";
 import Header from "./header.astro";
 import Meta from "./meta.astro";
+import BackgroundCanvas from "./background-canvas.astro";
 
 type Props = {
   title?: string;
@@ -17,13 +18,14 @@ const { title, description } = Astro.props;
   <head>
     <Meta title={title ? `${title} · ${SITE_TITLE}` : SITE_TITLE} description={description ?? SITE_DESCRIPTION} />
   </head>
-  <body>
-    <div class="flex flex-col h-full mb-8 overflow-y-scroll antialiased bg-[#000814]">
+  <body class="relative bg-neutral-900">
+    <div class="z-10 flex flex-col h-full mb-8 overflow-y-scroll antialiased transparent">
       <Header />
       <div class="flex-auto">
         <slot />
       </div>
       <Footer />
     </div>
+    <BackgroundCanvas client:idle />
   </body>
 </html>

@@ -33,6 +33,7 @@
     "rough-notation": "^0.5.1",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.3",
+    "three": "^0.170.0",
     "typescript": "^5.7.2"
   }
 }

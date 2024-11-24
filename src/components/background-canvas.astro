@@ -1,0 +1,103 @@
+---
+
+---
+
+<canvas id="background-canvas"></canvas>
+<style>
+  #background-canvas {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity 1500ms ease-out;
+  }
+</style>
+<script>
+  import { THREE, resizeRendererToDisplaySize } from "../../utils/backgroundCanvas";
+
+  const canvas = document.getElementById("background-canvas");
+  document.addEventListener("DOMContentLoaded", () => {
+    if (canvas) {
+      canvas.style.opacity = "1";
+    }
+  });
+
+  window.addEventListener("beforeunload", () => {
+    canvas?.remove();
+  });
+
+  let mouseX = 0;
+  let mouseY = 0;
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  const starBGCanvas = () => {
+    const renderer = new THREE.WebGLRenderer({ canvas });
+    renderer.setClearColor(new THREE.Color("#1c1d24"));
+    // renderer.setClearColor(new THREE.Color("#7788f3"));
+
+    const fov = 100,
+      aspect = 2,
+      near = 2,
+      far = 10;
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera.position.z = 2;
+
+    const scene = new THREE.Scene();
+    // light source
+    const color = 0xffffff,
+      intensity = 1;
+    const light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(-1, 2, 4);
+    scene.add(light);
+
+    const textureLoader = new THREE.TextureLoader();
+    const texture = textureLoader.load("/dot.svg");
+
+    const material = new THREE.PointsMaterial({
+      size: 0.15,
+      map: texture,
+      transparent: true,
+    });
+
+    const geometry = new THREE.BufferGeometry();
+
+    const getRandomParticlePos = (particleCount: number) => {
+      const arr = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount; i++) {
+        arr[i] = (Math.random() - 0.5) * 15;
+      }
+      return arr;
+    };
+
+    geometry.setAttribute("position", new THREE.BufferAttribute(getRandomParticlePos(650), 3));
+
+    const cube = new THREE.Points(geometry, material);
+    scene.add(cube);
+
+    const render = (time: number) => {
+      time *= 0.001;
+      if (resizeRendererToDisplaySize(renderer)) {
+        const canvas = renderer.domElement;
+        // changing the camera aspect to remove the strechy problem
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+      }
+
+      cube.position.x = mouseX * 0.0001;
+      cube.position.y = mouseY * -0.0001;
+
+      renderer.render(scene, camera);
+      // loop
+      requestAnimationFrame(render);
+    };
+    requestAnimationFrame(render);
+  };
+
+  starBGCanvas();
+</script>
