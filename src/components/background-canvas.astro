@@ -75,10 +75,10 @@
       return arr;
     };
 
-    geometry.setAttribute("position", new THREE.BufferAttribute(getRandomParticlePos(650), 3));
+    geometry.setAttribute("position", new THREE.BufferAttribute(getRandomParticlePos(500), 3));
 
-    const cube = new THREE.Points(geometry, material);
-    scene.add(cube);
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
 
     const render = (time: number) => {
       time *= 0.001;
@@ -89,8 +89,21 @@
         camera.updateProjectionMatrix();
       }
 
-      cube.position.x = mouseX * 0.0001;
-      cube.position.y = mouseY * -0.0001;
+      points.position.x = mouseX * 0.0001;
+      points.position.y = mouseY * -0.0001;
+
+      // 更新粒子的位置，使它们向上移动
+      const positions = points.geometry.attributes.position.array;
+      for (let i = 0; i < positions.length; i++) {
+        positions[i * 3 + 1] += 0.001; // Y 方向上移动
+
+        // 如果粒子移出屏幕，则将其重置到初始位置
+        if (positions[i * 3 + 1] > 5) {
+          positions[i * 3 + 1] = -5;
+        }
+      }
+
+      points.geometry.attributes.position.needsUpdate = true; // 告诉 Three.js 更新位置属性
 
       renderer.render(scene, camera);
       // loop
