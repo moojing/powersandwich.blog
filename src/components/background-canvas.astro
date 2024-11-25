@@ -17,20 +17,10 @@
 </style>
 <script>
   import { THREE, resizeRendererToDisplaySize } from "../../utils/backgroundCanvas";
-
   const canvas = document.getElementById("background-canvas");
-  document.addEventListener("DOMContentLoaded", () => {
-    if (canvas) {
-      canvas.style.opacity = "1";
-    }
-  });
-
-  window.addEventListener("beforeunload", () => {
-    canvas?.remove();
-  });
-
   let mouseX = 0;
   let mouseY = 0;
+
   document.addEventListener("mousemove", (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
@@ -39,7 +29,6 @@
   const starBGCanvas = () => {
     const renderer = new THREE.WebGLRenderer({ canvas });
     renderer.setClearColor(new THREE.Color("#1c1d24"));
-    // renderer.setClearColor(new THREE.Color("#7788f3"));
 
     const fov = 50,
       aspect = 2,
@@ -49,33 +38,27 @@
     camera.position.z = 5;
 
     const scene = new THREE.Scene();
-    // light source
-    const color = 0xffffff,
-      intensity = 1;
-    const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(-1, 2, 4);
-    scene.add(light);
 
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load("/dot.svg");
 
     const particles = new THREE.Group();
 
-    const particleCount = 100;
+    const particleCount = 1000;
     for (let i = 0; i < particleCount; i++) {
       const randomAngle = Math.random() * 360;
       const newMaterial = new THREE.SpriteMaterial({
-        size: 0.05,
         map: texture,
         transparent: true,
         rotation: randomAngle,
       });
 
       const sprite = new THREE.Sprite(newMaterial);
+      sprite.scale.set(0.1, 0.1, 1); // make the particle smaller
       sprite.position.set(
-        (Math.random() - 0.5) * 15, // X 位置
-        Math.random() * 10 - 5, // Y 位置
-        (Math.random() - 0.5) * 15, // Z 位置
+        (Math.random() - 0.5) * 15, // x
+        Math.random() * 10 - 5, // y
+        (Math.random() - 0.5) * 15, // z
       );
 
       sprite.material.rotation = randomAngle;
@@ -87,6 +70,7 @@
 
     const render = (time: number) => {
       time *= 0.001;
+
       if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;
         // changing the camera aspect to remove the strechy problem
@@ -111,10 +95,20 @@
 
       renderer.render(scene, camera);
       // loop
+
       requestAnimationFrame(render);
     };
     requestAnimationFrame(render);
   };
 
-  starBGCanvas();
+  document.addEventListener("astro:page-load", () => {
+    if (canvas) {
+      canvas.style.opacity = "1";
+    }
+    starBGCanvas();
+  });
+
+  window.addEventListener("beforeunload", () => {
+    canvas?.remove();
+  });
 </script>
