@@ -41,12 +41,12 @@
     renderer.setClearColor(new THREE.Color("#1c1d24"));
     // renderer.setClearColor(new THREE.Color("#7788f3"));
 
-    const fov = 500,
+    const fov = 50,
       aspect = 2,
-      near = 2,
-      far = 5;
+      near = 5,
+      far = 100;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.z = 2;
+    camera.position.z = 5;
 
     const scene = new THREE.Scene();
     // light source
@@ -59,24 +59,27 @@
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load("/dot.svg");
 
-    const material = new THREE.SpriteMaterial({
-      size: 0.05,
-      map: texture,
-      transparent: true,
-      rotation: 0,
-    });
-
     const particles = new THREE.Group();
 
     const particleCount = 100;
     for (let i = 0; i < particleCount; i++) {
-      const sprite = new THREE.Sprite(material);
+      const randomAngle = Math.random() * 360;
+      const newMaterial = new THREE.SpriteMaterial({
+        size: 0.05,
+        map: texture,
+        transparent: true,
+        rotation: randomAngle,
+      });
+
+      const sprite = new THREE.Sprite(newMaterial);
       sprite.position.set(
         (Math.random() - 0.5) * 15, // X 位置
         Math.random() * 10 - 5, // Y 位置
-        (Math.random() - 0.5) * 5, // Z 位置
+        (Math.random() - 0.5) * 15, // Z 位置
       );
-      sprite.material.rotation = Math.random() * 10 * Math.PI * 2;
+
+      sprite.material.rotation = randomAngle;
+
       particles.add(sprite);
     }
 
@@ -92,19 +95,15 @@
       }
 
       particles.position.x = mouseX * 0.0001;
-      particles.position.y = mouseY * -0.0001;
-      particles.rotation.y += 0.0001;
+      particles.position.y = mouseY * -0.0002;
+      particles.rotation.y -= 0.0001;
 
-      // 更新粒子的旋转
+      // update particles position and rotation
       particles.children.forEach((particle: any) => {
-        particle.material.rotation += 0.00001; // 控制旋转速度
-      });
+        particle.position.y += 0.0001; // move up
+        particle.material.rotation += 0.0001;
 
-      // 更新粒子的位置，使它们向上移动
-      particles.children.forEach((particle: any) => {
-        particle.position.y += 0.001; // 向上移动
-
-        // 如果粒子移出屏幕，则将其重置到初始位置
+        // if particle out of screen, reset to initial position
         if (particle.position.y > 5) {
           particle.position.y = -5;
         }
