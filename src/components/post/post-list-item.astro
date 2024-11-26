@@ -8,13 +8,12 @@ type Props = {
 };
 
 const { post } = Astro.props;
-console.log("post", post);
 const cover = post.data.cover ?? "";
 const isCoverObject = typeof cover === "object" && cover?.src;
 const coverSrc = isCoverObject ? `${cover.src}` : `${cover}`;
 ---
 
-<div class="flex flex-col gap-4 ring-1 rounded-lg p-4 ring-0 cursor-pointer bg-zinc-800/60">
+<div class="flex flex-col gap-4 rounded-lg p-4 ring-0 cursor-pointer bg-zinc-800/60">
   {
     post.slug && (
       <a href={`/posts/${post.slug}`} target="_self">
@@ -25,7 +24,7 @@ const coverSrc = isCoverObject ? `${cover.src}` : `${cover}`;
   <div class="flex flex-col gap-2">
     <div class="flex gap-2">
       <DateTag date={post.data.date} />
-      {post.data.tags?.map((tag) => <Tag tag={tag} />)}
+      {post.data.tags?.map((tag: string) => <Tag tag={tag} />)}
     </div>
     <a href={`/posts/${post.slug}`} target="_self">
       <h1 class="text-3xl font-title font-black text-white">{post.data.title}</h1>
