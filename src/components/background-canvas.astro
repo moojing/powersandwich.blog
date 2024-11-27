@@ -87,8 +87,8 @@
 
       // update particles position and rotation
       particles.children.forEach((particle: any) => {
-        particle.position.y += 0.0001; // move up
-        particle.material.rotation += 0.0001;
+        particle.position.y += 0.00001; // move up
+        particle.material.rotation += 0.00001;
 
         // if particle out of screen, reset to initial position
         if (particle.position.y > 5) {
