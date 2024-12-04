@@ -33,47 +33,58 @@
     renderer = new THREE.WebGLRenderer({ canvas });
     renderer.setClearColor(new THREE.Color("#171717"));
 
-    const fov = 50,
-      aspect = 2,
-      near = 5,
-      far = 100;
+    const fov = 75,
+      aspect = window.innerWidth / window.innerHeight,
+      near = 0.1,
+      far = 1000;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.z = 5;
+    camera.position.z = 3;
 
     const scene = new THREE.Scene();
+    // scene.fog = new THREE.FogExp2(0x181818, 0.2);
 
+    // light
+    const light = new THREE.AmbientLight(0xffffff, 2);
+    light.position.set(0, 0, 0);
+    scene.add(light);
+
+    const pointLight = new THREE.PointLight(0xffffff, 2);
+    pointLight.position.set(0, 0, 0);
+    scene.add(pointLight);
+
+    // dot texture
     const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load("/dot.svg");
+    const dotTexture = textureLoader.load("/dot.svg");
 
-    const particles = new THREE.Group();
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particleCount = 15000;
 
-    const particleCount = 1000;
+    const vertices = new Float32Array(particleCount);
     for (let i = 0; i < particleCount; i++) {
-      const randomAngle = Math.random() * 360;
-      const newMaterial = new THREE.SpriteMaterial({
-        map: texture,
-        transparent: true,
-        rotation: randomAngle,
-      });
-
-      const sprite = new THREE.Sprite(newMaterial);
-      sprite.scale.set(0.1, 0.1, 1); // make the particle smaller
-      sprite.position.set(
-        (Math.random() - 0.5) * 15, // x
-        Math.random() * 10 - 5, // y
-        (Math.random() - 0.5) * 15, // z
-      );
-
-      sprite.material.rotation = randomAngle;
-
-      particles.add(sprite);
+      vertices[i] = (Math.random() - 0.5) * 100;
     }
 
-    scene.add(particles);
+    const rotations = new Float32Array(particleCount);
+    for (let i = 0; i < particleCount; i++) {
+      rotations[i] = Math.random() * Math.PI * 2;
+    }
 
-    const render = (time: number) => {
-      time *= 0.001;
+    particlesGeometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
+    particlesGeometry.setAttribute("rotation", new THREE.BufferAttribute(rotations, 1));
 
+    const particlesMaterial = new THREE.PointsMaterial({
+      map: dotTexture, // attach the texture to the material
+      size: 0.2,
+      transparent: true,
+    });
+
+    const stars = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(stars);
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const animate = () => {
       if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;
         // changing the camera aspect to remove the strechy problem
@@ -81,27 +92,15 @@
         camera.updateProjectionMatrix();
       }
 
-      particles.position.x = mouseX * 0.0001;
-      particles.position.y = mouseY * -0.0002;
-      particles.rotation.y -= 0.0001;
+      stars.position.x = mouseX * 0.0005;
+      stars.position.y = mouseY * -0.0005;
 
-      // update particles position and rotation
-      particles.children.forEach((particle: any) => {
-        particle.position.y += 0.00001; // move up
-        particle.material.rotation += 0.00001;
-
-        // if particle out of screen, reset to initial position
-        if (particle.position.y > 5) {
-          particle.position.y = -5;
-        }
-      });
+      stars.rotation.x += scrollDelta * 0.002;
 
       renderer.render(scene, camera);
-      // loop
-
-      requestAnimationFrame(render);
+      requestAnimationFrame(animate);
     };
-    requestAnimationFrame(render);
+    animate();
   };
 
   document.addEventListener("astro:page-load", () => {
