@@ -4,6 +4,7 @@ import Footer from "./footer.astro";
 import Header from "./header.astro";
 import Meta from "./meta.astro";
 import StarBackground from "./react/StarBackground.tsx";
+import { scrollIdle } from "../stores";
 
 type Props = {
   title?: string;
@@ -19,7 +20,7 @@ const { title, description } = Astro.props;
     <Meta title={title ? `${title} · ${SITE_TITLE}` : SITE_TITLE} description={description ?? SITE_DESCRIPTION} />
   </head>
   <body class="relative bg-neutral-900">
-    <div class="z-10 flex flex-col h-full mb-8 overflow-y-scroll antialiased transparent">
+    <div id="layout-container" class="z-10 flex flex-col h-full mb-8 overflow-y-scroll antialiased transparent">
       <Header />
       <div class="flex-auto">
         <slot />
@@ -27,5 +28,6 @@ const { title, description } = Astro.props;
       <Footer />
     </div>
     <StarBackground client:idle />
+    <script></script>
   </body>
 </html>

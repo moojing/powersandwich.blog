@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 type Props = {
@@ -8,9 +8,9 @@ type Props = {
 const StarBackground: React.FC<Props> = ({ onScroll }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const [scrollIdle, setScrollIdle] = useState(false);
 
   useEffect(() => {
-    console.log("useEffect");
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -22,7 +22,6 @@ const StarBackground: React.FC<Props> = ({ onScroll }) => {
 
     const scene = new THREE.Scene();
 
-    // 相機設置
     const fov = 75,
       aspect = window.innerWidth / window.innerHeight,
       near = 0.1,
@@ -30,25 +29,23 @@ const StarBackground: React.FC<Props> = ({ onScroll }) => {
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     camera.position.z = 5;
 
-    // 添加光照
     const light = new THREE.AmbientLight(0xffffff, 2);
     scene.add(light);
 
     const pointLight = new THREE.PointLight(0xffffff, 2);
     scene.add(pointLight);
 
-    // 粒子設置
     const textureLoader = new THREE.TextureLoader();
     const dotTexture = textureLoader.load("/dot.svg");
 
     const particlesGeometry = new THREE.BufferGeometry();
     const particleCount = 1000;
 
-    const vertices = new Float32Array(particleCount * 3); // 每個粒子需要 x, y, z 三個座標
+    const vertices = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
-      vertices[i * 3] = (Math.random() - 0.5) * 20; // X 座標
-      vertices[i * 3 + 1] = (Math.random() - 0.5) * 20; // Y 座標
-      vertices[i * 3 + 2] = (Math.random() - 0.5) * 50; // Z 座標，分布在 -25 到 25 之間
+      vertices[i * 3] = (Math.random() - 0.5) * 20;
+      vertices[i * 3 + 1] = (Math.random() - 0.5) * 20;
+      vertices[i * 3 + 2] = (Math.random() - 0.5) * 50;
     }
 
     particlesGeometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
@@ -57,25 +54,25 @@ const StarBackground: React.FC<Props> = ({ onScroll }) => {
       map: dotTexture,
       size: 0.2,
       transparent: true,
-      depthWrite: false, // 避免深度測試讓粒子被遮擋
+      depthWrite: false,
     });
 
     const stars = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(stars);
 
     const animate = () => {
-      console.log("animate :", animate);
       const positions = particlesGeometry.attributes.position.array as Float32Array;
 
       for (let i = 0; i < particleCount; i++) {
-        positions[i * 3 + 2] += 0.05; // 調整移動速度
+        positions[i * 3 + 2] += scrollIdle ? 0.05 : 0.00005;
+        console.log("scrollIdle :", scrollIdle);
 
         if (positions[i * 3 + 2] > 25) {
-          positions[i * 3 + 2] = -25; // 重置 Z 座標到初始範圍
+          positions[i * 3 + 2] = -25;
         }
       }
 
-      particlesGeometry.attributes.position.needsUpdate = true; // 告訴 Three.js 更新粒子位置
+      particlesGeometry.attributes.position.needsUpdate = true;
 
       if (rendererRef.current) {
         rendererRef.current.render(scene, camera);
@@ -96,22 +93,43 @@ const StarBackground: React.FC<Props> = ({ onScroll }) => {
 
     window.addEventListener("resize", handleResize);
 
+    // listen to the scroll event of the layout container & set scrollIdle
+    const layoutContent = document?.getElementById("layout-container");
+    let debounceTimer: ReturnType<typeof setTimeout>;
+    let idleTimer: ReturnType<typeof setTimeout>;
+
+    layoutContent?.addEventListener("scroll", () => {
+      console.log("scroll :", scroll);
+      clearTimeout(debounceTimer);
+      clearTimeout(idleTimer);
+
+      debounceTimer = setTimeout(() => {
+        setScrollIdle(false);
+      }, 200);
+
+      // set scrollIdle to true after 3 seconds of no scrolling
+      idleTimer = setTimeout(() => {
+        setScrollIdle(true);
+      }, 3000);
+    });
+
     if (canvasRef?.current?.style.opacity) {
       canvasRef.current.style.opacity = "1";
     }
-    // 清理函數
+
     return () => {
       window.removeEventListener("resize", handleResize);
       particlesGeometry.dispose();
       particlesMaterial.dispose();
       renderer.dispose();
+      clearTimeout(debounceTimer);
+      clearTimeout(idleTimer);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      id="background-canvas"
       style={{
         display: "block",
         position: "absolute",
