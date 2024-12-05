@@ -26,7 +26,7 @@ export default defineConfig({
     }),
     sitemap(),
     tailwind(),
-    react(),
+    react({ include: ["**/react/**/*"] }),
   ],
   output: "static",
 });
