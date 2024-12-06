@@ -5,10 +5,20 @@ type Props = {
   onScroll?: () => void; // 可選的 onScroll 回調函數
 };
 
+function throttle(func: Function, limit: number) {
+  let lastCall = 0;
+  return function (...args: any[]) {
+    const now = Date.now();
+    if (now - lastCall >= limit) {
+      lastCall = now;
+      func(...args);
+    }
+  };
+}
+
 const StarBackground: React.FC<Props> = ({ onScroll }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [scrollIdle, setScrollIdle] = useState(false);
-  console.log("scrollIdle :", scrollIdle);
+  const speedRef = useRef(0.05);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -42,18 +52,19 @@ const StarBackground: React.FC<Props> = ({ onScroll }) => {
 
     // 創建粒子
     const particlesGeometry = new THREE.BufferGeometry();
-    const particleCount = 1000;
+    const particleCount = 3000;
     const vertices = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
-      vertices[i * 3] = (Math.random() - 0.5) * 20;
-      vertices[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      vertices[i * 3 + 2] = (Math.random() - 0.5) * 50;
+      vertices[i * 3] = (Math.random() - 0.5) * 20; // X 軸
+      vertices[i * 3 + 1] = (Math.random() - 0.5) * 20; // Y 軸
+      vertices[i * 3 + 2] = (Math.random() - 0.5) * 50; // Z 軸
     }
     particlesGeometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
 
     const particlesMaterial = new THREE.PointsMaterial({
       map: dotTexture,
-      size: 0.2,
+      size: 0.05,
+      color: "#fff",
       transparent: true,
       depthWrite: false,
     });
@@ -70,53 +81,71 @@ const StarBackground: React.FC<Props> = ({ onScroll }) => {
     window.addEventListener("resize", handleResize);
 
     // 動畫邏輯
+    let currentSpeed = 0.01;
+
+    const layoutContent = document.getElementById("layout-container");
+    let idleTimer: ReturnType<typeof setTimeout>;
+
+    layoutContent?.addEventListener(
+      "scroll",
+      throttle(() => {
+        console.log("scroll detected");
+
+        // 滾動時減速
+        if (speedRef.current !== 0.0005) {
+          speedRef.current = 0.0005;
+        }
+
+        // 滾動停止後恢復正常速度
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+          if (speedRef.current !== 0.05) {
+            speedRef.current = 0.05;
+          }
+        }, 3000); // 3 秒無滾動後恢復
+      }, 100), // 每 100ms 觸發一次
+    );
+
     const animate = () => {
+      currentSpeed += (speedRef.current - currentSpeed) * 0.1;
+
+      if (Math.abs(speedRef.current - currentSpeed) < 0.00001) {
+        console.log("currentSpeed :", currentSpeed);
+        console.log("particleSpeed :", speedRef.current);
+        console.log("Math.abs(particleSpeed - currentSpeed) :", Math.abs(speedRef.current - currentSpeed));
+        currentSpeed = speedRef.current;
+      }
+
       const positions = particlesGeometry.attributes.position.array as Float32Array;
+
       for (let i = 0; i < particleCount; i++) {
-        positions[i * 3 + 2] += scrollIdle ? 0.005 : 0.05;
+        positions[i * 3 + 2] += currentSpeed;
         if (positions[i * 3 + 2] > 25) {
           positions[i * 3 + 2] = -25;
         }
       }
+
       particlesGeometry.attributes.position.needsUpdate = true;
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
     };
 
-    animate(); // 啟動動畫
+    animate();
+    console.log("animate :", animate);
     if (canvasRef.current) {
       canvasRef.current.style.opacity = "1";
     }
-
-    // 處理滾動事件
-    const layoutContent = document.getElementById("layout-container");
-    let debounceTimer: ReturnType<typeof setTimeout>;
-    let idleTimer: ReturnType<typeof setTimeout>;
-
-    layoutContent?.addEventListener("scroll", () => {
-      clearTimeout(debounceTimer);
-      clearTimeout(idleTimer);
-
-      debounceTimer = setTimeout(() => {
-        setScrollIdle(false);
-      }, 100);
-
-      idleTimer = setTimeout(() => {
-        setScrollIdle(true);
-      }, 3000);
-    });
 
     // 清理函數
     return () => {
       window.removeEventListener("resize", handleResize);
       layoutContent?.removeEventListener("scroll", () => {});
-      clearTimeout(debounceTimer);
       clearTimeout(idleTimer);
       particlesGeometry.dispose();
       particlesMaterial.dispose();
       renderer.dispose();
     };
-  }, [scrollIdle]); // scrollIdle 被加入依賴，用於控制動畫速度
+  }, []); // particleSpeed 為依賴，用於控制速度
 
   return (
     <canvas
@@ -130,7 +159,6 @@ const StarBackground: React.FC<Props> = ({ onScroll }) => {
         height: "100vh",
         opacity: 0,
         transition: "opacity 1500ms ease-out",
-        filter: "blur(4px)",
       }}
     ></canvas>
   );
