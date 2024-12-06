@@ -1,10 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
-type Props = {
-  onScroll?: () => void; // 可選的 onScroll 回調函數
-};
-
 function throttle(func: Function, limit: number) {
   let lastCall = 0;
   return function (...args: any[]) {
@@ -16,21 +12,21 @@ function throttle(func: Function, limit: number) {
   };
 }
 
-const StarBackground: React.FC<Props> = ({ onScroll }) => {
+const StarBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const speedRef = useRef(0.05);
+  const speedRef = useRef(0.05); // initial speed
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // 初始化 renderer
+    // initialize renderer
     const renderer = new THREE.WebGLRenderer({ canvas });
     renderer.setClearColor(new THREE.Color("#171717"));
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    // 初始化 scene 和 camera
+    // initialize scene and camera
     const scene = new THREE.Scene();
     const fov = 75,
       aspect = window.innerWidth / window.innerHeight,
@@ -39,25 +35,25 @@ const StarBackground: React.FC<Props> = ({ onScroll }) => {
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     camera.position.z = 5;
 
-    // 添加光源
+    // add light
     const light = new THREE.AmbientLight(0xffffff, 2);
     scene.add(light);
 
     const pointLight = new THREE.PointLight(0xffffff, 2);
     scene.add(pointLight);
 
-    // 加載材質
+    // load texture
     const textureLoader = new THREE.TextureLoader();
     const dotTexture = textureLoader.load("/dot.svg");
 
-    // 創建粒子
+    // create particles
     const particlesGeometry = new THREE.BufferGeometry();
     const particleCount = 3000;
     const vertices = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
-      vertices[i * 3] = (Math.random() - 0.5) * 20; // X 軸
-      vertices[i * 3 + 1] = (Math.random() - 0.5) * 20; // Y 軸
-      vertices[i * 3 + 2] = (Math.random() - 0.5) * 50; // Z 軸
+      vertices[i * 3] = (Math.random() - 0.5) * 20; // X axis
+      vertices[i * 3 + 1] = (Math.random() - 0.5) * 20; // Y axis
+      vertices[i * 3 + 2] = (Math.random() - 0.5) * 50; // Z axis
     }
     particlesGeometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
 
@@ -72,7 +68,7 @@ const StarBackground: React.FC<Props> = ({ onScroll }) => {
     const stars = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(stars);
 
-    // 調整窗口大小
+    // adjust window size
     const handleResize = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -80,39 +76,36 @@ const StarBackground: React.FC<Props> = ({ onScroll }) => {
     };
     window.addEventListener("resize", handleResize);
 
-    // 動畫邏輯
+    // animation logic
     let currentSpeed = 0.01;
-
-    const layoutContent = document.getElementById("layout-container");
     let idleTimer: ReturnType<typeof setTimeout>;
 
-    layoutContent?.addEventListener(
-      "scroll",
-      throttle(() => {
-        console.log("scroll detected");
+    // mouse move trigger deceleration
+    const handleMouseMove = throttle(() => {
+      console.log("mouse moved");
 
-        // 滾動時減速
-        if (speedRef.current !== 0.0005) {
-          speedRef.current = 0.0005;
+      // deceleration
+      if (speedRef.current !== 0.0005) {
+        speedRef.current = 0.0005;
+      }
+
+      // stop moving restore speed
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        if (speedRef.current !== 0.05) {
+          speedRef.current = 0.05;
         }
+      }, 30000); // 30 seconds without movement
+    }, 100); // trigger every 100ms
 
-        // 滾動停止後恢復正常速度
-        clearTimeout(idleTimer);
-        idleTimer = setTimeout(() => {
-          if (speedRef.current !== 0.05) {
-            speedRef.current = 0.05;
-          }
-        }, 3000); // 3 秒無滾動後恢復
-      }, 100), // 每 100ms 觸發一次
-    );
+    window.addEventListener("mousemove", handleMouseMove);
+    const layoutContainer = document.getElementById("layout-container");
+    layoutContainer?.addEventListener("scroll", handleMouseMove);
 
     const animate = () => {
       currentSpeed += (speedRef.current - currentSpeed) * 0.1;
 
       if (Math.abs(speedRef.current - currentSpeed) < 0.00001) {
-        console.log("currentSpeed :", currentSpeed);
-        console.log("particleSpeed :", speedRef.current);
-        console.log("Math.abs(particleSpeed - currentSpeed) :", Math.abs(speedRef.current - currentSpeed));
         currentSpeed = speedRef.current;
       }
 
@@ -131,21 +124,20 @@ const StarBackground: React.FC<Props> = ({ onScroll }) => {
     };
 
     animate();
-    console.log("animate :", animate);
+
     if (canvasRef.current) {
       canvasRef.current.style.opacity = "1";
     }
 
-    // 清理函數
     return () => {
       window.removeEventListener("resize", handleResize);
-      layoutContent?.removeEventListener("scroll", () => {});
+      window.removeEventListener("mousemove", handleMouseMove);
       clearTimeout(idleTimer);
       particlesGeometry.dispose();
       particlesMaterial.dispose();
       renderer.dispose();
     };
-  }, []); // particleSpeed 為依賴，用於控制速度
+  }, []);
 
   return (
     <canvas
