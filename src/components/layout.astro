@@ -4,7 +4,6 @@ import Footer from "./footer.astro";
 import Header from "./header.astro";
 import Meta from "./meta.astro";
 import StarBackground from "./react/StarBackground.tsx";
-import { scrollIdle } from "../stores";
 
 type Props = {
   title?: string;
@@ -28,6 +27,5 @@ const { title, description } = Astro.props;
       <Footer />
     </div>
     <StarBackground client:idle />
-    <script></script>
   </body>
 </html>

@@ -6,6 +6,7 @@ import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
@@ -27,6 +28,7 @@ export default defineConfig({
     sitemap(),
     tailwind(),
     react({ include: ["**/react/**/*"] }),
+    icon({}),
   ],
   output: "static",
 });
