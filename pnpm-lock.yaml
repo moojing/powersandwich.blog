@@ -26,6 +26,15 @@ importers:
       '@astrojs/tailwind':
         specifier: ^5.1.0
         version: 5.1.0(astro@4.8.6(@types/node@20.12.12)(typescript@5.7.2))(tailwindcss@3.4.3)
+      '@fontsource-variable/jetbrains-mono':
+        specifier: ^5.1.1
+        version: 5.1.1
+      '@fontsource/poppins':
+        specifier: ^5.1.0
+        version: 5.1.0
+      '@fontsource/press-start-2p':
+        specifier: ^5.1.0
+        version: 5.1.0
       '@iconify-json/logos':
         specifier: ^1.2.3
         version: 1.2.3
@@ -644,6 +653,15 @@ packages:
   '@eslint/js@9.3.0':
     resolution: {integrity: sha512-niBqk8iwv96+yuTwjM6bWg8ovzAPF9qkICsGtcoa5/dmqcEMfdwNAX7+/OHcJHc7wj7XqPxH98oAHytFYlw6Sw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@fontsource-variable/jetbrains-mono@5.1.1':
+    resolution: {integrity: sha512-V+1aRFRvuZ66PpO30s8l/2aADKzpV9VRsO3kSZE+rTMvi4vab3cUcPHMN2z+wAvjkYJO71Yf+g3/Y6pSMmQpVQ==}
+
+  '@fontsource/poppins@5.1.0':
+    resolution: {integrity: sha512-tpLXlnNi2fwQjiipvuj4uNFHCdoLA8izRsKdoexZuEzjx0r/g1aKLf4ta6lFgF7L+/+AFdmaXFlUwwvmDzYH+g==}
+
+  '@fontsource/press-start-2p@5.1.0':
+    resolution: {integrity: sha512-l2HeeeNdaO9NJZnW+fKz/aq3rbCTac71LY0mXVhy55h2x5RueN+AWRf5AtC9puD1m5fInvwipKQLvpXj0p47Tg==}
 
   '@humanwhocodes/config-array@0.13.0':
     resolution: {integrity: sha512-DZLEEqFWQFiyK6h5YIeynKx7JlvCYWL0cImfSRXZ9l4Sg2efkFGTuFf6vzXjK1cq6IYkU+Eg/JizXw+TD2vRNw==}
@@ -4026,6 +4044,12 @@ snapshots:
       - supports-color
 
   '@eslint/js@9.3.0': {}
+
+  '@fontsource-variable/jetbrains-mono@5.1.1': {}
+
+  '@fontsource/poppins@5.1.0': {}
+
+  '@fontsource/press-start-2p@5.1.0': {}
 
   '@humanwhocodes/config-array@0.13.0':
     dependencies:

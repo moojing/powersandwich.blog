@@ -26,5 +26,10 @@ export const MENUS = [
 ];
 
 export const FOOTER_CONTENT = "A bite a day keeps bugs away.";
-
+export const ME_DESCRIPTION =
+  `I am a passionate front-end developer with 4 years of experience in JavaScript and the author of a book on the
+      subject. I enjoy exploring new advancements in software engineering. After transitioning from backend to frontend
+      development, I have reignited my passion for new technologies. Currently, as a front-end programmer with a deep
+      interest in blockchain, I am committed to contributing to this rapidly evolving field. I’ve successfully
+      collaborated with developers in a Growth Squad to build experimental and innovative projects.`;
 export const GOOGLE_GTAG = "G-XXXXXXXXXX";

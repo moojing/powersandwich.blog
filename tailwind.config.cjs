@@ -9,6 +9,7 @@ module.exports = {
         sans: ["Inter"].concat(defaultTheme.fontFamily.sans),
         title: ["Noto Sans", "Familjen Grotesk"].concat(defaultTheme.fontFamily.sans),
         logo: ["'Press Start 2P'"].concat(defaultTheme.fontFamily.sans),
+        mono: ["JetBrains Mono"].concat(defaultTheme.fontFamily.mono),
       },
     },
   },

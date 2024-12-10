@@ -1,9 +1,19 @@
 ---
 import Layout from "../components/layout.astro";
+import "@fontsource-variable/jetbrains-mono";
+import { ME_DESCRIPTION } from "../config";
 ---
 
 <Layout>
-  <div class="flex flex-col items-center justify-center h-full">
-    <div class="text-white text-4xl font-bold">me</div>
+  <div
+    class="flex-col-reverse md:flex-row flex items-center justify-center gap-6 md:gap-4 h-full text-white mx-auto
+    max-w-screen-md bg-neutral-900/80 rounded-lg p-4 mt-[60px] md:mt-[80px]"
+  >
+    <p class="font-mono text-white">
+      {ME_DESCRIPTION}
+    </p>
+    <div class="text-white text-4xl font-bold min-w-48">
+      <img src="/avatar.jpeg" alt="me" class="w-48 h-48 rounded-full" />
+    </div>
   </div>
 </Layout>
