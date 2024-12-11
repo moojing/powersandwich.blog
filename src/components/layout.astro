@@ -4,6 +4,7 @@ import Footer from "./footer.astro";
 import Header from "./header.astro";
 import Meta from "./meta.astro";
 import StarBackground from "./react/StarBackground.tsx";
+
 import "@fontsource/press-start-2p";
 import "@fontsource/poppins";
 
@@ -23,11 +24,13 @@ const { title, description } = Astro.props;
   <body class="relative bg-neutral-900">
     <div id="layout-container" class="z-10 flex flex-col h-full mb-8 overflow-y-scroll antialiased transparent">
       <Header />
+
       <div class="flex-auto">
         <slot />
       </div>
       <Footer />
     </div>
+
     <StarBackground client:idle />
   </body>
 </html>

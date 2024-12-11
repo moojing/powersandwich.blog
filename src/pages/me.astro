@@ -1,19 +1,34 @@
 ---
 import Layout from "../components/layout.astro";
 import "@fontsource-variable/jetbrains-mono";
+import { Icon } from "astro-icon/components";
 import { ME_DESCRIPTION } from "../config";
+import { CONTACTS } from "../config";
 ---
 
 <Layout>
-  <div
-    class="flex-col-reverse md:flex-row flex items-center justify-center gap-6 md:gap-4 h-full text-white mx-auto
-    max-w-screen-md bg-neutral-900/80 rounded-lg p-4 mt-[60px] md:mt-[80px]"
-  >
-    <p class="font-mono text-white">
-      {ME_DESCRIPTION}
-    </p>
-    <div class="text-white text-4xl font-bold min-w-48">
-      <img src="/avatar.jpeg" alt="me" class="w-48 h-48 rounded-full" />
+  <div class="mx-auto max-w-screen-md bg-neutral-900/80 rounded-lg p-4 mt-[60px] md:mt-[80px]">
+    <div class="flex-col-reverse md:flex-row flex items-center justify-center gap-6 md:gap-4 h-full text-white">
+      <div>
+        <h3 class="text-white text-2xl font-logo">Hello, I am Mu Jing!</h3>
+        <p class="font-mono text-slate-400 my-6" set:html={ME_DESCRIPTION} />
+      </div>
+      <div class="text-4xl font-bold min-w-48">
+        <img src="/avatar.jpeg" alt="me" class="w-48 h-48 rounded-full" />
+      </div>
+    </div>
+    <div class="text-white hover:">
+      <div class="flex items-center gap-4">
+        <a href={CONTACTS.github} target="_blank" class="hover:[&>svg]:text-slate-400">
+          <Icon name="github" width={24} height={24} color="#ffffff" class="transition-colors duration-300" />
+        </a>
+        <a href={CONTACTS.linkedIn} target="_blank" class="hover:[&>svg]:text-slate-400">
+          <Icon name="mdi:linkedin" width={28} height={28} color="#ffffff" class="transition-colors duration-300" />
+        </a>
+        <a href={CONTACTS.email} class="hover:[&>svg]:text-slate-400">
+          <Icon name="mdi:email" width={24} height={24} color="#ffffff" class="transition-colors duration-300" />
+        </a>
+      </div>
     </div>
   </div>
 </Layout>
