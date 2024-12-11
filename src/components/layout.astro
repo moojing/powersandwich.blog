@@ -11,9 +11,10 @@ import "@fontsource/poppins";
 type Props = {
   title?: string;
   description?: string;
+  hideFooter?: boolean;
 };
 
-const { title, description } = Astro.props;
+const { title, description, hideFooter } = Astro.props;
 ---
 
 <!doctype html>
@@ -28,7 +29,7 @@ const { title, description } = Astro.props;
       <div class="flex-auto">
         <slot />
       </div>
-      <Footer />
+      {!hideFooter && <Footer />}
     </div>
 
     <StarBackground client:idle />
