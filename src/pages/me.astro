@@ -1,9 +1,8 @@
 ---
 import Layout from "../components/layout.astro";
 import "@fontsource-variable/jetbrains-mono";
-import { Icon } from "astro-icon/components";
 import { ME_DESCRIPTION } from "../config";
-import { CONTACTS } from "../config";
+import ContactRow from "../components/contact-row.astro";
 ---
 
 <Layout>
@@ -17,18 +16,6 @@ import { CONTACTS } from "../config";
         <img src="/avatar.jpeg" alt="me" class="w-48 h-48 rounded-full" />
       </div>
     </div>
-    <div class="text-white hover:">
-      <div class="flex items-center gap-4">
-        <a href={CONTACTS.github} target="_blank" class="hover:[&>svg]:text-slate-400">
-          <Icon name="github" width={24} height={24} color="#ffffff" class="transition-colors duration-300" />
-        </a>
-        <a href={CONTACTS.linkedIn} target="_blank" class="hover:[&>svg]:text-slate-400">
-          <Icon name="mdi:linkedin" width={28} height={28} color="#ffffff" class="transition-colors duration-300" />
-        </a>
-        <a href={CONTACTS.email} class="hover:[&>svg]:text-slate-400">
-          <Icon name="mdi:email" width={24} height={24} color="#ffffff" class="transition-colors duration-300" />
-        </a>
-      </div>
-    </div>
+    <ContactRow />
   </div>
 </Layout>

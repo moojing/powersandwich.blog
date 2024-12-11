@@ -1,5 +1,9 @@
 ---
 import { SLOGAN } from "../config";
+import ContactRow from "./contact-row.astro";
 ---
 
-<footer class="bg-zinc-800 w-full h-20">Footer</footer>
+<footer class="bg-zinc-800/40 w-full h-15 flex items-center justify-center text-slate-400 py-6 px-8 justify-between">
+  <span> © 2024 Powersandwich. All rights reserved. </span>
+  <ContactRow />
+</footer>

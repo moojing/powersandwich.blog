@@ -1,0 +1,18 @@
+---
+import { CONTACTS } from "../config";
+import { Icon } from "astro-icon/components";
+---
+
+<div class="text-slate-400">
+  <div class="flex items-center gap-4">
+    <a href={CONTACTS.github} target="_blank" class="hover:[&>svg]:text-white">
+      <Icon name="github" width={24} height={24} class="transition-colors duration-300" />
+    </a>
+    <a href={CONTACTS.linkedIn} target="_blank" class="hover:[&>svg]:text-white">
+      <Icon name="mdi:linkedin" width={28} height={28} class="transition-colors duration-300" />
+    </a>
+    <a href={CONTACTS.email} class="hover:[&>svg]:text-white">
+      <Icon name="mdi:email" width={24} height={24} class="transition-colors duration-300" />
+    </a>
+  </div>
+</div>
