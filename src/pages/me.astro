@@ -6,16 +6,61 @@ import ContactRow from "../components/contact-row.astro";
 ---
 
 <Layout hideFooter>
-  <div class="mx-auto max-w-screen-md bg-neutral-900/60 rounded-lg p-4 mt-[60px] md:mt-[80px]">
-    <div class="flex-col-reverse md:flex-row flex items-center justify-center gap-6 md:gap-4 h-full text-white">
-      <div>
-        <h3 class="text-white text-2xl font-logo">Hello, I am Mu Jing!</h3>
-        <p class="font-mono text-slate-400 my-6" set:html={ME_DESCRIPTION} />
+  <div class="max-w-screen-md mx-auto pb-24">
+    <div class="bg-neutral-900/60 rounded-lg p-4 mt-[60px] md:mt-[80px] mb-6">
+      <div class="flex-col-reverse md:flex-row flex items-center justify-center gap-6 md:gap-4 h-full text-white">
+        <div>
+          <h3 class="text-white text-2xl font-logo">Hello, I am Mu Jing!</h3>
+          <p class="font-mono text-slate-400 my-6" set:html={ME_DESCRIPTION} />
+        </div>
+        <div class="text-4xl font-bold min-w-48">
+          <img src="/avatar.jpeg" alt="me" class="w-48 h-48 rounded-full" />
+        </div>
       </div>
-      <div class="text-4xl font-bold min-w-48">
-        <img src="/avatar.jpeg" alt="me" class="w-48 h-48 rounded-full" />
+      <ContactRow />
+    </div>
+
+    <div class="p-4 flex gap-4 bg-neutral-900/60 rounded-lg">
+      <div class="flex flex-col flex-1 p-4">xxx</div>
+      <div class="flex-1 flex flex-col border border-slate-600 gap-4 p-4">
+        <div class="flex gap-4 flex-wrap items-center">
+          <h3 class="text-2xl text-white">Work Experience</h3>
+        </div>
+        <ul class="flex flex-col gap-4 text-slate-400">
+          <li class="flex flex-col">
+            <h4>HTMX</h4>
+            <div class="flex gap-2 justify-between text-slate-500">
+              <p class="text-sm">CEO</p><p class="text-sm">2024 - Present</p>
+            </div>
+          </li>
+          <li class="flex flex-col">
+            <h4>Build-a-Bear Workshop</h4>
+            <div class="flex gap-2 justify-between text-slate-500">
+              <p class="text-sm">Metaverse Architect</p>
+              <p class="text-sm">2021 - 2023</p>
+            </div>
+          </li>
+          <li class="flex flex-col">
+            <h4>Emojipedia</h4>
+            <div class="flex gap-2 justify-between text-slate-500">
+              <p class="text-sm">Chief Emoji Officer</p>
+              <p class="text-sm">2013 - 2021</p>
+            </div>
+          </li>
+          <li class="flex flex-col">
+            <h4>Bitcoin</h4>
+            <div class="flex gap-2 justify-between text-slate-500">
+              <p class="text-sm">Satoshi Nakamoto</p>
+              <p class="text-sm">2008 - 2009</p>
+            </div>
+          </li>
+        </ul>
+        <a class="px-4 py-2 border border-slate-400" href="/ExampleResume.pdf" download="ExampleResume.pdf">
+          <div class="flex gap-2 items-center text-white">
+            <span>Download CV</span>
+          </div>
+        </a>
       </div>
     </div>
-    <ContactRow />
   </div>
 </Layout>
