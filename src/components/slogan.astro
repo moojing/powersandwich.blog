@@ -1,0 +1,20 @@
+---
+import { SLOGAN } from "../config";
+
+type Props = {
+  class?: string;
+  atBottom?: boolean;
+};
+
+const { atBottom } = Astro.props;
+---
+
+<footer class:list={[atBottom ? "bg-gradient-to-t" : "bg-gradient-to-b", "from-zinc-800/60"]}>
+  <div class="flex flex-row items-center justify-center max-w-screen-md h-40 md:h-60 mx-auto px-4 sm:px-6">
+    <p
+      class="text-lg md:text-4xl leading-6 md:leading-[60px] bg-clip-text text-center text-transparent bg-gradient-to-r from-slate-100 to-slate-400 font-logo font-black"
+    >
+      {SLOGAN}
+    </p>
+  </div>
+</footer>

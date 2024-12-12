@@ -3,7 +3,7 @@ title: "React 模組化筆記（二）- 打包工具的選擇"
 date: '2021-09-12'
 description: "在開發 React 元件庫時，選擇合適的打包工具是一個重要的決定。這篇文章將介紹不同打包工具的特性，以及如何選擇最適合你需求的工具。"
 cover: "../../assets/frontend-npm-module.png"
-tags: ["frontend", "react", "webpack", "rollup"]
+tags: ["frontend", "webpack", "rollup"]
 ---
 
 在元件庫系列文的第二部分，會試著用 webpack 來打包模組，並把過程記錄下來。我們在前面的文章裡面提到了許多種類的 JavaScript 模組系統，而模組系統的差異在 SSR 架構下，我們要製作元件庫時可能會是一個需要處理的問題，除了把所有元件庫的程式碼直接轉換成 UMD 的模組系統，我們也可以透過 package.json 來做處理，這一點我們也會一併說明。

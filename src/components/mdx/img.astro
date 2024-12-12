@@ -1,12 +1,11 @@
 ---
 const props = Astro.props;
+
+// src might be an object or a string
+const imgSource = typeof props.src === "object" ? props.src : props;
 ---
 
 <div {...props} class="flex flex-col gap-2 text-center">
-  <img
-    class="w-full rounded-lg overflow-clip"
-    src={props.src ? `${props.src}?w=1024&q=70` : ""}
-    alt={props.alt ?? ""}
-  />
+  <img class="w-full rounded-lg overflow-clip" src={imgSource.src ? `${imgSource.src}` : ""} alt={props.alt ?? ""} />
   <span class="text-gray-400 font-normal text-sm">{props.alt}</span>
 </div>

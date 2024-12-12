@@ -1,11 +1,21 @@
 ---
 import { MENUS } from "../config";
+import { Icon } from "astro-icon/components";
 ---
 
 <div class="flex flex-row gap-4">
   {
     MENUS.map((item) => (
-      <a href={item.link} target={item.target} class="h-full text-sm hover:text-orange-700">
+      <a
+        href={item.link}
+        target={item.target}
+        class="h-full mx-0 md:mx-4 text-sm text-slate-400 hover:text-slate-100 flex items-center gap-2"
+      >
+        {item.icon && (
+          <span>
+            <Icon name={item.icon} width={16} height={16} class="text-slate-400" />
+          </span>
+        )}
         {item.title}
       </a>
     ))

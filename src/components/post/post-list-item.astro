@@ -2,9 +2,9 @@
 import type { CollectionEntry } from "astro:content";
 import DateTag from "../date-tag.astro";
 import Tag from "../tag.astro";
-
+import { CollectionType } from "../../types";
 type Props = {
-  post: CollectionEntry<"blog">;
+  post: CollectionEntry<CollectionType.Blog>;
 };
 
 const { post } = Astro.props;
@@ -13,7 +13,7 @@ const isCoverObject = typeof cover === "object" && cover?.src;
 const coverSrc = isCoverObject ? `${cover.src}` : `${cover}`;
 ---
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-4 rounded-lg p-4 ring-0 cursor-pointer bg-zinc-800/60">
   {
     post.slug && (
       <a href={`/posts/${post.slug}`} target="_self">
@@ -24,13 +24,13 @@ const coverSrc = isCoverObject ? `${cover.src}` : `${cover}`;
   <div class="flex flex-col gap-2">
     <div class="flex gap-2">
       <DateTag date={post.data.date} />
-      {post.data.tags?.map((tag) => <Tag tag={tag} />)}
+      {post.data.tags?.map((tag: string) => <Tag tag={tag} />)}
     </div>
     <a href={`/posts/${post.slug}`} target="_self">
-      <h1 class="text-3xl font-title font-black">{post.data.title}</h1>
+      <h1 class="text-3xl font-title font-black text-white">{post.data.title}</h1>
     </a>
     <a href={`/posts/${post.slug}`} target="_self">
-      <p class="text-sm text-zinc-700">{post.data.description}</p>
+      <p class="text-sm text-gray-300">{post.data.description}</p>
     </a>
   </div>
 </div>

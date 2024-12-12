@@ -3,27 +3,35 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
 import Footer from "./footer.astro";
 import Header from "./header.astro";
 import Meta from "./meta.astro";
+import StarBackground from "./react/StarBackground.tsx";
+
+import "@fontsource/press-start-2p";
+import "@fontsource/poppins";
 
 type Props = {
   title?: string;
   description?: string;
+  hideFooter?: boolean;
 };
 
-const { title, description } = Astro.props;
+const { title, description, hideFooter } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="text-zinc-800">
+<html lang="en" class="bg-slate-900">
   <head>
     <Meta title={title ? `${title} · ${SITE_TITLE}` : SITE_TITLE} description={description ?? SITE_DESCRIPTION} />
   </head>
-  <body>
-    <div class="flex flex-col h-full mb-8 overflow-y-scroll antialiased">
+  <body class="relative bg-neutral-900">
+    <div id="layout-container" class="z-10 flex flex-col h-full mb-8 overflow-y-scroll antialiased transparent">
       <Header />
+
       <div class="flex-auto">
         <slot />
       </div>
-      <Footer />
+      {!hideFooter && <Footer />}
     </div>
+
+    <StarBackground client:idle />
   </body>
 </html>

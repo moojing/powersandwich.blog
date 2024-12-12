@@ -2,13 +2,16 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../../components/layout.astro";
 import Tag from "../../components/tag.astro";
+import Slogan from "../../components/slogan.astro";
 
 // MDX Components
 import DateTag from "../../components/date-tag.astro";
 import PostContent from "../../components/post/post-content.astro";
+import { CollectionType } from "../../types";
 
+type Post = CollectionEntry<CollectionType.Blog>;
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getCollection(CollectionType.Blog);
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
@@ -16,7 +19,7 @@ export async function getStaticPaths() {
 }
 
 type Props = {
-  post: CollectionEntry<"blog">;
+  post: Post;
 };
 
 const { post } = Astro.props;
@@ -29,18 +32,21 @@ const coverSrc = isCoverObject ? `${cover.src}` : `${cover}`;
 <Layout title={post.data.title} description={post.data.description}>
   <div class="flex flex-col gap-8 md:w-5/6 px-4 py-12 sm:px-8 mx-auto">
     <div class="flex flex-col gap-6 items-center justify-center max-w-screen-sm mx-auto">
-      <h1 id="header" class="text-5xl text-center font-title font-black">{post.data.title}</h1>
+      <h1 id="header" class="text-5xl text-center font-title font-black text-white">{post.data.title}</h1>
       <div class="flex items-center justify-center gap-2">
         <DateTag date={post.data.date} />
         {post.data.tags?.map((tag) => <Tag tag={tag} />)}
       </div>
-      <p class="text-lg text-center text-zinc-700 max-w-[480px]">{post.data.description}</p>
+      <p class="text-lg text-center text-white max-w-[576px]">{post.data.description}</p>
     </div>
     {coverSrc && <img src={coverSrc} alt={post.data.title} class="w-full max-w-screen-md mx-auto rounded-lg" />}
   </div>
-  <div class="relative flex flex-col gap-2 max-w-screen-md mx-auto px-4 sm:px-6 text-base text-zinc-700">
+  <div
+    class="relative flex flex-col gap-3 max-w-screen-md mx-auto px-4 sm:px-6 text-xl leading-relaxed text-white bg-neutral-900/90 rounded-lg"
+  >
     <PostContent post={post} />
   </div>
+  <Slogan atBottom />
 </Layout>
 
 <script>

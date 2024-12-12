@@ -1,0 +1,98 @@
+---
+import Layout from "../components/layout.astro";
+import "@fontsource-variable/jetbrains-mono";
+import { ME_DESCRIPTION } from "../config";
+import ContactRow from "../components/contact-row.astro";
+import { WORK_EXPERIENCE } from "../config";
+import { Image } from "astro:assets";
+import { PROJECTS } from "../config";
+import { Icon } from "astro-icon/components";
+---
+
+<Layout hideFooter>
+  <div class="max-w-screen-lg mx-auto pb-24">
+    <div class="bg-neutral-900/60 rounded-lg p-4 mt-[60px] md:mt-[80px] mb-6">
+      <div class="flex-col md:flex-row flex items-center justify-center gap-6 md:gap-10 h-full text-white">
+        <div>
+          <h3 class="text-white text-2xl font-logo">Hello, I am Mu Jing!</h3>
+          <p class="font-mono text-slate-400 my-6 mb-10" set:html={ME_DESCRIPTION} />
+          <h3 class="text-white text-2xl font-logo mb-5">Contacts</h3>
+          <ContactRow />
+        </div>
+        <div class="min-w-80 w-full">
+          <div class="flex flex-col border border-slate-600 gap-4 p-4 pt-0">
+            <img src="/avatar.jpeg" alt="me" class="w-32 h-32 rounded-full mx-auto mt-4" />
+            <div class="flex flex-wrap items-center">
+              <h3 class="text-lg text-white font-logo">Work Experience</h3>
+            </div>
+            <ul class="flex flex-col gap-4 text-slate-400">
+              {
+                WORK_EXPERIENCE.map((item) => (
+                  <li class="flex flex-col">
+                    <h4 class="text-lg">{item.company}</h4>
+                    <div class="flex gap-2 justify-between text-slate-500">
+                      <>
+                        <p class="text-sm">{item.position}</p>
+                        <p class="text-sm">
+                          {item.startDate} - {item.endDate}
+                        </p>
+                      </>
+                    </div>
+                  </li>
+                ))
+              }
+            </ul>
+            <a
+              class="px-4 py-2 border border-slate-400"
+              target="_blank"
+              href="https://drive.google.com/file/d/1hezaur-KS8kOS7LPEjROt7uV8oyIqH0W/view"
+              download="Resume.pdf"
+            >
+              <div class="flex gap-2 items-center text-white justify-center">
+                <span>Open CV</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-4 flex gap-4 bg-neutral-900/60 rounded-lg">
+      <div class="flex flex-col flex-1">
+        <h3 class="text-white text-2xl font-logo mb-6">Projects</h3>
+        <ul class="flex flex-col gap-8 text-slate-400">
+          {
+            PROJECTS.map((item) => (
+              <li class="flex gap-4 md:flex-row flex-col">
+                <div class="max-w-full md:max-w-40 w-full aspect-[4/3] overflow-hidden rounded-lg bg-white ">
+                  <Image src={item.image} alt={item.title} class="object-cover h-full w-full" />
+                </div>
+                <div>
+                  {item.link ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      class="hover:text-white text-lg flex items-center gap-1 transition-colors"
+                    >
+                      <h4 class="text-lg">{item.title}</h4>
+
+                      <Icon name="mdi:external-link" class="w-3 h-3" />
+                    </a>
+                  ) : (
+                    <h4 class="text-lg">{item.title}</h4>
+                  )}
+                  <p class="text-sm mb-4">{item.description}</p>
+                  <ul class="list-disc list-inside flex-col gap-1">
+                    {item.details.map((detail) => (
+                      <li class="text-sm">{detail}</li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</Layout>
