@@ -74,7 +74,7 @@ export const WORK_EXPERIENCE = [
 
 export const PROJECTS = [
   {
-    title: "Publication",
+    title: "My Book - JavaScript Concept Sandwich",
     description: "This is the first JavaScript technical book I wrote. I participated in a writing competition. In this competition, I decided to try expressing the JavaScript knowledge I had acquired. In the end, I won an award in the competition.",
     image: JsSandwich,
     link: "https://www.tenlong.com.tw/products/9789864347575",
@@ -86,10 +86,14 @@ export const PROJECTS = [
   },
   {
     title: "Raycast Extension - Coinmarketcap Price Crawler",
-    description: "A crawler to get the price of cryptocurrencies.",
+    description: "This is an open source project build with Raycast, and it's a crawler to get the price of cryptocurrencies.",
     image: RaycastExt,
     link: "https://www.raycast.com/SonicSpark/coinmarketcap-crypto-price-crawler",
-    details:[]
+    details:[
+      'Make price inquiry easier',
+      'Built with React API',
+      'A open source project',
+    ]
   },
 ];
 export const GOOGLE_GTAG = "G-XXXXXXXXXX";
