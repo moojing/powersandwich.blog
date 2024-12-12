@@ -31,12 +31,10 @@ import { Icon } from "astro-icon/components";
                   <li class="flex flex-col">
                     <h4 class="text-lg">{item.company}</h4>
                     <div class="flex gap-2 justify-between text-slate-500">
-                      <>
-                        <p class="text-sm">{item.position}</p>
-                        <p class="text-sm">
-                          {item.startDate} - {item.endDate}
-                        </p>
-                      </>
+                      <p class="text-sm">{item.position}</p>
+                      <p class="text-sm">
+                        {item.startDate} - {item.endDate}
+                      </p>
                     </div>
                   </li>
                 ))
