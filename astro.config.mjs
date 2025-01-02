@@ -20,7 +20,7 @@ export default defineConfig({
     mdx({
       syntaxHighlight: "shiki",
       shikiConfig: {
-        theme: "github-light",
+        theme: "dark-plus",
       },
       remarkPlugins: [remarkMath],
       rehypePlugins: [rehypeKatex],
