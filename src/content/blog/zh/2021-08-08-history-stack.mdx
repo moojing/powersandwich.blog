@@ -3,7 +3,7 @@ title: "History-stack"
 description: "或許 pushState 與 replaceState 這兩個方法你可能沒聽過，但是瀏覽器「上一頁、下一頁」功能你一定不陌生，其實這兩個 API 是瀏覽器提供給開發者操作瀏覽紀錄用的，透過這兩個 API 並搭配事件處理，我們就可以將瀏覽器預設的「上一頁下一頁」修改成我們想要的客製化結果。"
 date: '2021-08-08'
 tags: ["react", "javascript", "frontend"]
-cover: "../../assets/frontend-use-case.jpg"
+cover: "../../../assets/frontend-use-case.jpg"
 ---
 
 或許 `pushState` 與 `replaceState` 這兩個方法你可能沒聽過，但是瀏覽器「上一頁、下一頁」功能你一定不陌生，其實這兩個 API 是瀏覽器提供給開發者操作瀏覽紀錄用的，透過這兩個 API 並搭配事件處理，我們就可以將瀏覽器預設的「上一頁下一頁」修改成我們想要的客製化結果。
@@ -19,7 +19,7 @@ cover: "../../assets/frontend-use-case.jpg"
 
 最近接到了必須修改瀏覽器歷史紀錄行為的需求，所以順便寫了篇文章整理下來。 在公司負責的產品是類似 AWS 那樣資源控制的後台介面，前端部分雖然使用了 React 作為主要工具，但架構上有點像是由 Webpack 打包出靜態檔， 之後交由後端 Server 來處理前端內容，所以無法直接將路由控制交給 React 作使用。
 
-![Use case](../../assets/frontend-use-case.jpg)
+![Use case](../../../assets/frontend-use-case.jpg)
 
 什麼意思？一般 SPA 原理是由 JS 產生動態內容並即時掛到 DOM 上，但這個產品流程上是這樣：
 
@@ -49,11 +49,11 @@ cover: "../../assets/frontend-use-case.jpg"
 
 讀完這兩段雖然可能沒辦法馬上弄清楚說明的意思，但從內容我們可以看到一個蠻重要的部分：「 **history stack.** 」這是否說明瀏覽器記錄與資料結構裡的堆疊 ( Stack ) 有關？沒錯，瀏覽器裡的歷史紀錄就是以堆疊的形式儲存下來供使用者作使用，首先讓我們來看看堆疊是什麼，可以看看以下的模型圖。
 
-![Stack Model](../../assets/frontend-stack-model.jpg)
+![Stack Model](../../../assets/frontend-stack-model.jpg)
 
 我們可以使用 `push` 與 `pop` 兩種方法分別對堆疊結構加入一筆新的資料或是取出最後一筆資料，因此，關於堆疊有一個很常見的描述就是「先進後出」。其他前端常用到的資料結構可以參考我之前[鐵人賽的文章](https://ithelp.ithome.com.tw/articles/10227662)。
 
-![History Stack Model](../../assets/frontend-history-stack-model.jpg)
+![History Stack Model](../../../assets/frontend-history-stack-model.jpg)
 
 所以堆疊套用在歷史紀錄上是怎麼回事呢？每當我們從同一個頁面點擊網址轉到新的頁面時，就是在對歷史紀錄的堆疊使用 `push` 方法新增一筆新的瀏覽紀錄 ，而當我們執行上一頁往前瀏覽時，就像是在使用 `pop` 方法取出最後一筆瀏覽紀錄（網頁位置）。
 
@@ -89,13 +89,13 @@ window.onpopstate  = ( event ) =>; { //事件函式內容 }
 
 說了這麼多，來舉個實際的例子看看運作方式如何吧，現在我有三個按鈕，每個按鈕點擊後各自會呼叫有不同參數的 `pushState` 方法，而這時因為是第一次進入頁面，所以 `history.length` 是 1 。
 
-![history stack demo](../../assets/frontend-history-stack-demo.png)
+![history stack demo](../../../assets/frontend-history-stack-demo.png)
 
-![history stack demo code ](../../assets/frontend-history-stack-demo-code.png)
+![history stack demo code ](../../../assets/frontend-history-stack-demo-code.png)
 
 所以如果我依序點擊 first 、second 、 third 按鈕之後，應該會在瀏覽器歷史裡新增三筆紀錄堆疊。
 
-![history stack demo](../../assets/frontend-history-stack-demo-result1.png)
+![history stack demo](../../../assets/frontend-history-stack-demo-result1.png)
 
 可以從上圖看到目前的網址內容變成 `third.html` ，但頁面仍然是原本的內容，沒有刷新，而瀏覽紀錄堆疊長度也真的變成 4 。這時的堆疊裡應該分別是：
 
@@ -105,7 +105,7 @@ first.html -> first.html -> second.html -> third.html
 
 堆疊裡的最後一筆紀錄是 `third.html` ，所以現在如果點擊上ㄧ頁按鈕，理論上會回到 `second.html` 堆疊。
 
-![history stack demo push back](../../assets/frontend-history-stack-demo-lastPage.png)
+![history stack demo push back](../../../assets/frontend-history-stack-demo-lastPage.png)
 
 透過上圖可以看出確實如此，而且搭配 `onpopstate` 事件把 event 物件印出來可以看到在 pushState 時傳入的 state 物件的內容 也會隨著被 pop 出來。還有一個可以注意的地方是我們在**做以上這些操作時，都沒有任何頁面刷新的情況發生，但確實改變了瀏覽紀錄堆疊**。
 

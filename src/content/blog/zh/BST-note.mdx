@@ -7,7 +7,7 @@ tags: [
 	'algorithm',
 	'bst',
 	]
-cover: '../../assets/bst-note/example.png'
+cover: '../../../assets/bst-note/example.png'
 ---
 
 
@@ -51,7 +51,7 @@ class BinarySearchTree {
 ```
 
 ## insert 新增
-![BST insert flow](../../assets/bst-note/insert.gif)
+![BST insert flow](../../../assets/bst-note/insert.gif)
 insert 方法，在創造新的 Node 之後，要注意的是一開始要先檢查 edge case ，也就是 root 本身存不存在。
 
 ```javascript
@@ -103,7 +103,7 @@ insert(value){
 ```
 
 ## loopup 查找
-![BST loopup flow](../../assets/bst-note/search.gif)
+![BST loopup flow](../../../assets/bst-note/search.gif)
 要在 BST 上尋找某個值，相對來說比較簡單，只要根據 BST 的規則持續比較和遍歷就行。和插入的邏輯很像，從 root 節點往下開始與目標值做比較，來看看要往右邊去尋找還是左邊，直到目標值和某個節點的值相等為止。
 
 要注意的是如果查找到最後發現 `currentNode` 變成 `null` ，那就表示想要查找的值並不存在這棵樹上。
@@ -130,7 +130,7 @@ lookup(value){
 ```
 
 ## remove 刪除
-![BST remove flow](../../assets/bst-note/delete.gif)
+![BST remove flow](../../../assets/bst-note/delete.gif)
 最後一個方法是刪除節點 ，也是比較複雜的一個方法。刪除方法其實又可以細分為兩個步驟：
 
 - 查找要被刪除的目標節點

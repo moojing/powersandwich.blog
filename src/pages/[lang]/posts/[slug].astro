@@ -1,21 +1,24 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import Layout from "../../components/layout.astro";
-import Tag from "../../components/tag.astro";
-import Slogan from "../../components/slogan.astro";
+import Layout from "../../../components/layout.astro";
+import Tag from "../../../components/tag.astro";
+import Slogan from "../../../components/slogan.astro";
 
 // MDX Components
-import DateTag from "../../components/date-tag.astro";
-import PostContent from "../../components/post/post-content.astro";
-import { CollectionType } from "../../types";
+import DateTag from "../../../components/date-tag.astro";
+import PostContent from "../../../components/post/post-content.astro";
+import { CollectionType } from "../../../types";
 
 type Post = CollectionEntry<CollectionType.Blog>;
 export async function getStaticPaths() {
   const posts = await getCollection(CollectionType.Blog);
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  return posts.map((post) => {
+    const [lang, ...slug] = post.slug.split("/");
+    return {
+      params: { lang, slug: slug.join("/") || undefined },
+      props: { post },
+    };
+  });
 }
 
 type Props = {

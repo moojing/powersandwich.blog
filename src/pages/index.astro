@@ -6,6 +6,9 @@ import { posts } from "../helpers";
 ---
 
 <Layout>
+  <slot name="meta">
+    <meta http-equiv="refresh" content="0;url=/en" />
+  </slot>
   <Slogan />
   <PostListing posts={posts} />
 </Layout>

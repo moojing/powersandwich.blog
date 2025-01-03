@@ -1,0 +1,12 @@
+---
+import Layout from "../components/layout.astro";
+import PostListing from "../components/post/post-list.astro";
+
+// redirect to /en/posts by default
+---
+
+<Layout>
+  <slot name="meta">
+    <meta http-equiv="refresh" content="0;url=/en/posts" />
+  </slot>
+</Layout>

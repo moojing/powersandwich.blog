@@ -21,7 +21,7 @@ export const MENUS = [
   },
   {
     title: "Posts",
-    link: "/posts",
+    link: "/en/posts",
     target: "_self",
   },
   {

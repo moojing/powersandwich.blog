@@ -7,6 +7,6 @@ import { posts, tags } from "../../helpers";
 ---
 
 <Layout>
-  <SlugList slugs={tags} generateLink={(slug) => `/tags/${encodeURI(slug)}`} />
+  <SlugList slugs={tags} generateLink={(slug: string) => `/tags/${encodeURI(slug)}`} />
   <PostListing posts={posts} />
 </Layout>

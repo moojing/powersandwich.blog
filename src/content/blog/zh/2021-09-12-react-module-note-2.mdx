@@ -2,7 +2,7 @@
 title: "React 模組化筆記（二）- 打包工具的選擇"
 date: '2021-09-12'
 description: "在開發 React 元件庫時，選擇合適的打包工具是一個重要的決定。這篇文章將介紹不同打包工具的特性，以及如何選擇最適合你需求的工具。"
-cover: "../../assets/frontend-npm-module.png"
+cover: "../../../assets/frontend-npm-module.png"
 tags: ["frontend", "webpack", "rollup"]
 ---
 
@@ -47,7 +47,7 @@ tags: ["frontend", "webpack", "rollup"]
 
 main 是我們要自製模組時一個很重要的設定。如果你在專案 npm install 之後仔細觀察 node_module 裡面模組的內容的話，會發現每個模組裡面都有各自的 package.json。以 node.js 來講，當這個模組被我們的專案引用的時候， Node.js 事實上會依照 package.json 裡面的 `main` 來作為引入時第一個執行的檔案。
 
-![npm module](../../assets/frontend-npm-module.png)
+![npm module](../../../assets/frontend-npm-module.png)
 
 ### `scripts`
 
@@ -178,7 +178,7 @@ yarn build:webpack
 
 指令執行完之後，應該就會看到包含著處理過後的程式碼的 dist 資料夾出現了。
 
-![webpack result](../../assets/frontend-pack-result.png)
+![webpack result](../../../assets/frontend-pack-result.png)
 
 ### 模組內 package.json 的設定
 
@@ -234,7 +234,7 @@ export default App
 
 都做好之後我們就可以來啟動專案了，啟動之後你會發現我們所引入的按鈕元件居然完全沒有樣式，只有 Html 結構和 class name 而已，這是怎麼回事呢？
 
-![webpack result](../../assets/frontend-webpack-import-example-result.png)
+![webpack result](../../../assets/frontend-webpack-import-example-result.png)
 
 因為在這個新創造的 CRA 專案內我們引入 Button 元件時，事實上只有引入到 JS 程式碼而已，而如果你回頭去看我們的打包流程就會發現，我們的 CSS 是分開來另外處理成為另外一個獨立的 CSS 檔案的， 所以這時當然吃不到樣式啦！ 我們得另外在專案內引入才行。
 
@@ -252,7 +252,7 @@ import 'mujing-module-demo/dist/css/common.css'
 
 加入引入 CSS 的設定之後，我們應該就可以在畫面上看到一個完整的按鈕元素：
 
-![webpack result](../../assets/frontend-webpack-import-example-addCss.png)
+![webpack result](../../../assets/frontend-webpack-import-example-addCss.png)
 
 ## 為什麼打包成 umd 還是可以被其他專案引用？
 
@@ -262,7 +262,7 @@ import 'mujing-module-demo/dist/css/common.css'
 
 關鍵就在於：**雖然我們的模組是使用 umd 模組系統，但是由於我們的所引入的專案（CRA 專案）事實上也有使用 webpack 來處理程式碼**（ 只是沒辦法直接看出來，必須做 eject 才有辦法把 webpack 設定產生出來，且通常還會搭配 babel ），所以那些模組裡面的 umd 程式碼在最後實際被執行時仍下會被轉為可以被瀏覽器執行的 JavaScript code.
 
-![webpack result](../../assets/frontend-umd-import-example.png)
+![webpack result](../../../assets/frontend-umd-import-example.png)
 
 所以在這種情況下只要模組內的程式碼能夠順利被專案內的 webpack 處理，基本上都能夠順利跑起來，不過如果我們**想要做到 tree shaking 的效果，就一定要讓 module 在被引入的時候是 esm 這種模組系統 才行**。
 
@@ -272,7 +272,7 @@ import 'mujing-module-demo/dist/css/common.css'
 
 可惜的是我們目前是用 Webpack 來處理這個模組專案，但是 Webpack 目前在輸出 esm 模組系統的功能上還是屬於[實驗階段](https://webpack.js.org/configuration/output/#type-module)，因此不適合正式拿來做為專案的一部分使用。
 
-![webpack result](../../assets/frontend-webpack-example-esm.png)
+![webpack result](../../../assets/frontend-webpack-example-esm.png)
 
 因為這個原因，所以利用 webpack 來打包模組的嘗試就到這裡先暫停了，後來我們發現另一套打包工具 Rollup 可以解決這個問題，在本系列文的下一篇會講到如何用 Rollup 來將專案處理成 esm 的 module。
 

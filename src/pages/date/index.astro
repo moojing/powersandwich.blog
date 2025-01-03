@@ -7,6 +7,6 @@ import { posts, years } from "../../helpers";
 ---
 
 <Layout>
-  <SlugList slugs={years} generateLink={(slug) => `/date/${encodeURI(slug)}`} />
+  <SlugList slugs={years as string[]} generateLink={(slug: string) => `/date/${encodeURI(slug)}`} />
   <PostListing posts={posts} />
 </Layout>

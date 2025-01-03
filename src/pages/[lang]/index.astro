@@ -1,0 +1,27 @@
+---
+import Layout from "../../components/layout.astro";
+import PostListing from "../../components/post/post-list.astro";
+import Slogan from "../../components/slogan.astro";
+import { getPostsByLang } from "../../helpers";
+
+export async function getStaticPaths() {
+  return [
+    {
+      params: { lang: "en" },
+      props: { posts: getPostsByLang("en") },
+    },
+    {
+      params: { lang: "zh" },
+      props: { posts: getPostsByLang("zh") },
+    },
+  ];
+}
+
+const { lang } = Astro.params;
+const posts = getPostsByLang(lang);
+---
+
+<Layout>
+  <Slogan />
+  <PostListing posts={posts} />
+</Layout>

@@ -21,6 +21,7 @@ const { title, description, hideFooter } = Astro.props;
 <html lang="en" class="bg-slate-900">
   <head>
     <Meta title={title ? `${title} · ${SITE_TITLE}` : SITE_TITLE} description={description ?? SITE_DESCRIPTION} />
+    <slot name="meta" />
   </head>
   <body class="relative bg-neutral-900">
     <div id="layout-container" class="z-10 flex flex-col h-full mb-8 overflow-y-scroll antialiased transparent">
