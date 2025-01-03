@@ -3,7 +3,7 @@ import { MENUS } from "../config";
 import { Icon } from "astro-icon/components";
 ---
 
-<div class="flex flex-row gap-4">
+<div class="flex flex-row gap-4 items-center">
   {
     MENUS.map((item) => (
       <a
@@ -16,8 +16,10 @@ import { Icon } from "astro-icon/components";
             <Icon name={item.icon} width={16} height={16} class="text-slate-400" />
           </span>
         )}
-        {item.title}
+        {/* // hide title in mobile if icon exists */}
+        <span class={item.icon ? "hidden md:block" : ""}>{item.title}</span>
       </a>
     ))
   }
+  <slot />
 </div>

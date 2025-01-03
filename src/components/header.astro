@@ -1,6 +1,7 @@
 ---
 import { SITE_LOGO, SITE_TITLE } from "../config";
 import Menus from "./menus.astro";
+import Dropdown from "./react/dropdown.tsx";
 ---
 
 <header
@@ -15,6 +16,8 @@ import Menus from "./menus.astro";
         {SITE_TITLE}
       </h1>
     </a>
-    <Menus />
+    <Menus>
+      <Dropdown client:load />
+    </Menus>
   </div>
 </header>
