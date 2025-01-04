@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 const Dropdown = () => {
   // State to manage the current language
-  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const [currentLanguage, setCurrentLanguage] = useState("");
   // State to manage the dropdown visibility
   const [isOpen, setIsOpen] = useState(false);
   // Ref to track the dropdown container
@@ -10,7 +10,6 @@ const Dropdown = () => {
 
   // Function to handle language change
   const handleLanguageChange = (lang: string) => {
-    console.log("lang:", lang);
     setCurrentLanguage(lang); // Update the current language
     setIsOpen(false); // Close the dropdown menu
     window.location.href = `/${lang}`; // Redirect to the selected language's path
@@ -29,6 +28,8 @@ const Dropdown = () => {
       }
     };
 
+    setCurrentLanguage(window.location.pathname.split("/")[1]);
+
     // Add event listener for clicks
     document.addEventListener("click", handleClickOutside);
 
@@ -45,16 +46,9 @@ const Dropdown = () => {
         className="inline-flex justify-start items-center bg-transparent px-4 py-2 text-sm font-medium text-slate-400 focus:outline-none"
         onClick={toggleDropdown}
       >
-        {currentLanguage}
-        <svg
-          className="-mr-1 ml-2 h-5 w-5"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        {currentLanguage ? currentLanguage : "-"}
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M8 9h8l-4 7" />
         </svg>
       </button>
 
