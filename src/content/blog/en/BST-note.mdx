@@ -57,7 +57,7 @@ class BinarySearchTree {
 }
 ```
 
-## insert 
+## Insert function
 ![BST insert flow](../../../assets/bst-note/insert.gif)
 First, let's make the insert method, after creating a new Node, 
 we need to check the edge case, which is whether the root exists.
@@ -73,40 +73,42 @@ insert(value){
     }
 }
 ```
-{/* 接著就可以開始根據 `value` 來尋找適合插入的位置，還記得 BST 的規則是什麼嗎？任何兩個節點，
-左邊那個節點的值一定大於右邊節點的值。我們會從根節點遍歷往下尋找，判斷目標值 `value` 是大於或小於目標節點的值，
-如果結果是大於，就往右邊繼續比較和查找；否則往左邊。執行這樣的邏輯直到找到適合插入的位置為止。 */}
 
 Then, we can start searching for the appropriate insertion position based on the `value`. 
 Remember the rule of BST? 
 
-> For any two nodes, the value of the left node is always greater than the value of the right node. 
+> In a Binary Search Tree (BST), the value of all nodes in the left subtree is less than the value of the node, and the value of all nodes in the right subtree is greater than the value of the node.
+
+We'll start from the root node and traverse down to find the appropriate insertion position.
+If the value is greater than the current node's value, we'll go to the right subtree.
+Otherwise, we'll go to the left subtree.
 
 
 ``` js
 insert(value){
-	// 新增節點
+	// create a new node
 	const newNode = new Node(value);
     if (this.root === null) {
       this.root = newNode;
     } else {
-      // 先把要檢查的目標 node 設為 root 
+      // set the target node to the root
 	 let currentNode = this.root;
       while(true){
-        // 拿要插入的節點的值與當下節點的值作比較
-        // 如果目標值小於當下節點的值，就往左邊找
+        // compare the value of the new node with the current node
+        // if the value is greater than the current node's value, go to the right subtree
+        // if the value is less than the current node's value, go to the left subtree
         if(value < currentNode.value){
-	      // 先檢查左邊的值存不存在
+	      // check if the left value exists
           if(!currentNode.left){
-            // 如果不存在，表示這個位置就是目標位置
+            // if it doesn't exist, this is the target position
             currentNode.left = newNode;
             return this;
           }
-          // 如果左邊還有值，表示可以往下尋找
+          // if the left value exists, continue to search
           currentNode = currentNode.left;
         } else {
-          // 如果目標值大於當下節點的值，就往右邊找
-          // 右邊的邏輯比照上面
+          // if the value is greater than the current node's value, go to the right subtree
+          // the logic is similar to the left subtree
           if(!currentNode.right){
             currentNode.right = newNode;
             return this;
@@ -118,12 +120,13 @@ insert(value){
 }
 ```
 
-## loopup 查找
+## Lookup function
 ![BST loopup flow](../../../assets/bst-note/search.gif)
-要在 BST 上尋找某個值，相對來說比較簡單，只要根據 BST 的規則持續比較和遍歷就行。和插入的邏輯很像，從 root 節點往下開始與目標值做比較，來看看要往右邊去尋找還是左邊，直到目標值和某個節點的值相等為止。
 
-要注意的是如果查找到最後發現 `currentNode` 變成 `null` ，那就表示想要查找的值並不存在這棵樹上。
+To search for a value in a BST, it is relatively simple.  We can follow the BST rules to compare and traverse the tree. 
+The logic is similar to the insert method, starting from the root node and comparing the target value to determine whether to go to the right or left subtree until the target value matches a node's value.
 
+if we find that `currentNode` becomes `null`, it means the target value does not exist in the tree.
 ``` js
 ...
 lookup(value){
@@ -145,16 +148,22 @@ lookup(value){
 ...
 ```
 
-## remove 刪除
+## remove 
 ![BST remove flow](../../../assets/bst-note/delete.gif)
-最後一個方法是刪除節點 ，也是比較複雜的一個方法。刪除方法其實又可以細分為兩個步驟：
 
-- 查找要被刪除的目標節點
-- 移除這個節點
+The last method is to delete a node, which is also a relatively complex method. 
+The delete method can be divided into two steps:
 
-第二點要注意的是如果我們刪除的目標節點是有其他子節點的，那麼我們必須在這個節點被移除後**把剩下的子節點和原來的樹接回在一起**，就像上面流程圖展示的流程一樣。
+- Find the target node to be deleted
+- Remove this node
 
-所以在查找的過程中，除了在搜尋時我們會不斷修改 `currentNode` 用來執行下一次的數值大小判斷，我們還必須把我們**正在查找的節點的父節點 (Parent Node) 也一起記下來**；ˋ至於搜尋的流程，基本上跟前面提到的 lookup 的邏輯一樣。
+One thing to be careful about is that if the node we want to delete has other child nodes, 
+we must **connect the remaining child nodes and the original tree** after the node is removed, 
+as shown in the flowchart above.
+
+
+So we need to keep track of the parent by using `currentNode` node while searching.
+And we need to keep track of the parent node by using `parentNode` variable.
 
 ```js
 remove(value) {
@@ -164,7 +173,7 @@ remove(value) {
     let currentNode = this.root;
     let parentNode = null;
     while (currentNode) {
-	  // 和查找邏輯一樣    
+	  // the logic is similar to the lookup function
       if (value < currentNode.value) {
         parentNode = currentNode;
         currentNode = currentNode.left;
@@ -173,22 +182,31 @@ remove(value) {
         currentNode = currentNode.right;
       } else if (currentNode.value === value) {
       ...
-      // 找到目標節點
-      // 核心刪除邏輯
+      // find the target node
+      // the core delete logic
       }
     }
 }
 ```
-接下來就進入到主要的刪除邏輯，實作上可以有不同的做法，以下我會用其中一種來說明。需首先我們要考慮到以下三個情況（這邊一樣用 `currentNode` 來表示當下正在查看的節點） ：
 
-### 1. `currentNode` 沒有右邊子節點
-	這是最單純的狀況，如果 `A` 節點只有左邊節點`B`的話，那表示節點 `A` 被刪除之後只要考慮 `B` 是要被指派到它的上層節點的左節點或右節點。
+And let's start dealing with the core delete logic!
+There might be different ways to implement this, but I'll use one of them to explain.
+First, let's consider the following three cases (use `currentNode` to represent the node we are currently looking at):
+
+### 1. `currentNode` that doesn't have right child node
+	This is the simplest case. If `A` node only has left child node `B`, 
+	then after `A` is deleted, we only need to consider whether `B` should be assigned to its parent node's left or right node.
 	
-### 2. `currentNode` 有一個沒有左子節點的右子節點
-	如果 `currentNode` 有左子節點，而且有一個**沒有左子節點的右子節點**，那在 `currentNode` 被刪除之後，我們會讓右子節點接管，然後把原來 `currentNode` 的左子節點移動到右子節點的左子節點。
+### 2. `currentNode` has a right child node that doesn't have left child node
+	If `currentNode` has a right child node that doesn't have left child node, 
+	then after `currentNode` is deleted, we will let the right child node take over, 
+	and move the original `currentNode`'s left child node to the right child node's left child node.
 	
-### 3. `currentNode` 有一個有左子節點的右子節點 
-	如果目標節點右子節點有左子樹的話，我們就要找到在這個左子樹上的最小值（最左子節點），然後讓這個最左子節點取代原來的節點，換句話說我們要找**一個比原來節點大，但是比其右節點上數值都要小的值**。
+### 3. `currentNode` has a right child node that has a left child node
+  If our target node to remove has a right child node that has a left child node, 
+  we need to find the smallest value in this left subtree (the leftmost node), 
+  and let this leftmost node replace the original node. 
+  In other words,** we need to find a value that is greater than the original node but smaller than the value of its right child node.**
 
 ```js
 
@@ -196,33 +214,35 @@ remove(value) {
 	  ...
       // } else if (currentNode.value === value) {
       ...
-      // 找到目標節點
-      // 核心刪除邏輯
-      // 1. currentNode 沒有右邊子節點
+      // find the target node
+      // the core delete logic
+      // 1. currentNode doesn't have right child node
         if (currentNode.right === null) {
           if (parentNode === null) {
-            // 如果沒有 parentNode 表示是 root 
+            // if there is no parentNode, it means the target node is the root node
             this.root = currentNode.left;
           } else {
             
-            // 比較當前節點的值和 parentNode 
-            // 如果上層節點比較大，那麼就把 currentNode.left 指派成上層節點的左子節點
+            // compare the value of the current node with the parentNode
+            // if the parentNode's value is greater than the current node's value, 
+            // then assign the currentNode.left to the parentNode's left child node
             if (currentNode.value < parentNode.value) {
               parentNode.left = currentNode.left;
-			// 反之則指派成右子節點
+            // if the parentNode's value is less than the current node's value, 
+            // then assign the currentNode.left to the parentNode's right child node
             } else if (currentNode.value > parentNode.value) {
               parentNode.right = currentNode.left;
             }
           }
 
-          // 2. currentNode 有一個沒有左子節點的右子節點
+          // 2. currentNode has a right child node that doesn't have left child node
         } else if (currentNode.right.left === null) {
-	      // 原來 currentNode 的左子節點在 currentNode 被刪除後將成為右子節點的左子節點，然後由這個右子節點接管 currentNode
+	      // the left child node of the original currentNode will become the left child node of the right child node after the currentNode is removed
           currentNode.right.left = currentNode.left;
           if (parentNode === null) {
             this.root = currentNode.right;
           } else {
-            // 接合被刪除節點的子節點樹，與前一個情況相同
+            // the logic is similar to the previous case
             if (currentNode.value < parentNode.value) {
               parentNode.left = currentNode.right;
             } else if (currentNode.value > parentNode.value) {
@@ -230,9 +250,9 @@ remove(value) {
             }
           }
 
-          // 3. currentNode 有一個有左子節點的右子節點 
+          // 3. currentNode has a right child node that has a left child node
         } else {
-          //先找到右子樹上的最左子節點
+          // find the leftmost node in the right subtree
           let leftmost = currentNode.right.left;
           let leftmostParent = currentNode.right;
           while (leftmost.left !== null) {
@@ -240,17 +260,18 @@ remove(value) {
             leftmost = leftmost.left;
           }
 
-		  // 如果最左節點有右子樹，把他指派給其上層節點
+		  // if the leftmost node has a right child node, assign it to the leftmostParent's left child node
           leftmostParent.left = leftmost.right;
-          // 把最左節點的左右節點接上 currentNode 的左右節點
+
+          // assign the left and right child nodes of the currentNode to the leftmost node
           leftmost.left = currentNode.left;
           leftmost.right = currentNode.right;
 
           if (parentNode === null) {
             this.root = leftmost;
           } else {
-		    // 判斷原來節點的值是比其上層節點大或小
-		    // 以此決定新的節點要接上上層節點的左節點或是右節點
+            // determine whether the original node's value is greater or less than the parentNode's value
+            // to decide which child node of the parentNode to assign the leftmost node to
             if (currentNode.value < parentNode.value) {
               parentNode.left = leftmost;
             } else if (currentNode.value > parentNode.value) {
