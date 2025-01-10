@@ -75,10 +75,12 @@ export const WORK_EXPERIENCE = [
 
 export const PROJECTS = [
   {
+    id: "javascript-concept-sandwich",
     title: "My Book - JavaScript Concept Sandwich",
     description: "This is the first JavaScript technical book I wrote. I participated in a writing competition. In this competition, I decided to try expressing the JavaScript knowledge I had acquired. In the end, I won an award in the competition.",
     image: JsSandwich,
-    link: "https://www.tenlong.com.tw/products/9789864347575",
+    link: "/projects/javascript-concept-sandwich",
+    externalLink: "https://www.tenlong.com.tw/products/9789864347575",
     details: [
       "Explaining how JavaScript works through illustrations.",
       "Making it easier for people who want to learn JavaScript.",
@@ -86,10 +88,12 @@ export const PROJECTS = [
     ],
   },
   {
+    id: "raycast-extension-coinmarketcap-price-crawler",
     title: "Raycast Extension - Coinmarketcap Price Crawler",
     description: "This is an open source project build with Raycast, and it's a crawler to get the price of cryptocurrencies.",
     image: RaycastExt,
-    link: "https://www.raycast.com/SonicSpark/coinmarketcap-crypto-price-crawler",
+    externalLink: "https://www.raycast.com/SonicSpark/coinmarketcap-crypto-price-crawler",
+    link: "/projects/raycast-extension-coinmarketcap-price-crawler",
     details:[
       'Make price inquiry easier',
       'Built with React API',

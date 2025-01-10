@@ -27,8 +27,10 @@ const Dropdown = () => {
         setIsOpen(false);
       }
     };
-
-    setCurrentLanguage(window.location.pathname.split("/")[1] || "-");
+    const language = window.location.pathname.split("/")[1] || "-";
+    if (LANGUAGES.includes(language)) {
+      setCurrentLanguage(language);
+    }
 
     document.addEventListener("click", handleClickOutside);
 

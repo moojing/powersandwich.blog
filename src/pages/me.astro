@@ -61,14 +61,17 @@ import { Icon } from "astro-icon/components";
         <ul class="flex flex-col gap-8 text-slate-400">
           {
             PROJECTS.map((item) => (
-              <li class="flex gap-4 md:flex-row flex-col">
+              <li
+                class="project flex gap-4 md:flex-row flex-col cursor-pointer rounded-lg p-4 hover:bg-white/10  transition-colors"
+                id={item.id}
+              >
                 <div class="max-w-full md:max-w-40 w-full aspect-[4/3] overflow-hidden rounded-lg bg-white ">
                   <Image src={item.image} alt={item.title} class="object-cover h-full w-full" />
                 </div>
                 <div>
-                  {item.link ? (
+                  {item.externalLink ? (
                     <a
-                      href={item.link}
+                      href={item.externalLink}
                       target="_blank"
                       class="hover:text-white text-slate-200 text-lg flex items-center gap-1 transition-colors"
                     >
@@ -94,3 +97,12 @@ import { Icon } from "astro-icon/components";
     </div>
   </div>
 </Layout>
+
+<script>
+  const projects = document.querySelectorAll(".project");
+  projects.forEach((project) => {
+    project.addEventListener("click", () => {
+      window.location.href = `/projects/${project.id}`;
+    });
+  });
+</script>

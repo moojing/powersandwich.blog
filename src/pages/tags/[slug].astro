@@ -14,7 +14,7 @@ export async function getStaticPaths() {
     (map, post) => {
       const tags = post.data.tags;
       if (tags?.length) {
-        tags.forEach((tag) => {
+        tags.forEach((tag: string) => {
           tagSet.add(tag);
           map[tag] = (map[tag] || []).concat(post);
         });
