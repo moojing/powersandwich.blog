@@ -7,6 +7,7 @@ export const SITE_TITLE = "POWERSANDWICH";
 export const ME_AVATAR = "/avatar.jpeg";
 export const SITE_DESCRIPTION =
   "Mia is designed to be minimalist yet powerful, integrating the capabilities of Astro, MDX, and Rough Notation. Whether you're a developer, writer, or just someone who loves clean and efficient design, this theme is perfect for you.";
+export const LANGUAGES = ['en', 'zh'];
 
 export const CONTACTS = {
   linkedIn: "https://www.linkedin.com/in/mu-jing-tsai/",

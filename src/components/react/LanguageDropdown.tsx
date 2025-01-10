@@ -1,39 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
+import { LANGUAGES } from "../../config";
 
 const Dropdown = () => {
-  // State to manage the current language
-  const [currentLanguage, setCurrentLanguage] = useState("");
-  // State to manage the dropdown visibility
+  const [currentLanguage, setCurrentLanguage] = useState("-");
   const [isOpen, setIsOpen] = useState(false);
-  // Ref to track the dropdown container
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Function to handle language change
   const handleLanguageChange = (lang: string) => {
-    setCurrentLanguage(lang); // Update the current language
-    setIsOpen(false); // Close the dropdown menu
-    window.location.href = `/${lang}`; // Redirect to the selected language's path
+    setCurrentLanguage(lang);
+    setIsOpen(false);
+    if (lang === currentLanguage) return;
+    if (lang === "-") {
+      window.location.href = "/";
+    } else {
+      window.location.href = `/${lang}`;
+    }
   };
 
-  // Toggle dropdown menu
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false); // Close the dropdown
+        setIsOpen(false);
       }
     };
 
-    setCurrentLanguage(window.location.pathname.split("/")[1]);
+    setCurrentLanguage(window.location.pathname.split("/")[1] || "-");
 
-    // Add event listener for clicks
     document.addEventListener("click", handleClickOutside);
 
-    // Cleanup event listener on component unmount
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
@@ -46,7 +44,7 @@ const Dropdown = () => {
         className="inline-flex justify-start items-center bg-transparent px-4 py-2 text-sm font-medium text-slate-400 focus:outline-none"
         onClick={toggleDropdown}
       >
-        {currentLanguage ? currentLanguage : "-"}
+        {currentLanguage}
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <path fill="currentColor" d="M8 9h8l-4 7" />
         </svg>
@@ -61,17 +59,21 @@ const Dropdown = () => {
           <div className="py-1">
             <button
               className="text-slate-400 inline-block px-4 py-2 text-sm hover:bg-slate-800 w-full"
-              onClick={() => handleLanguageChange("en")}
+              onClick={() => handleLanguageChange("-")}
             >
-              en
-            </button>
-            <button
-              className="text-slate-400 inline-block px-4 py-2 text-sm hover:bg-slate-800 w-full"
-              onClick={() => handleLanguageChange("zh")}
-            >
-              zh
+              -
             </button>
           </div>
+          {LANGUAGES.map((lang) => (
+            <div className="py-1">
+              <button
+                className="text-slate-400 inline-block px-4 py-2 text-sm hover:bg-slate-800 w-full"
+                onClick={() => handleLanguageChange(lang)}
+              >
+                {lang}
+              </button>
+            </div>
+          ))}
         </div>
       )}
     </div>
