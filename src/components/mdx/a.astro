@@ -2,6 +2,12 @@
 const props = Astro.props;
 ---
 
-<a {...props} href={props.href} class="text-blue-600 after:content-['_↗']" target="_blank" rel="noopener noreferrer">
+<a
+  {...props}
+  href={props.href}
+  class="text-blue-300 after:content-['_↗'] underline"
+  target="_blank"
+  rel="noopener noreferrer"
+>
   <slot />
 </a>
