@@ -98,9 +98,11 @@ set(key, value) {
 
 
 ## get Function 
- 想要取得某個鍵值對應的資料，我們一樣要先用 `key` 值透過 Hash Function 去計算出對應位置。如果這個位置有儲存資料的話我們應該會取得一個陣列，接著我們只要在這個 Array 裡面去查找有沒有想要查詢的 `key` 被儲存在裡面，然後回傳對應的資料就好：
+
 If we want to get the data corresponding to a certain key, we need to use the `key` value to calculate the corresponding position through the Hash Function. 
-If there is data stored in this position, we should get an array, and then we just need to find if the `key` we want to query is stored in this Array, and then return the corresponding data:
+And if there is data stored in this position, we will get an array, 
+then we just need to find if the `key` we want to query is stored in this Array, and return the corresponding data:
+
 ```js
 get(key) {
   let address = this._hash(key); 
