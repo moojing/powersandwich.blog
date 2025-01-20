@@ -6,6 +6,7 @@ const blog = defineCollection({
       title: z.string(),
       description: z.string(),
       draft: z.boolean().optional(),
+      hideOnHomePage: z.boolean().optional(),
       date: z
       .string()
       .or(z.date())
