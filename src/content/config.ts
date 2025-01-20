@@ -23,24 +23,7 @@ const blog = defineCollection({
     }),
 });
 
-const projects = defineCollection({
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      draft: z.boolean().optional(),
-      date: z
-      .string()
-      .or(z.date())
-      .transform((val) =>
-        new Date(val).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        }),
-      ),
-      cover: image().optional().or(z.string()),
-    }),
-});
+// in case we want to change the schema of the projects, we can do it here
+const projects = blog
 
 export const collections = { blog,projects };

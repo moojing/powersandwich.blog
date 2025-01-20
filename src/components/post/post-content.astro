@@ -31,7 +31,7 @@ import Tr from "../mdx/tr.astro";
 import Ul from "../mdx/ul.astro";
 import { CollectionType } from "../../types";
 type Props = {
-  post: CollectionEntry<CollectionType.Blog>;
+  post: CollectionEntry<CollectionType.Blog | CollectionType.Projects>;
 };
 
 const { post } = Astro.props;
