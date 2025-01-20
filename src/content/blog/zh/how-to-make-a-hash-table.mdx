@@ -1,17 +1,18 @@
 ---
 title: '如何用 JavaScript 做一個 HashTable? '
-date: '2025-01-10'
-description: ''
-cover: ''
+date: '2025-01-20'
+description: '這是我在學習 Hash Table 這個資料結構時的筆記。Hash Table 是什麼？Hash Table 是一種用來儲存鍵值對（ key-value pair ) 的資料結構，並且能夠讓我們用輸入的「鍵」值以非常快的速度來找到對應的資料。'
+cover: '../../../assets/hash-table/hash-table-cover.png'
 tags: [
 	'javascript',
 	'data-structure']
+draft: true
 ---
 這是我在學習 Hash Table 這個資料結構時的筆記。
 
 Hash Table 是什麼？Hash Table 是一種用來儲存鍵值對（ key-value pair ) 的資料結構，並且能夠讓我們用輸入的「鍵」值以非常快的速度來找到對應的資料。
 
-Hash Table 在每個語言中都經常出現，在 JavaScript 中也是如此，只是通常我們不知道我們在用它而已，舉例來說，在 JavaScript 中，`Set` 和 `Map` 這兩種資料型別就運用了 Hash Table 的概念。
+Hash Table 在每個語言中都經常出現，在 JavaScript 中也是如此，只是通常我們不知道我們在用它而已，舉例來說，在 JavaScript 中，`Set` 和 `Map`，甚至是物件這幾種資料型別就運用了 Hash Table 的概念。
 
 以下是一個 Hash Table 的結構範例 ([圖片出處](https://github.com/bradtraversy/traversy-js-challenges/blob/main/assets/images/hash-table.png))：
 
@@ -142,7 +143,9 @@ keys() {
 ...
 ```
 
-這樣我們就完成了一個基本的 HashTable，通常 HashTable 還會有其他像是 `delete` 以及 `values`等方法可以使用，不過前面這三個方法已經涵蓋了 Hash Table 的基本概念，在這邊就不再全部詳述。以下是完整的 Hash Table 程式碼：
+這樣我們就完成了一個基本的 HashTable，通常 HashTable 還會有其他像是 `delete` 以及 `values`等方法可以使用，不過前面這三個方法已經涵蓋了 Hash Table 的基本概念，在這邊就不再全部詳述。
+
+以下是完整的 Hash Table 程式碼：
 
 ```js
 class HashTable {

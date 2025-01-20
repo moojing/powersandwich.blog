@@ -1,0 +1,213 @@
+---
+title: 'How to make a Hash Table in JavaScript'
+description: "What's Hash Table? Hash Table is a data structure that stores key-value pairs and allows us to find the corresponding data quickly using the key we input."
+date: '2025-01-20'
+cover: '../../../assets/hash-table/hash-table-cover.png'
+tags: [
+	'javascript',
+	'data-structure']
+---
+
+This is a note about Hash Table in JavaScript that I wrote when I was learning it.
+
+What's Hash Table? Hash Table is a data structure that stores key-value pairs and allows us to find the corresponding data quickly using the key we input.
+
+Hash Table is often used in JavaScript, but we don't know it. 
+For example, `Set` and `Map`, and even `Object` are using the concept of Hash Table.
+
+Here is an example of a Hash Table structure ([image source](https://github.com/bradtraversy/traversy-js-challenges/blob/main/assets/images/hash-table.png)):
+
+![Hash Table Structure](https://github.com/bradtraversy/traversy-js-challenges/blob/main/assets/images/hash-table.png?raw=true)
+
+You can see the left-hand side part is the key, and the right-hand side is the corresponding value;
+and there is a Hash Function in the middle, which is used to put each different value into a different position on the table.
+It will calculate the position (index) on the Hash Table based on the key you input, the value returned by the Hash Function should remain the same as long as the input value is the same.
+
+##  Hash Function
+
+Today, we will focus on implementing the entire Hash Map, so the Hash Function is not the core part.
+
+Here is a simple implementation of the Hash Function:
+```js
+function simpleHashKey(key, arraySize) {
+  let hash = 0;
+  for (let i = 0; i < key.length; i++) {
+    hash += key.charCodeAt(i); // add the Unicode value of each character
+  }
+  return hash % arraySize; // ensure the result is lower than or equal to the array size
+}
+
+const arraySize = 10;
+
+console.log(simpleHashKey("abc", arraySize)); // 6
+console.log(simpleHashKey("xyz", arraySize)); // 8
+console.log(simpleHashKey("a", arraySize));   // 7
+
+```
+
+## HashTable Class 
+Then we can integrate this function into the HashTable class, and we also need `set` / `get` to add and find data, and `keys` to query all the keys in the Hash Table:
+```js
+class HashTable {
+  constructor(size){
+    this.data = new Array(size);
+  }
+
+  _hash(key) {
+	  let hash = 0;
+	  for (let i = 0; i < key.length; i++) {
+	    hash += key.charCodeAt(i); 
+	  }
+	  return hash % size;
+  }
+  set (){}
+  get (){}
+  keys(){}
+}
+```
+
+## set Function 
+To implement the `set` function, we need to do two steps:
+- there will be a parameter `key`, use the Hash Function to find the corresponding storage position (Index) in the Hash Table
+- store the value in the Hash Table, but we have to consider the Hash Collision
+
+ 
+### Hash Collisions
+![Hash Collisions](../../../assets/hash-table/hash-collision.gif)
+
+So what is Hash Collision? It means when two different keys, after being calculated by the Hash Function, get the same Index.
+This may lead to data being overwritten and lost. [There are many ways to solve this problem](https://en.wikipedia.org/wiki/Hash_table#Separate_chaining), the most common one is to use a LinkedList to ensure that multiple data can correspond to the same Index.
+
+We'll use a simpler Array to achieve the same purpose, and we will store the `key` and `value` in this Array:
+
+![Our Hash Table Structure](../../../assets/hash-table/save-data-in-hash-table.png)
+ 
+ By this way, the data in the Hash Table will always be an Array, so we can store the `key` and `value` in this Array to avoid the problem of data being overwritten due to collisions:
+ 
+```js
+set(key, value) {
+  let address = this._hash(key); 
+  if (!this.data[address]) {
+    this.data[address] = []; // if the address is empty, create an array
+  }
+  
+  this.data[address].push([key, value]);
+  return this.data; 
+}
+```
+
+
+## get Function 
+ 想要取得某個鍵值對應的資料，我們一樣要先用 `key` 值透過 Hash Function 去計算出對應位置。如果這個位置有儲存資料的話我們應該會取得一個陣列，接著我們只要在這個 Array 裡面去查找有沒有想要查詢的 `key` 被儲存在裡面，然後回傳對應的資料就好：
+If we want to get the data corresponding to a certain key, we need to use the `key` value to calculate the corresponding position through the Hash Function. 
+If there is data stored in this position, we should get an array, and then we just need to find if the `key` we want to query is stored in this Array, and then return the corresponding data:
+```js
+get(key) {
+  let address = this._hash(key); 
+  const bucket = this.data[address]; // get the array corresponding to the address
+  if (bucket) {
+    // traverse the array & find the corresponding key
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) {
+        return bucket[i][1]; // return the corresponding value
+      }
+    }
+  }
+  return 
+}
+...
+
+```
+
+
+## keys Function
+
+This function is used to query all the keys stored in the Hash Table, through implementing this function, we can also see a disadvantage of the Hash Table.
+That is when we want to visit all the values stored in the Hash Table, in order to avoid ignoring the values that are stored in the same position due to collisions, we need a second layer of for loop to query each one.
+
+
+```js
+...
+keys() {
+  const keysArray = [];
+  // traverse the entire data structure
+  for (let i = 0; i < this.data.length; i++) {
+    if (this.data[i] && this.data[i].length) {
+      // if the address has value, traverse each key-value pair
+      for (let j = 0; j < this.data[i].length; j++) {
+        keysArray.push(this.data[i][j][0]); // the last [0] is used to get the key
+      }
+    }
+  }
+  return keysArray; 
+}
+...
+```
+
+We've implemented the basic Hash Table, and usually HashTable also has other methods like `delete` and `values`, but the above three methods have covered the basic concepts of Hash Table, so we won't go into details here.
+
+Here is the complete code of the Hash Table:
+
+```js
+class HashTable {
+  constructor(size) {
+    this.data = new Array(size);
+  }
+
+  _hash(key) {
+    let hash = 0;
+    for (let i = 0; i < key.length; i++) {
+      hash += key.charCodeAt(i);
+    }
+    return hash % this.data.length;
+  }
+
+  set(key, value) {
+    let address = this._hash(key);
+    if (!this.data[address]) {
+      this.data[address] = [];
+    }
+    for (let i = 0; i < this.data[address].length; i++) {
+      if (this.data[address][i][0] === key) {
+        this.data[address][i][1] = value;
+        return this.data;
+      }
+    }
+    this.data[address].push([key, value]);
+    return this.data;
+  }
+
+  get(key) {
+    let address = this._hash(key);
+    const bucket = this.data[address];
+    if (bucket) {
+      for (let i = 0; i < bucket.length; i++) {
+        if (bucket[i][0] === key) {
+          return bucket[i][1];
+        }
+      }
+    }
+    return undefined;
+  }
+
+  keys() {
+    const keysArray = [];
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.data[i]) {
+        for (let j = 0; j < this.data[i].length; j++) {
+          keysArray.push(this.data[i][j][0]);
+        }
+      }
+    }
+    return keysArray;
+  }
+}
+
+const myHashTable = new HashTable(10);
+...
+```
+
+## References
+ - https://github.com/bradtraversy/traversy-js-challenges/blob/main/06-hash-tables-maps-sets/02-hash-table-intro/readme.md
+ - https://www.udemy.com/course/master-the-coding-interview-data-structures-algorithms
+ - https://en.wikipedia.org/wiki/Hash_table
