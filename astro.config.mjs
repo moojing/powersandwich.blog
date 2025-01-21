@@ -10,7 +10,7 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astro-theme-mia.pages.dev",
+  site: "https://powersandwich.com.tw",
   trailingSlash: "never",
   prefetch: {
     prefetchAll: true,
