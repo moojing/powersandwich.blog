@@ -3,10 +3,12 @@ import RaycastExt from './assets/projects/raycast-plugin.png'
 
 export const SITE_FAVICON = "/favicon.png";
 export const SITE_LOGO = "/logo.png";
-export const SITE_TITLE = "POWERSANDWICH";
+export const SITE_TITLE = "Powersandwich";
 export const ME_AVATAR = "/avatar.jpeg";
 export const SITE_DESCRIPTION =
-  "Mia is designed to be minimalist yet powerful, integrating the capabilities of Astro, MDX, and Rough Notation. Whether you're a developer, writer, or just someone who loves clean and efficient design, this theme is perfect for you.";
+  `
+  Powersandwich is a place where I document my learning and exploration of new knowledge. The name is inspired by my JavaScript book, "JavaScriptConcept Sandwich", but the content is not limited to JavaScript. It may also cover areas such as AI, Blockchain, and other software-related topics.
+`;
 export const LANGUAGES = ['en', 'zh'];
 
 export const CONTACTS = {

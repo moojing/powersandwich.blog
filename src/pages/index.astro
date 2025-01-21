@@ -7,7 +7,7 @@ import { posts } from "../helpers";
 const filteredPosts = posts.filter((post) => post.data.hideOnHomePage !== true);
 ---
 
-<Layout>
+<Layout title="Blog">
   <Slogan />
   <PostListing posts={filteredPosts} />
 </Layout>
