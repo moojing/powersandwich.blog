@@ -101,4 +101,4 @@ export const PROJECTS = [
     ]
   },
 ];
-export const GOOGLE_GTAG = "G-XXXXXXXXXX";
+export const GOOGLE_GTAG = "GTM-P6FNQVBP";
