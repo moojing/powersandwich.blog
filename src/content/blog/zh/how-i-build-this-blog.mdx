@@ -1,0 +1,52 @@
+---
+title: '我如何打造我的部落格？'
+date: '2025-01-24'
+description: ''
+cover: ''
+tags: ['astro']
+draft: true
+---
+
+我曾經試過許多不同的方式來建立自己的部落格。直到最近我發現了我以前曾經看過但忽略的 [Astro](https://astro.build/) 這套框架，試著用它來架設部落格之後我才發現他對現在前端開發來說非常友善，不僅支援 JSX 、且除了框架內建的 astro 格式，也可以直接用自己熟悉的框架來用自己習慣的方式來製作元件，於是我就決定用 Astro 作為我接下來主要的部落格網站生成工具。
+
+因為實在是用過太多種部落格工具，雖然真的很花時間，不過也因此更了解什麼樣的工具以及寫作流程更適合自己，這篇文章會用接下來的篇幅來針對之前選擇不同部落格工具的歷程來做個整理。
+
+## 身為一個開發者想要自架部落格，我注重的需求有哪些？
+ 我希望我使用的工具可以符合以下幾個需求：
+ 
+ 1. **文章內容要能夠長期保存，而且要能夠方便移轉**：這是最基本的，文章內容對一個寫作者來說是最重要的，而且我希望這些內容是方便未來轉移到其他平台或是工具的，因為誰也無法保證未來會不會有更好用的工具，所以最好的格式是 Markdown，因為許多地方都通用。
+ 2. **有開源、免費、或是低價的版型可以讓我選擇**：這是為了能夠免去從零開始重複造輪子而花費的時間，畢竟我想要的還是能夠讓我可以直接進行寫作的工具，而且除了時間成本，我也想盡量避免花費太多字面意義上的成本。
+ 3. **內建良好的 SEO 架構**: 同上，希望減少優化網站架構方面 SEO 的成本。
+ 4. **要能夠方便的進行前端的修改以及開發**：這點承接第二點，希望選完版型之後，我是有能力進行修改來改成自己喜歡以及自己想要呈現的功能及外觀的。
+
+如同前面提到，在使用目前的方案之前（也就是你目前看到的這個網站），我則陸續試過了以下幾種方式：
+- Wordpress + 視覺化頁面建構工具 [Divi](https://www.elegantthemes.com/gallery/divi/)
+- 其他開發者自架的[開源部落格模板](https://github.com/timlrx/tailwind-nextjs-starter-blog)
+- 其他 SSG : [Hexo](https://hexo.io/) 、[Jekyll](https://jekyllrb.com/) 
+以下會一一進行說明我自己的經驗。
+## Wordpress + Divi
+ Wordpress 是一個我曾經很希望能長期使用的方式，因為這個工具的歷史最悠久，<Notation type="underline" color="yellow">有最龐大的套件和模板資源，而且也有很好的 SEO</Notation>。雖然需要租一台主機而且還要花時間研究怎麼在自己的機器上啟動 Wordpress ，不過現在有一些第三方服務可以讓你不需要進行過多設定就架設好 Wordpress Blog，我之前是搭配 Digital Ocean ，這個平台有提供[簡易架設 Wordpress](https://www.digitalocean.com/community/tutorials/how-to-use-the-wordpress-one-click-install) 的方法。
+ 
+ 除了這一點還有一個問題就是 <Notation type="underline" color="yellow">部落格文章資料保存不太方便</Notation>，因為一但架設的主機被砍掉了，如果沒有其他備份的方法的話，文章資料會全部跟著有去無回；關於這個問題我也想了一個辦法來解決，那就是找套件看有沒有辦法把<Notation type="underline" color="yellow">放在 Git Repo 裡面的文章資料同步到 Wordpress 上面</Notation>，結果還真的有，我後來使用的同步套件叫做 [Git it Write](https://wordpress.org/plugins/git-it-write/)，如此一來就算我常常因為一些設定錯誤導致必須砍掉重練，也不用擔心文章要重新搬家，不過因為使用這個套件要符合 [特定格式](https://github.com/moojing/TechPosts)，整理這些文章資料的時候還是花了一點時間。 
+ 
+ 接著我用了 Divi 這套無程式碼 (No Code) 的前端視覺化工具 ，想試試看這樣會不會比較好進行前端視覺上或 layout 上的調整。而且 Divi 提供了[許多主題](https://www.elegantthemes.com/layouts/)，但隨著時間的推移我最終放棄使用這個方式，因為<Notation type="underline" color="yellow">學習成本實在太高了</Notation>，常常找不到頁面對應元素的設定在哪裡，或是還要 Google 研究一下才知道不同元件之間的關係和用法，導致原本直接改程式碼就能完成的效果往往要花好幾倍以上的時間。
+
+這邊的結論就是你常常聽到關於 Wordpress 的優點和缺點，可能都是真的，要使用之前請三思 ......。
+
+## 開源模板
+
+ 雖然我試過
+ 
+## 靜態網站生成器 (SSG)
+ 
+
+ 網站靜態生成器（Static Site Generators）這類型的工具有很多，目前主流的有 Hexo 、Jekyll 甚至是 Hugo。他們幾乎都有提供不少的開源模板，可以讓你很快速的安裝完並開始撰寫文章。但是
+
+
+## 參考連結
+- https://gohugo.io/templates/types/
+- https://hexo.io/docs/setup#package-json
+- https://github.com/timlrx/tailwind-nextjs-starter-blog
+
+
+
