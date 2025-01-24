@@ -15,4 +15,9 @@ export async function GET(context: any) {
   //     link: `/${post.slug}/`,
   //   })),
   // });
+  return new Response("Hello World", {
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  });
 }
