@@ -9,6 +9,7 @@ body {
 *:focus-visible {
   outline: none;
 }
+ 
 
 code {
   @apply text-sm font-mono text-orange-500 font-medium p-1 bg-zinc-800/60 rounded-md;

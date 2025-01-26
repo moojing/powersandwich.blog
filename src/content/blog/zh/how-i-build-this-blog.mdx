@@ -3,13 +3,14 @@ title: '我如何打造我的部落格？'
 date: '2025-01-24'
 description: ''
 cover: ''
-tags: ['astro']
+tags: ['astro','note']
 draft: true
 ---
 
 我曾經試過許多不同的方式來建立自己的部落格。直到最近我發現了我以前曾經看過但忽略的 [Astro](https://astro.build/) 這套框架，試著用它來架設部落格之後我才發現他對現在前端開發來說非常友善，不僅支援 JSX 、且除了框架內建的 astro 格式，也可以直接用自己熟悉的框架來用自己習慣的方式來製作元件，於是我就決定用 Astro 作為我接下來主要的部落格網站生成工具。
+![Content Website Timeline](../../../assets/how-i-build-this-blog/content-management-timeline.png)
 
-因為實在是用過太多種部落格工具，雖然真的很花時間，不過也因此更了解什麼樣的工具以及寫作流程更適合自己，這篇文章會用接下來的篇幅來針對之前選擇不同部落格工具的歷程來做個整理。
+因為實在是用過太多種部落格工具，我不知不覺已經快要把各種主流的內容網站架構都使用過一次了......。雖然真的很花時間，不過最後也因此找到適合自己的寫作流程，這篇文章會用接下來的篇幅來針對之前選擇不同部落格工具的歷程來做個整理(註： [上圖出處](https://contentlayer.dev/blog/working-with-content-is-hard-for-developers))。
 
 ## 身為一個開發者想要自架部落格，我注重的需求有哪些？
  我希望我使用的工具可以符合以下幾個需求：
@@ -22,31 +23,57 @@ draft: true
 如同前面提到，在使用目前的方案之前（也就是你目前看到的這個網站），我則陸續試過了以下幾種方式：
 - Wordpress + 視覺化頁面建構工具 [Divi](https://www.elegantthemes.com/gallery/divi/)
 - 其他開發者自架的[開源部落格模板](https://github.com/timlrx/tailwind-nextjs-starter-blog)
-- 其他 SSG : [Hexo](https://hexo.io/) 、[Jekyll](https://jekyllrb.com/) 
-以下會一一進行說明我自己的經驗。
-## Wordpress + Divi
- Wordpress 是一個我曾經很希望能長期使用的方式，因為這個工具的歷史最悠久，<Notation type="underline" color="yellow">有最龐大的套件和模板資源，而且也有很好的 SEO</Notation>。雖然需要租一台主機而且還要花時間研究怎麼在自己的機器上啟動 Wordpress ，不過現在有一些第三方服務可以讓你不需要進行過多設定就架設好 Wordpress Blog，我之前是搭配 Digital Ocean ，這個平台有提供[簡易架設 Wordpress](https://www.digitalocean.com/community/tutorials/how-to-use-the-wordpress-one-click-install) 的方法。
+- 其他 SSG : Hexo 、 Jekyll、Hugo
+
+以下會一一描述我使用這些工具的經驗。
+## Wordpress + Divi ( on Digital Ocean )
+![Divi Snapshot](../../../assets/how-i-build-this-blog/digital-ocean-create-droplet.png)
  
- 除了這一點還有一個問題就是 <Notation type="underline" color="yellow">部落格文章資料保存不太方便</Notation>，因為一但架設的主機被砍掉了，如果沒有其他備份的方法的話，文章資料會全部跟著有去無回；關於這個問題我也想了一個辦法來解決，那就是找套件看有沒有辦法把<Notation type="underline" color="yellow">放在 Git Repo 裡面的文章資料同步到 Wordpress 上面</Notation>，結果還真的有，我後來使用的同步套件叫做 [Git it Write](https://wordpress.org/plugins/git-it-write/)，如此一來就算我常常因為一些設定錯誤導致必須砍掉重練，也不用擔心文章要重新搬家，不過因為使用這個套件要符合 [特定格式](https://github.com/moojing/TechPosts)，整理這些文章資料的時候還是花了一點時間。 
+ Wordpress 是一個我曾經很希望能長期使用的方式，因為這個工具的歷史最悠久，<Notation type="underline" color="yellow">有最龐大的套件和模板資源，而且也有很好的 SEO</Notation>。雖然需要租一台主機而且還要花時間研究怎麼在自己的機器上啟動 Wordpress ，不過現在有一些第三方服務可以讓你不需要進行過多設定就架設好 Wordpress Blog，我之前是搭配 Digital Ocean ，這個平台有提供[簡易架設 Wordpress](https://www.digitalocean.com/community/tutorials/how-to-use-the-wordpress-one-click-install) 的方法。
+ ![Divi Snapshot](../../../assets/how-i-build-this-blog/git-it-write.png)
+ 
+ 除了這一點還有一個問題就是 <Notation type="underline" color="yellow">部落格文章資料保存不太方便</Notation>，因為一但架設的主機被砍掉了，如果沒有其他備份的方法的話，文章資料會全部跟著有去無回；關於這個問題我也想了一個辦法來解決，那就是找套件看有沒有辦法把<Notation type="underline" color="yellow">放在 Git Repo 裡面的文章資料同步到 Wordpress 上面</Notation> 。結果還真的有，我後來使用的同步套件叫做 [Git it Write](https://wordpress.org/plugins/git-it-write/)，如此一來就算我常常因為一些設定錯誤導致必須砍掉重練，也不用擔心文章要重新搬家，不過因為使用這個套件要符合 [特定格式](https://github.com/moojing/TechPosts)，整理這些文章資料的時候還是花了一點時間。 
+ 
+![Divi Snapshot](../../../assets/how-i-build-this-blog/divi-snapshot-1.png)
  
  接著我用了 Divi 這套無程式碼 (No Code) 的前端視覺化工具 ，想試試看這樣會不會比較好進行前端視覺上或 layout 上的調整。而且 Divi 提供了[許多主題](https://www.elegantthemes.com/layouts/)，但隨著時間的推移我最終放棄使用這個方式，因為<Notation type="underline" color="yellow">學習成本實在太高了</Notation>，常常找不到頁面對應元素的設定在哪裡，或是還要 Google 研究一下才知道不同元件之間的關係和用法，導致原本直接改程式碼就能完成的效果往往要花好幾倍以上的時間。
+ 
 
 這邊的結論就是你常常聽到關於 Wordpress 的優點和缺點，可能都是真的，要使用之前請三思 ......。
 
 ## 開源模板
+![Next.js Tailwind Blog](../../../assets/how-i-build-this-blog/tailwind-blog.png)
 
- 雖然我試過
+我之前使用過一陣子 [tailwind-nextjs-starter-blog](https://tailwind-nextjs-starter-blog.vercel.app/) 這個別人自製的開源 Blog 模板，整體看起來非常簡潔而且排版也很好看；而且看起來作者有持續在維護，現在回去看已經比之前使用的時候多了不少追蹤和 Fork 數量。 (這個 [專案作者的 Blog](https://www.timlrx.com/) 自己也是用這個模板，翻一翻會發現裡面有許多蠻有料的文章！)
+
+這類型的專案還算是很不錯的，尤其對於習慣用 React 做開發的開發者來說更是容易；不過還是有一些小缺點像是要花時間讀別人的程式碼和架構、和如果有一些自己想要的功能，在專案初期可能要自己動手實作。
+
+還有就是這類專案可能不只一個，但是因為沒有一定的規範，所以有可能每個專案都長得不太一樣，沒辦法像 Wordpress 的主題那樣說換就換，必須要自己動手從頭開始改成自己想要的樣子才行。對於我這種盡量不想要跟別人撞版型的人，這算是一個比較大的痛點，所以後來我還是改掉了。
+
+## 主流的靜態網站生成器 (SSG)
+
+網站靜態生成器（Static Site Generators）這類型的專案和工具有很多，目前主流的工具有  [Hexo](https://hexo.io/) 、[Jekyll](https://jekyllrb.com/)還有 [Hugo](https://gohugo.io/)。 
+
+![Hexo](../../../assets/how-i-build-this-blog/hexo.png)
+![Jekyll](../../../assets/how-i-build-this-blog/jekyll.png)
+![Hugo](../../../assets/how-i-build-this-blog/hugo.png)
+
  
-## 靜態網站生成器 (SSG)
+ 上面三套工具中我使用過 Hexo 和 Jekyll ，Hugo 我沒有真的使用、但是有試用過，使用上也是非常快速方便，我自己甚至還試過把用來架設文件頁面的[Docusaurus]( https://docusaurus.io) 拿來架設 Blog。
  
-
- 網站靜態生成器（Static Site Generators）這類型的工具有很多，目前主流的有 Hexo 、Jekyll 甚至是 Hugo。他們幾乎都有提供不少的開源模板，可以讓你很快速的安裝完並開始撰寫文章。但是
-
+ 除了 Docusaurus，以上這些工具有一個很大的好處，就是它們幾乎都有提供不少的開源模板，可以讓你很快速的安裝完並開始撰寫文章；不過他們也都有一個共同的缺點，那就是他們在前端的部分，預設都使用模板語言，所以如果你想修改前端邏輯，而且對像是 [Pug](https://pugjs.org/api/getting-started.html) 、 [EJS](https://ejs.co/) 這類前端模板語言不熟的話，那麼除了看懂專案架構，你還得花時間習慣這些模板語言，或是你要花時間去加上在主流前端框架裡面常見的 JSX 語法的支援。
+ 
+## 我目前使用的 SSG 工具  -  Astro
+Astro 就是寫這篇文章的當下，我用來架設部落格網站的工具。
 
 ## 參考連結
+
 - https://gohugo.io/templates/types/
 - https://hexo.io/docs/setup#package-json
 - https://github.com/timlrx/tailwind-nextjs-starter-blog
+- https://docusaurus.io/docs
+- https://pugjs.org/api/getting-started.html
+- https://ejs.co/
 
 
 
