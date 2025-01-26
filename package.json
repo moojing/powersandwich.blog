@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && tsc --noEmit && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

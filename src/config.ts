@@ -4,18 +4,13 @@ import RaycastExt from './assets/projects/raycast-plugin.png'
 export const SITE_FAVICON = "/favicon.png";
 export const SITE_LOGO = "/logo.png";
 export const SITE_TITLE = "Powersandwich";
-export const ME_AVATAR = "/avatar.jpeg";
 export const SITE_DESCRIPTION =
   `
   Powersandwich is a place where I document my learning and exploration of new knowledge. The name is inspired by my JavaScript book, "JavaScriptConcept Sandwich", but the content is not limited to JavaScript. It may also cover areas such as AI, Blockchain, and other software-related topics.
 `;
+export const ME_AVATAR = "/avatar.jpeg";
 export const LANGUAGES = ['en', 'zh'];
 
-export const CONTACTS = {
-  linkedIn: "https://www.linkedin.com/in/mu-jing-tsai/",
-  github: "https://github.com/moojing",
-  email: "mailto:moojitsai@gmail.com",
-};
 export const MENUS = [
   {
     title: "About Me",
@@ -34,6 +29,14 @@ export const MENUS = [
     icon: "github",
   },
 ];
+
+export const FOOTER_CONTENT = "Powersandwich. All rights reserved.";
+
+export const CONTACTS = {
+  linkedIn: "https://www.linkedin.com/in/mu-jing-tsai/",
+  github: "https://github.com/moojing",
+  email: "mailto:moojitsai@gmail.com",
+};
 
 export const SLOGAN = "A bite a day keeps bugs away.";
 export const ME_DESCRIPTION =

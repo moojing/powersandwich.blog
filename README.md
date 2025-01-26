@@ -1,43 +1,50 @@
-# Mia - Astro & Tailwindcss & MDX Theme
+# Leo - Astro & Tailwindcss & MDX Theme
 
-[English](README.md) | [中文](README_zh.md) | [Demo](https://astro-theme-mia.pages.dev/)
+[English](README.md)
 
-Mia is designed to be minimalist yet powerful, integrating the capabilities of Astro, MDX, and Rough Notation. Whether you're a developer, writer, or just someone who loves clean and efficient design, this theme is perfect for you.
+Leo is a Astro theme inspired by another Astro theme [Mia](https://github.com/infinity-ooo/astro-theme-mia).
 
-![Mia Theme Preview](public/theme-preview.png)
+![Theme Preview](public/theme-preview.png)
 
-### Get Started
+## Commands
 
-Install the dependencies:
+All commands are run from the root of the project, from a terminal:
 
-```bash
-npm install
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `pnpm install`             | Installs dependencies                            |
+| `pnpm run dev`             | Starts local dev server at `localhost:4321`      |
+| `pnpm run build`           | Build your production site to `./dist/`          |
+| `pnpm run preview`         | Preview your build locally, before deploying     |
+| `pnpm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `pnpm run astro -- --help` | Get help using the Astro CLI                     |
+
+## i18n Content Support
+
+You can have your content in different langugages after setting the `LANGUAGES` in the `src/config.ts` file. Then add the folder with corresponding language code in your entry folder. For example, in the project, the folder structure inside `src/content/blog` is like this:
+
+```
+...
+├── blog
+│   ├── en
+│   │   ├── some-en-post.mdx
+│   │   ├── s ome-en-post-1.mdx
+│   │   └── ...
+│   └── zh
+│       ├── some-zh-post.mdx
+│       ├── some-zh-post-1.mdx
+│       └── ...
+...
 ```
 
-Run and visit http://localhost:4321.
-
-```bash
-npn run dev
-```
-
-Build the App:
-
-```bash
-npm run build
-```
-
-You will then see the `dist` folder generated for publishing, which you can preview locally with the following command:
-
-```bash
-npm run preview
-```
+Read the [Astro Docs](https://docs.astro.build/en/recipes/i18n/) for more information.
 
 ### Using Rough Notation
 
-Mia is based on the [Rough Notation](https://roughnotation.com/) library. You can use `<Notation />` component in your MDX content, such as:
+Leo is also based on the [Rough Notation](https://roughnotation.com/) library. You can use `<Notation />` component in your MDX content, such as:
 
 ```mdx
-In Swift, the `Codable` protocol is a type alias for the <Notation type="box" color="blue">`Encodable` and `Decodable`</Notation> protocols:
+In JavaScript, the Array object can be seen as a combination of both <Notation type="box" color="blue">list storage</Notation> and <Notation type="box" color="blue">utility methods</Notation>, providing a unified structure for storing and manipulating data.
 ```
 
 And following is the type of this component:
@@ -58,18 +65,21 @@ Update the `src/config.ts` file to configure the theme:
 - `SITE_LOGO`: the logo of the site
 - `SITE_TITLE`: the title of the site
 - `SITE_DESCRIPTION`: the description of the site
+- `ME_AVATAR`: the avatar of the site
+- `LANGUAGES`: the i18n languages of the site
 - `MENUS`: the menus of the site
 - `FOOTER_CONTENT`: the content of the footer
+- `CONTACTS`: the contacts about the site
 - `GOOGLE_GTAG`: the Google Tag Manager ID
 
 ### Theme Integrations
 
-- @astrojs/mdx: https://docs.astro.build/en/guides/markdown-content/
-- @astrojs/rss: https://docs.astro.build/en/guides/rss/
-- @astrojs/sitemap: https://docs.astro.build/en/guides/integrations-guide/sitemap/
-- @astrojs/tailwind: https://docs.astro.build/en/guides/integrations-guide/tailwind/
-- rough-notation: https://roughnotation.com/
+- @astrojs/mdx: <https://docs.astro.build/en/guides/markdown-content/>
+- @astrojs/rss: <https://docs.astro.build/en/guides/rss/>
+- @astrojs/sitemap: <https://docs.astro.build/en/guides/integrations-guide/sitemap/>
+- @astrojs/tailwind: <https://docs.astro.build/en/guides/integrations-guide/tailwind/>
+- rough-notation: <https://roughnotation.com/>
 
 ### License
 
-- [MIT](https://github.com/infinity-ooo/astro-theme-mia/blob/main/LICENSE)
+- [MIT](LICENSE)
