@@ -1,4 +1,4 @@
-# Leo - Astro & Tailwindcss & MDX Theme
+# Leo - Astro Theme With Tailwindcss & MDX
 
 [English](README.md)
 
