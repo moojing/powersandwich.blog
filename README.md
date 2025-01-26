@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-Leo is a Astro theme inspired by another Astro theme [Mia](https://github.com/infinity-ooo/astro-theme-mia).
+Leo is an Astro theme inspired by another Astro theme [Mia](https://github.com/infinity-ooo/astro-theme-mia).
 
 ![Theme Preview](public/theme-preview.png)
 
