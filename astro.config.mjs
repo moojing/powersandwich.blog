@@ -7,6 +7,7 @@ import { defineConfig } from "astro/config";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import icon from "astro-icon";
+import { LANGUAGES } from "./src/config";
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,6 +16,10 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true,
     defaultStrategy: "viewport",
+  },
+  i18n: {
+    locales: LANGUAGES,
+    defaultLocale: "en",
   },
   integrations: [
     mdx({

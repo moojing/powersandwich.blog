@@ -18,7 +18,7 @@ const { title, description, hideFooter } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="bg-slate-900">
+<html lang={Astro.currentLocale} class="bg-slate-900">
   <head>
     <Meta title={title ? `${title} · ${SITE_TITLE}` : SITE_TITLE} description={description ?? SITE_DESCRIPTION} />
     <slot name="meta" />
