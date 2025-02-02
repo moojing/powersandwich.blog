@@ -1,5 +1,6 @@
 import JsSandwich from './assets/projects/javascript-concept-sandwich-cover.png'
 import RaycastExt from './assets/projects/raycast-plugin.png'
+import AstroLeo from './assets/projects/astro-leo-theme-preview.png'
 
 export const SITE_FAVICON = "/favicon.png";
 export const SITE_LOGO = "/logo.png";
@@ -102,7 +103,20 @@ export const PROJECTS = [
     details:[
       'Make price inquiry easier',
       'Built with React API',
-      'A open source project',
+      'An open source project',
+    ]
+  },
+  {
+    id: "astro-leo-theme",
+    title: "Astro Blog Theme - Leo",
+    description: "Leo is an Astro theme built with Tailwind that gives you a sense of exploration in the universe and is designed to make writing posts easy.",
+    image: AstroLeo,
+    externalLink: "https://astro.build/themes/details/astro-theme-leo/",
+    link: "/en/posts/how-i-build-this-blog",
+    details:[
+      'The astro theme that is built for my blog, which is this website',
+      'Built with Astro, Tailwind, and TypeScript',
+      'I used three.js to create this starry background',
     ]
   },
 ];

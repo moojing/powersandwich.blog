@@ -57,13 +57,14 @@ import { Icon } from "astro-icon/components";
 
     <div class="p-4 flex gap-4 bg-neutral-900/60 rounded-lg">
       <div class="flex flex-col flex-1">
-        <h3 class="text-white text-2xl font-logo mb-6">Projects</h3>
+        <h3 class="text-white text-2xl font-logo mb-6">My Projects</h3>
         <ul class="flex flex-col gap-8 text-slate-400 m-0">
           {
             PROJECTS.map((item) => (
               <li
                 class="project flex gap-4 md:flex-row flex-col cursor-pointer rounded-lg p-4 hover:bg-white/10  transition-colors"
                 id={item.id}
+                data-link={item.link}
               >
                 <div class="max-w-full md:max-w-40 w-full aspect-[4/3] overflow-hidden rounded-lg bg-white ">
                   <Image src={item.image} alt={item.title} class="object-cover h-full w-full" />
@@ -102,7 +103,10 @@ import { Icon } from "astro-icon/components";
   const projects = document.querySelectorAll(".project");
   projects.forEach((project) => {
     project.addEventListener("click", () => {
-      window.location.href = `/projects/${project.id}`;
+      const link = project.getAttribute("data-link");
+      if (link) {
+        window.location.href = link;
+      }
     });
   });
 </script>
