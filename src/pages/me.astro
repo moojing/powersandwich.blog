@@ -105,7 +105,7 @@ import { Icon } from "astro-icon/components";
     project.addEventListener("click", () => {
       const link = project.getAttribute("data-link");
       if (link) {
-        window.location.href = link;
+        window.location.href = window.location.origin + link;
       }
     });
   });
