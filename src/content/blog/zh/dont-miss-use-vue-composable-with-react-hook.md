@@ -1,7 +1,7 @@
 ---
 title: '別把 Vue 的 Composable 當成 React 的 Hook 來用'
-date: ''
-description: ''
+date: '2025-02-03'
+description: '這是一篇踩雷紀錄，雖然我知道 Vue 底層實作有許多地方看起來很像 React 但是其實不一樣的地方，但是在寫了一陣子 Vue 之後，有時還是忍不住會在實作元件的時候帶入 React 的一些使用方式。'
 cover: ''
 tags: ['note']
 draft: true
