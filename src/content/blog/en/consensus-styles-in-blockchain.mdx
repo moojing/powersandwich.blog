@@ -1,0 +1,137 @@
+---
+title: 'Consensus Mechanisms in Blockchain: From Nakamoto-style to BFT'
+date: '2025-02-10'
+description: 'In blockchain, one of the most important mechanisms is "consensus." It ensures that all participants agree on the transaction records, determining the security of transactions, the operational efficiency of the blockchain, and the degree of decentralization. Different blockchains adopt different consensus mechanisms to achieve this goal.'
+tags: ['blockchain', 'notes']
+cover: '../../../assets/blockchain-cubes.jpg'
+---
+
+This article is a note I wrote during the [Advanced Solidity Bootcamp](https://www.encode.club/advanced-solidity-bootcamp/) organized by Encode Club. It mainly includes research and preliminary comparisons of mainstream consensus mechanisms used in blockchain.
+
+In blockchain, one of the most important mechanisms is "consensus." It is responsible for <Notation type="underline" color="yellow"> ensuring that all participants agree on the transaction records </Notation>, determining the security of transactions, the operational efficiency of the blockchain, and the degree of decentralization. Different blockchains adopt different consensus mechanisms to achieve this goal.
+
+This article will introduce three main consensus mechanisms:
+
+- **Nakamoto-style**
+- **BFT-style**
+- **Avalanche Snow**
+
+## What is a Consensus Mechanism?
+
+The role of a consensus mechanism is to allow everyone on the blockchain to reach a unified opinion on the order of transactions and data content, ensuring that transaction records cannot be tampered with or reused (such as [double-spending attacks](https://ethereum.org/en/glossary/#double-spend)). Currently, there are three main types of consensus mechanisms used in blockchain:
+
+## Nakamoto-style Consensus
+
+Nakamoto-style consensus was first proposed by the Bitcoin network, named after Bitcoin's creator, Satoshi Nakamoto. <Notation type="underline" color="yellow">This consensus mechanism is mainly based on **Proof of Work (PoW)**</Notation>. Its core principles are as follows:
+
+- **Mining Competition**: Nodes (miners) compete for the right to generate blocks by calculating hash values.
+- **Longest Chain Rule**: All nodes choose the chain with the most accumulated proof of work (i.e., the longest chain) and regard it as the only recognized chain.
+- **Probabilistic Finality**: Even if a transaction has been packaged into a block, it can still be overwritten or changed, <Notation type="underline" color="yellow">but as new blocks are added, the possibility of it being altered becomes lower and eventually becomes extremely difficult to change.</Notation>
+
+### Pros and Cons
+
+- Highly decentralized: Participation without centralized authorization.
+- Highly secure: Extremely high cost of attack.
+- Huge energy consumption: Requires a lot of computing resources.
+- Slow transaction speed, with Bitcoin taking about 10 minutes per block.
+
+---
+Representative blockchains: Bitcoin, Ethereum (pre-merge PoW Network)
+
+
+---
+
+## BFT-style Consensus
+
+BFT (Byzantine Fault Tolerance) is different from Nakamoto-style, <Notation type="underline" color="yellow">it ensures consensus among nodes on transactions through a **voting mechanism** and provides instant finality (i.e., transaction irreversibility)</Notation>. Ethereum has moved closer to a BFT-style consensus mechanism after the merge.
+### Main Features
+
+1. **Consensus through Voting**:
+    - Nodes decide whether a block is valid through voting, usually requiring **more than 2/3 of nodes to agree** to ensure finality.
+    - Prevents malicious nodes from affecting the consensus result. If malicious nodes appear, PoS systems usually punish them through slashing, such as deducting part or all of the staked assets to prevent them from disrupting the consensus process.
+
+2. **Instant Finality**:
+
+    - Once a block receives enough votes, it is final and irreversible.
+
+3. **Staking and Slashing Mechanism (PoS)**:
+
+    - Nodes usually need to stake assets (like ETH), and if they misbehave, they will be punished (slashing).
+
+### Pros and Cons
+
+- Fast transaction confirmation, usually completed within seconds.
+
+- Energy-efficient, unlike PoW which requires a lot of energy.
+
+- Economically secure, high cost of attack, malicious nodes will be punished.
+
+- Potentially more centralized, large holders may influence voting results.
+
+- Some systems rely on trust, such as some PoS requiring validator elections.
+
+---
+Representative blockchains: Ethereum (post-merge PoS Network), Cosmos, Polkadot
+
+
+---
+
+## Avalanche Snowman Consensus Mechanism
+
+<Notation type="underline" color="yellow">Avalanche Snowman consensus is based on **random sampling**</Notation>, and its main features are:
+
+- **Random Sampling Voting**: Nodes randomly ask other nodes for opinions to quickly reach consensus.
+
+- **Ultra-fast Confirmation**: Transactions are usually confirmed within **1-2 seconds**.
+
+- **High Scalability**: Allows a large number of nodes to participate simultaneously without affecting efficiency.
+
+> If honest validators begin heavily weighted in favor of one color, then convergence on a decision value will happen very quickly, while variance in random sampling is required to tip the population in one direction in the case that initial inputs are evenly distributed.
+>
+>
+
+
+### Pros and Cons
+
+- Ultra-fast transaction confirmation, achieving finality within seconds.
+
+- Strong decentralization, high node participation.
+
+- High scalability, suitable for high-throughput applications.
+
+- New technology, long-term stability yet to be verified.
+
+- **Theoretical security still requires more practical testing.**
+
+---
+Representative blockchains: Avalanche (AVAX)
+
+
+---
+
+## Summary
+
+The PoW consensus mechanism requires a lot of computing power, resulting in high energy consumption, slow transaction speed, and limited scalability. <Notation type="underline" color="yellow">To solve these issues, Ethereum has shifted to PoS (BFT-style), selecting block producers through asset staking to reduce resource consumption and improve transaction efficiency.</Notation>
+Generally speaking, different consensus mechanisms are suitable for different scenarios:
+
+- **Bitcoin** uses PoW to ensure security but has slow transaction speed.
+
+- **Ethereum** has shifted to BFT-style PoS after the merge, improving transaction efficiency.
+
+- **Avalanche (AVAX)** uses a unique Snowman mechanism to enhance scalability and transaction speed.
+
+In the future, as blockchain applications grow, new consensus mechanisms may further optimize these technologies, finding a better balance between security, efficiency, and decentralization.
+
+
+
+## Reference
+
+- [https://www.avax.network/blog/frosty-bringing-strong-liveness-guarantees-to-the-snow-family-of-consensus-protocols](https://www.avax.network/blog/frosty-bringing-strong-liveness-guarantees-to-the-snow-family-of-consensus-protocols)
+
+- [https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/)
+
+- [https://ethereum.org/en/developers/docs/consensus-mechanisms/pow/](https://ethereum.org/en/developers/docs/consensus-mechanisms/pow/)
+
+- [https://pontem.medium.com/a-detailed-guide-to-blockchain-speed-tps-vs-80c1d52402d0](https://pontem.medium.com/a-detailed-guide-to-blockchain-speed-tps-vs-80c1d52402d0)
+
+- [What is Byzantine Fault Tolerance｜Explained For Beginners](https://www.youtube.com/watch?v=VWG9xcwjxUg)

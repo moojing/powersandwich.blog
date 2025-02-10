@@ -1,0 +1,141 @@
+---
+title: '區塊鏈裡的共識機制：從 Nakamoto-style 到 BFT' 
+date: '2025-02-10' 
+description: '在區塊鏈裡面，最重要的一個機制就是「共識」。它確保所有參與者對交易記錄達成一致，這些機制決定了交易的安全性、區塊鏈的運行效率，以及去中心化的程度。不同的區塊鏈，採用了不同的共識機制來達成這一目標。'
+tags: ['blockchain', 'notes'] 
+cover: '../../../assets/blockchain-cubes.jpg' 
+hideOnHomePage: true
+---
+
+這篇文章是我參加 Encode Club 舉辦的 [Advanced Solidity Bootcamp] (https：//www.encode.club/advanced-solidity-bootcamp/) 期間所寫的筆記，內容主要包含了對區塊鏈使用的主流共識機制的研究和初步的比較。
+
+在區塊鏈裡面，最重要的一個機制就是「共識」。它負責<Notation type="underline" color="yellow"> 確保所有參與者對交易記錄達成一致 </Notation>，這些機制決定了交易的安全性、區塊鏈的運行效率，以及去中心化的程度。不同的區塊鏈，採用了不同的共識機制來達成這一目標。
+
+本文會介紹三種主要的共識機制：
+
+- **Nakamoto-style**
+- **BFT-style**
+- **Avalanche Snow**
+
+## 什麼是共識機制？
+
+共識機制的作用就是讓區塊鏈上的所有人對交易順序和數據內容達成統一意見，確保交易記錄不會被竄改或重複使用 (像是[雙花攻擊](https://ethereum.org/en/glossary/#double-spend)) 。目前，區塊鏈使用的共識機制主要有三種：
+
+## Nakamoto-style 共識
+
+Nakamoto-style 共識一開始由比特幣 (Bitcoin) 網路提出，他的名字來自於比特幣創建者中本聰 (Statoshi Nakamoto) 。
+<Notation type="underline" color="yellow">這個共識機制主要是基於**工作量證明 (Proof of Work, PoW)**</Notation>。其核心原理如下：
+
+- **挖礦競爭**：節點 (礦工) 需要透過計算哈希值來競爭區塊產生權。
+- **最長鏈規則 (Longest Chain Rule)**：所有節點會選擇那條累積最多工作量證明的鏈（也就是最長的鏈），並視其為被認可的唯一一條鏈。
+- **概率最終性 (Probabilistic Finality)**：<Notation type="underline" color="yellow">即使交易已經被打包進區塊，仍然有可能被覆寫或更改，但隨著新區塊的增加，它被改動的可能性會越來越低，最終變得極難更改。</Notation>
+
+### 優點和缺點
+
+- 高度去中心化：不用中心化授權可參與。
+- 高度安全：攻擊成本極高。
+- 能耗巨大：需要大量計算資源。
+- 交易速度慢，比特幣每個區塊約 10 分鐘。
+
+---
+代表區塊鏈：Bitcoin, Ethereum (合併前的 PoW Network) 
+
+
+---
+
+## BFT-style 共識
+
+BFT (拜占庭容錯，全名是 Byzantine Fault Tolerance) ，這種共識不同於 Nakamoto-style，<Notation type="underline" color="yellow">它透過**投票機制**來確保節點對交易達成共識，並提供即時最終性 (即交易不可逆性) </Notation>。
+Ethereum 在合併後，離 BFT-style 的共識機制更近了一步。
+### 主要特點
+
+1. **基於投票達成共識**：
+    - 節點透過投票來決定區塊是否有效，通常需要 **2/3 以上的節點同意**，才能確保最終性。
+    - 避免惡意節點影響共識結果。如果出現惡意節點，PoS 系統通常會透過懲罰機 (Slashing) 來處罰它們，例如扣除部分或全部質押資產，防止它干擾共識過程。
+
+2. **即時最終性 (Instant Finality)**：
+
+    - 一旦區塊獲得足夠投票，它就是最終確定的，不可逆轉。
+
+3. **質押與懲罰機制 (PoS)**：
+
+    - 節點通常需要質押資產 (如 ETH) ，如果做壞事則會被懲罰 (Slashing) 。
+
+### 優點和缺點
+
+- 交易確認快，通常在幾秒內完成。
+
+- 節能環保，不像 PoW 需要大量能源。
+
+- 經濟安全，攻擊成本高，惡意節點會被懲罰。
+
+- 可能較中心化，大持幣者可能影響投票結果。
+
+- 部分系統依賴信任，如部分 PoS 需要選舉驗證者。
+
+---
+代表區塊鏈：Ethereum (合併後的 PoS Network) 、Cosmos、Polkadot
+
+
+---
+
+## Avalanche Snowman 共識機制
+
+<Notation type="underline" color="yellow">Avalanche Snowman 共識是基於**隨機抽樣 (Random Sampling)** 的機制</Notation>，它的主要特點是：
+
+- **隨機抽樣投票**：節點隨機詢問其他節點的意見，快速達成共識。
+
+- **超快速確認**：交易通常在 **1-2 秒內** 被確定。
+
+- **高擴展性**：允許大量節點同時參與，不影響效率。
+
+> If honest validators begin heavily weighted in favor of one color, then convergence on a decision value will happen very quickly, while variance in random sampling is required to tip the population in one direction in the case that initial inputs are evenly distributed.
+>
+>
+> 如果誠實的驗證者開始偏向某一個顏色，那麼決策值的收斂將會非常快；而如果初始輸入是均勻分佈的，則需要隨機抽樣的變異性來讓整個群體向某一個方向傾斜。
+
+
+### 優點和缺點
+
+- 超快交易確認，幾秒內達成最終性。
+
+- 去中心化強，節點參與度高。
+
+- 高擴展性，適用於高吞吐量應用。
+
+- 新技術，長期穩定性待驗證。
+
+- **理論安全性仍需更多實踐測試。**
+
+---
+代表區塊鏈：Avalanche (AVAX) 
+
+
+---
+ 
+## 總結
+
+PoW 共識機制因為需要大量算力，不僅能源消耗高，交易速度也較慢，且擴展性受限。<Notation type="underline" color="yellow">為了解決這些問題，Ethereum 轉向 PoS (BFT-style) ，透過質押資產來選擇區塊生產者，降低資源消耗並提升交易效率。</Notation>
+ 總體來說，各種共識機制適用於不同場景：
+
+- **比特幣 (Bitcoin)** 採用 PoW，確保安全但交易速度慢。
+
+- **以太坊 (Ethereum)** 在合併後轉向 BFT-style PoS，提高交易效率。
+
+- **Avalanche (AVAX)** 採用獨特的 Snowman 機制，提升擴展性與交易速度。
+
+在未來，隨著區塊鏈應用的增長，新的共識機制可能會進一步優化這些技術，讓區塊鏈在安全性、效率和去中心化之間找到更好的平衡。
+
+
+
+## Reference
+
+- [https://www.avax.network/blog/frosty-bringing-strong-liveness-guarantees-to-the-snow-family-of-consensus-protocols](https://www.avax.network/blog/frosty-bringing-strong-liveness-guarantees-to-the-snow-family-of-consensus-protocols) 
+
+- [https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/) 
+
+- [https://ethereum.org/en/developers/docs/consensus-mechanisms/pow/](https://ethereum.org/en/developers/docs/consensus-mechanisms/pow/) 
+
+- [https://pontem.medium.com/a-detailed-guide-to-blockchain-speed-tps-vs-80c1d52402d0](https://pontem.medium.com/a-detailed-guide-to-blockchain-speed-tps-vs-80c1d52402d0) 
+
+- [What is Byzantine Fault Tolerance｜Explained For Beginners](https://www.youtube.com/watch?v=VWG9xcwjxUg) 
