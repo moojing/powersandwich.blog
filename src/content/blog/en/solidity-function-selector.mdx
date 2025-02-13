@@ -1,0 +1,88 @@
+---
+title: 'Function Selector in Solidity'
+date: '2025-02-11'
+description: 'When first learning Solidity, I was confused by the terms Function Selector and Function Signature. However, after understanding them in detail, I found they are not that abstract. This article will explain the definitions of these two terms and related issues.'
+cover: '../../../assets/solidity-logo.webp' 
+tags: ['solidity','blockchain','note'] 
+---
+When first learning Solidity, I was confused by the terms Function Selector and Function Signature. However, after understanding them in detail, I found they are not that abstract. This article will explain the definitions of these two terms and related issues.
+
+## What is a Function Selector?
+
+In the official documentation, there is an explanation of the Function Selector:
+
+> The first four bytes of the call data for a function call specifies the function to be called. It is the first (left, high-order in big-endian) four bytes of the Keccak-256 hash of the signature of the function.
+
+In simpler terms, in **Solidity**, each function has a **unique identifier**. This identifier is derived from the function's name combined with a specific format (Function Signature, explained later), and then calculated using the hash function [Keccak-256](https://dev.to/shlok2740/keccak256-in-solidity-433m). The first 4 bytes of this value are the Function Selector.
+
+When you call a function in a contract, the Function Selector is placed in the **first 4 bytes (first 8 hexadecimal characters) of the transaction**, allowing the EVM to know which function to execute. It is called a Function Selector because the EVM uses this value to determine which function to execute.
+
+## Function Signature
+
+Function Signature is not a specification unique to Solidity. It is used in many languages to allow the compiler to distinguish between different functions and their related information.
+
+> The signature is defined as the canonical expression of the basic prototype without data location specifier, i.e. the function name with the parenthesised list of parameter types. Parameter types are split by a single comma — no spaces are used.
+
+This is a continuation of the previous official documentation quote. Although the document explains it abstractly, it clearly describes the specification. A Function Signature is the function name followed by parentheses, listing the parameter types separated by a single comma.
+
+For example, in the following contract:
+
+```solidity 
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.4.16 <0.9.0;
+
+contract Foo {
+    function bar(bytes3[2] memory) public pure {}
+    function baz(uint32 x, bool y) public pure returns (bool r) { r = x > 32 || y; }
+}
+```
+
+If we want to execute the `bar` function in the Foo contract, the Function Signature would be `bar(bytes3[2])`. If we want to execute the `baz` function, the Function Signature would be `baz(uint32,bool)`.
+
+## Calculating the Function Selector
+
+![Keccak 256 hash](../../../assets/solidity-function-selector/keccak256-bar.png)
+
+Now that we know what a Function Signature is, how do we calculate the Function Selector? The process is simple. Use the value of the Function Signature, and after [Keccak-256 calculation](https://emn178.github.io/online-tools/keccak_256.html?input=bar(bytes3%5B2%5D)&input_type=utf-8&output_type=hex), you will get `0xfce353f601a3d....`. The first 8 digits `0xfce353f6` are the Function Selector.
+
+## Function Selector Collision
+
+Keccak-256 is a hash function that maps any input to a fixed-length hash value. We take the first eight digits as the Function Selector. However, since only the first eight digits are taken, there is a possibility that different input values, after being processed by this hash function, have the same first eight digits.
+
+When different Function Signatures result in the same Function Selector, a Function Selector Collision occurs. Although it cannot be called a vulnerability, this possibility can easily become a target for attackers. Therefore, when writing contracts
+ (especially proxy patterns, which will be explained in future proxy-related posts), it is important to be aware of this characteristic.
+
+## "uint" And "uint256" Are Interchangeable?
+
+According to the official documentation, when calculating the Function Selector, `uint` in the Function Signature is converted to `uint256`.
+
+```solidity 
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.4.16 <0.9.0;
+
+contract Foo {
+    function bar(bytes3[2] memory) public pure {}
+    function baz(uint32 x, bool y) public pure returns (bool r) { r = x > 32 || y; }
+    function sam(bytes memory, bool, uint[] memory) public pure {}
+}
+```
+
+> `0xa5643bf2`: the Method ID. This is derived from the signature `sam(bytes,bool,uint256[])`. Note that `uint` is replaced with its canonical representation `uint256`.
+
+So, if you write a function in the contract like `function sam(bytes memory, bool, uint[] memory)`, when calling this function, 
+
+you need to know that the corresponding function selector used to call it must be derived from `sam(bytes,bool,uint256[])` after the keccak256 hash function calculation, not `sam(bytes,bool,uint[])`. Otherwise, calling the wrong function may result in defects or vulnerabilities.
+
+The issue caused by this behavior is slightly different from the Function Selector Collision mentioned earlier, but both are due to generating incorrect Function Selectors, leading to unexpected problems. If you want to learn more about this issue, you can continue reading this excellent article:
+
+[Jackpot or Honeypot? A quick lesson on solc's uint and function selectors](https://medium.com/@mattaereal/jackpot-or-honeypot-a-quick-lesson-on-solcs-uint-and-function-selectors-cc1ea7f6afce)
+
+## References
+- https://docs.soliditylang.org/en/latest/contracts.html#
+- [Function Selector Calculator](https://www.evm-function-selector.click/)
+- [Function Selector Database](https://www.4byte.directory/)
+- [How does the EVM resolve method ID collision?](https://ethereum.stackexchange.com/questions/46182/how-does-the-evm-resolve-method-id-collision)
+- [Function selector collision in ERC165](https://ethereum.stackexchange.com/questions/133696/function-selector-collision-in-erc165)
+- [Should UIs handle 4Byte function selector collisions?](https://ethereum.stackexchange.com/questions/40297/should-uis-handle-4byte-function-selector-collisions)
+- https://forum.openzeppelin.com/t/beware-of-the-proxy-learn-how-to-exploit-function-clashing/1070
+- https://github.com/AmazingAng/WTF-Solidity/blob/main/Languages/en/S02_SelectorClash_en/readme.md
