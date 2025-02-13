@@ -1,7 +1,7 @@
 ---
 import Layout from "../components/layout.astro";
 import "@fontsource-variable/jetbrains-mono";
-import { ME_DESCRIPTION } from "../config";
+import { ME_DESCRIPTION, CV_LINK } from "../config";
 import ContactRow from "../components/contact-row.astro";
 import { WORK_EXPERIENCE } from "../config";
 import { Image } from "astro:assets";
@@ -40,12 +40,7 @@ import { Icon } from "astro-icon/components";
                 ))
               }
             </ul>
-            <a
-              class="px-4 py-2 border border-slate-400"
-              target="_blank"
-              href="https://drive.google.com/file/d/1hezaur-KS8kOS7LPEjROt7uV8oyIqH0W/view"
-              download="Resume.pdf"
-            >
+            <a class="px-4 py-2 border border-slate-400" target="_blank" href={CV_LINK}>
               <div class="flex gap-2 items-center text-white justify-center">
                 <span>Open CV</span>
               </div>
