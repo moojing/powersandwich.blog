@@ -13,13 +13,14 @@ In the official documentation, there is an explanation of the Function Selector:
 
 > The first four bytes of the call data for a function call specifies the function to be called. It is the first (left, high-order in big-endian) four bytes of the Keccak-256 hash of the signature of the function.
 
-In simpler terms, in **Solidity**, each function has a **unique identifier**. This identifier is derived from the function's name combined with a specific format (Function Signature, explained later), and then calculated using the hash function [Keccak-256](https://dev.to/shlok2740/keccak256-in-solidity-433m). The first 4 bytes of this value are the Function Selector.
+In simpler terms, in **Solidity**, each function has a **unique identifier**. This identifier is derived from the function's name combined with a specific format (Function Signature, explained later), and then calculated using the hash function [Keccak-256](https://dev.to/shlok2740/keccak256-in-solidity-433m).
+<Notation type="underline" color="yellow"> The first 4 bytes of this value are the Function Selector.</Notation>
 
-When you call a function in a contract, the Function Selector is placed in the **first 4 bytes (first 8 hexadecimal characters) of the transaction**, allowing the EVM to know which function to execute. It is called a Function Selector because the EVM uses this value to determine which function to execute.
+When you call a function in a contract, the Function Selector is placed in the **first 4 bytes (first 8 hexadecimal characters) of the transaction**, allowing the EVM to know which function to execute. It is called a Function Selector probably because the EVM uses this value to determine which function to execute.
 
 ## Function Signature
 
-Function Signature is not a specification unique to Solidity. It is used in many languages to allow the compiler to distinguish between different functions and their related information.
+Function Signature is not a specification unique to Solidity. It is used in many languages to <Notation type="underline" color="yellow"> allow the compiler to distinguish between different functions and their related information. </Notation>
 
 > The signature is defined as the canonical expression of the basic prototype without data location specifier, i.e. the function name with the parenthesised list of parameter types. Parameter types are split by a single comma — no spaces are used.
 
@@ -43,13 +44,14 @@ If we want to execute the `bar` function in the Foo contract, the Function Signa
 
 ![Keccak 256 hash](../../../assets/solidity-function-selector/keccak256-bar.png)
 
-Now that we know what a Function Signature is, how do we calculate the Function Selector? The process is simple. Use the value of the Function Signature, and after [Keccak-256 calculation](https://emn178.github.io/online-tools/keccak_256.html?input=bar(bytes3%5B2%5D)&input_type=utf-8&output_type=hex), you will get `0xfce353f601a3d....`. The first 8 digits `0xfce353f6` are the Function Selector.
+Now that we know what a Function Signature is, how do we calculate the Function Selector? 
+The process is simple.Take function `bar(bytes3[2] memory) ...` for example, you just need to use the value of the Function Signature `bar(bytes3[2])`, and after [Keccak-256 calculation](https://emn178.github.io/online-tools/keccak_256.html?input=bar(bytes3%5B2%5D)&input_type=utf-8&output_type=hex), you will get `0xfce353f601a3d....`. The first 8 digits (8 hexadecimal digits, also equal to 4 bytes) `0xfce353f6` are the Function Selector.
 
 ## Function Selector Collision
 
 Keccak-256 is a hash function that maps any input to a fixed-length hash value. We take the first eight digits as the Function Selector. However, since only the first eight digits are taken, there is a possibility that different input values, after being processed by this hash function, have the same first eight digits.
 
-When different Function Signatures result in the same Function Selector, a Function Selector Collision occurs. Although it cannot be called a vulnerability, this possibility can easily become a target for attackers. Therefore, when writing contracts
+<Notation type="underline" color="yellow"> When different Function Signatures result in the same Function Selector, a Function Selector Collision occurs. </Notation> Although it cannot be called a vulnerability, this possibility can easily become a target for attackers. Therefore, when writing contracts
  (especially proxy patterns, which will be explained in future proxy-related posts), it is important to be aware of this characteristic.
 
 ## "uint" And "uint256" Are Interchangeable?
@@ -69,9 +71,8 @@ contract Foo {
 
 > `0xa5643bf2`: the Method ID. This is derived from the signature `sam(bytes,bool,uint256[])`. Note that `uint` is replaced with its canonical representation `uint256`.
 
-So, if you write a function in the contract like `function sam(bytes memory, bool, uint[] memory)`, when calling this function, 
-
-you need to know that the corresponding function selector used to call it must be derived from `sam(bytes,bool,uint256[])` after the keccak256 hash function calculation, not `sam(bytes,bool,uint[])`. Otherwise, calling the wrong function may result in defects or vulnerabilities.
+So, if you write a function in the contract like `function sam(bytes memory, bool, uint[] memory)`, when calling this function, you need to know that the corresponding function selector used to call it must be derived from `sam(bytes,bool,uint256[])` after the keccak256 hash function calculation, not `sam(bytes,bool,uint[])`. 
+Otherwise, it will cause the wrong function selector, then the wrong function call may result in defects or vulnerabilities.
 
 The issue caused by this behavior is slightly different from the Function Selector Collision mentioned earlier, but both are due to generating incorrect Function Selectors, leading to unexpected problems. If you want to learn more about this issue, you can continue reading this excellent article:
 
