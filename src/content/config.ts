@@ -19,7 +19,7 @@ const blog = defineCollection({
       ),
       tags: z.array(z.string()).optional(),
       // image or image url 
-      cover: image().optional().or(z.string()) ,
+      cover: image().or(z.string()) ,
     }),
 });
 

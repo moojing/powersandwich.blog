@@ -3,6 +3,8 @@ import type { CollectionEntry } from "astro:content";
 import DateTag from "../date-tag.astro";
 import Tag from "../tag.astro";
 import { CollectionType } from "../../types";
+import { Image } from "astro:assets";
+
 type Props = {
   post: CollectionEntry<CollectionType.Blog>;
 };
@@ -18,7 +20,11 @@ const [lang, ...slug] = post.slug.split("/");
   {
     post.slug && (
       <a href={`/${lang}/posts/${slug.join("/")}`} target="_self">
-        <img src={coverSrc} alt="cover" class="w-full aspect-video rounded-lg self-auto object-cover" />
+        {isCoverObject ? (
+          <Image src={cover} alt="cover" class="w-full aspect-video rounded-lg self-auto object-cover" />
+        ) : (
+          <img src={coverSrc} alt="cover" class="w-full aspect-video rounded-lg self-auto object-cover" />
+        )}
       </a>
     )
   }
