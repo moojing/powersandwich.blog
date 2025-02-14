@@ -11,6 +11,9 @@ module.exports = {
         logo: ["'Press Start 2P'"].concat(defaultTheme.fontFamily.sans),
         mono: ["JetBrains Mono"].concat(defaultTheme.fontFamily.mono),
       },
+      colors: {
+        highlight: "#f97316",
+      }
     },
   },
   plugins: [],
