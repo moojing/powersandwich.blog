@@ -33,10 +33,10 @@ const coverSrc = isCoverObject ? `${cover.src}` : `${cover}`;
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
-  <slot name="meta">
+  <Fragment slot="meta">
     <meta property="og:image" content={coverSrc} />
     <meta property="twitter:image" content={coverSrc} />
-  </slot>
+  </Fragment>
 
   <div class="flex flex-col gap-8 md:w-5/6 px-4 py-12 sm:px-8 mx-auto">
     <div class="flex flex-col gap-6 items-center justify-center max-w-screen-sm mx-auto">
@@ -55,24 +55,24 @@ const coverSrc = isCoverObject ? `${cover.src}` : `${cover}`;
     <PostContent post={post} />
   </div>
   <Slogan atBottom />
-</Layout>
 
-<script>
-  import { annotate, annotationGroup } from "rough-notation";
-  const notions = document.querySelectorAll("span[data-notion-identity]");
-  const annotations = new Array(notions.length).fill(0).map((_, index) => {
-    const node = notions[index] as HTMLSpanElement;
-    const type = node.dataset.notionType;
-    const color = node.dataset.notionColor;
-    const strokeWidth = node.dataset.notionStrokewidth;
-    return annotate(node, {
-      type: (type as "underline") ?? "underline",
-      color: color ?? "red",
-      animate: false,
-      multiline: type === "bracket" ? false : true,
-      brackets: ["left", "right"],
-      strokeWidth: Number(strokeWidth) ?? 1.5,
+  <script>
+    import { annotate, annotationGroup } from "rough-notation";
+    const notions = document.querySelectorAll("span[data-notion-identity]");
+    const annotations = new Array(notions.length).fill(0).map((_, index) => {
+      const node = notions[index] as HTMLSpanElement;
+      const type = node.dataset.notionType;
+      const color = node.dataset.notionColor;
+      const strokeWidth = node.dataset.notionStrokewidth;
+      return annotate(node, {
+        type: (type as "underline") ?? "underline",
+        color: color ?? "red",
+        animate: false,
+        multiline: type === "bracket" ? false : true,
+        brackets: ["left", "right"],
+        strokeWidth: Number(strokeWidth) ?? 1.5,
+      });
     });
-  });
-  annotationGroup(annotations).show();
-</script>
+    annotationGroup(annotations).show();
+  </script>
+</Layout>
