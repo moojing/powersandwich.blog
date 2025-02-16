@@ -3,7 +3,7 @@ const props = Astro.props;
 import { Icon } from "astro-icon/components";
 ---
 
-<h3 {...props} class="text-2xl font-bold mt-6 mb-2 relative scroll-mt-40 group" id={`${props.id}`}>
+<h3 {...props} class="text-xl font-bold mt-6 mb-2 relative scroll-mt-40 group" id={`${props.id}`}>
   <slot />
   <a
     href={`#${props.id}`}
