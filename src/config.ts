@@ -115,7 +115,6 @@ export const PROJECTS = [
     externalLink: "https://github.com/porco-rosso-j/eth-rome-2023",
     link: "https://taikai.network/ethrome/hackathons/ethrome-23/projects/clnfwynab00eswu01pbnmnjif/idea",
     details:[
-      'A private payment dapp, allowing users to send/receive crypto privately, with just an URL',
       'Built with Railgun, a private payment protocol enabling end-to-end encrypted transactions',
       'Won the bounty of Privacy Track',
     ]
