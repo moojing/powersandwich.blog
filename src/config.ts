@@ -1,6 +1,7 @@
 import JsSandwich from './assets/projects/javascript-concept-sandwich-cover.png'
 import RaycastExt from './assets/projects/raycast-plugin.png'
 import AstroLeo from './assets/projects/astro-leo-theme-preview.png'
+import GhostPay from './assets/projects/ghostpay-screenshot.png'
 
 export const SITE_FAVICON = "/favicon.png";
 export const SITE_LOGO = "/logo.png";
@@ -104,6 +105,19 @@ export const PROJECTS = [
       'Make price inquiry easier',
       'Built with React API',
       'An open source project',
+    ]
+  },
+  {
+    id: "eth-rome-ghostpay",
+    title: "ETHRome Hackathon Project - GhostPay",
+    description: "GhostPay is a private payment dapp, allowing users to send and receive crypto privately, with just an URL instead of wallet address.",
+    image: GhostPay,
+    externalLink: "https://github.com/porco-rosso-j/eth-rome-2023",
+    link: "https://taikai.network/ethrome/hackathons/ethrome-23/projects/clnfwynab00eswu01pbnmnjif/idea",
+    details:[
+      'A private payment dapp, allowing users to send/receive crypto privately, with just an URL',
+      'Built with Railgun, a private payment protocol enabling end-to-end encrypted transactions',
+      'Won the bounty of Privacy Track',
     ]
   },
   {
