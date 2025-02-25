@@ -30,6 +30,10 @@ pre.astro-code {
   @apply px-4 py-3 rounded-lg text-xl !bg-zinc-800/60 leading-6 overflow-x-scroll;
 }
 
+pre.astro-code code {
+  @apply p-0;
+}
+
 svg.rough-annotation {
   opacity: 70%;
 }
