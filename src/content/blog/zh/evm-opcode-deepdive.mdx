@@ -1,11 +1,12 @@
 ---
 title: 'EVM OPCodes 解析 - Contract Creation'
-date: '2025-02-24'
-description: ''
+date: '2025-02-26'
+description: '這篇文章是為了介紹 Solidity 背後的操作碼 (Operaion Code 或 OP Code) 實際上在 EVM 裡面是怎麼運作的。我們在寫一份合約的時候雖然是使用 Solidity 這個人類看得懂的程式語言，不過 Solidity 可不是給機器看的，所以我們需要 Compiler 的介入來幫助我們把人類的自然語言轉換成能與機器溝通的機器碼。'
 cover: '../../../assets/solidity-logo.webp' 
-tags: []
+tags: ['solidity','blockchain','note'] 
+hideOnHomePage: true
 ---
-這篇文章是為了介紹 Solidity 背後的操作碼 (Operaion Code 或 OP Code) 實際上在 EVM 裡面是怎麼運作的。我們在寫一份合約的時候雖然是使用 Solidity 這個人類看得懂的程式語言，不過 Solidity 可不是給機器看的，所以我們需要 Compiler 的介入來幫助我們把人類的自然語言轉換成能與機器溝通的機器碼。
+這篇文章是為了介紹 Solidity 背後的操作碼 (Operation Code) 實際上在 EVM 裡面是怎麼運作的。我們在寫一份合約的時候雖然是使用 Solidity 這個人類看得懂的程式語言，不過 Solidity 可不是給機器看的，所以我們需要 Compiler 的介入來幫助我們把人類的自然語言轉換成能與機器溝通的機器碼。
 
 ## Compiler 做了什麼？
 
