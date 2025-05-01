@@ -2,6 +2,7 @@ import JsSandwich from './assets/projects/javascript-concept-sandwich-cover.png'
 import RaycastExt from './assets/projects/raycast-plugin.png'
 import AstroLeo from './assets/projects/astro-leo-theme-preview.png'
 import GhostPay from './assets/projects/ghostpay-screenshot.png'
+import MyProGuide from './assets/projects/my-pro-guide.png'
 
 export const SITE_FAVICON = "/favicon.png";
 export const SITE_LOGO = "/logo.png";
@@ -82,17 +83,17 @@ export const WORK_EXPERIENCE = [
 
 export const PROJECTS = [
   {
-    id: "javascript-concept-sandwich",
-    title: "My Book - JavaScript Concept Sandwich",
-    description: "This is the first JavaScript technical book I wrote. I participated in a writing competition. In this competition, I decided to try expressing the JavaScript knowledge I had acquired. In the end, I won an award in the competition.",
-    image: JsSandwich,
-    link: "/projects/javascript-concept-sandwich",
-    externalLink: "https://www.tenlong.com.tw/products/9789864347575",
-    details: [
-      "Explaining how JavaScript works through illustrations.",
-      "Making it easier for people who want to learn JavaScript.",
-      "Won an award in the competition.",
-    ],
+    id: "my-pro-guide",
+    title: "My Pro Guide",
+    description: "This is a guide platform for travelers to find the best guide for their trip.",
+    image: MyProGuide,
+    externalLink: "https://guide.myproguide.com/",
+    link: "https://guide.myproguide.com/",
+    details:[
+      'Built with Nuxt.js, Shadcn Vue, Tailwind, and TypeScript',
+      'Allow guides to register and receive reviews and tips from travelers',
+      'Allow travelers to find the best guide for their trip',
+    ]
   },
   {
     id: "raycast-extension-coinmarketcap-price-crawler",
@@ -120,6 +121,19 @@ export const PROJECTS = [
     ]
   },
   {
+    id: "javascript-concept-sandwich",
+    title: "My Book - JavaScript Concept Sandwich",
+    description: "This is the first JavaScript technical book I wrote. I participated in a writing competition. In this competition, I decided to try expressing the JavaScript knowledge I had acquired. In the end, I won an award in the competition.",
+    image: JsSandwich,
+    link: "/projects/javascript-concept-sandwich",
+    externalLink: "https://www.tenlong.com.tw/products/9789864347575",
+    details: [
+      "Explaining how JavaScript works through illustrations.",
+      "Making it easier for people who want to learn JavaScript.",
+      "Won an award in the competition.",
+    ],
+  },
+  {
     id: "astro-leo-theme",
     title: "Astro Blog Theme - Leo",
     description: "Leo is an Astro theme built with Tailwind that gives you a sense of exploration in the universe and is designed to make writing posts easy.",
@@ -132,5 +146,6 @@ export const PROJECTS = [
       'I used three.js to create this starry background',
     ]
   },
+  
 ];
 export const GOOGLE_GTAG = "GTM-P6FNQVBP";
