@@ -49,7 +49,7 @@ export const ME_DESCRIPTION =
       interest in blockchain, I am committed to contributing to this rapidly evolving field. I’ve successfully
       collaborated with developers in a Growth Squad to build experimental and innovative projects.`;
 
-export const CV_LINK = 'https://www.canva.com/design/DAFqIFUUFRo/XeP_E73rn0YIkr3DGCPl-w/view'
+export const CV_LINK = 'https://flowcv.com/resume/wgn4reukrb4l'
 export const WORK_EXPERIENCE = [
   {
     company: "protto Co. Ltd.",
