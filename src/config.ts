@@ -88,6 +88,7 @@ export const PROJECTS = [
     description: "This is a guide platform for travelers to find the best guide for their trip.",
     image: MyProGuide,
     externalLink: "https://guide.myproguide.com/",
+    externalLabel: "Explore ↗",
     link: "https://guide.myproguide.com/",
     details:[
       'Built with Nuxt.js, Shadcn Vue, Tailwind, and TypeScript',
@@ -101,6 +102,7 @@ export const PROJECTS = [
     description: "This is an open source project build with Raycast, and it's a crawler to get the price of cryptocurrencies.",
     image: RaycastExt,
     externalLink: "https://www.raycast.com/SonicSpark/coinmarketcap-crypto-price-crawler",
+    externalLabel: "Explore ↗",
     link: "/projects/raycast-extension-coinmarketcap-price-crawler",
     details:[
       'Make price inquiry easier',
@@ -114,6 +116,7 @@ export const PROJECTS = [
     description: "GhostPay is a private payment dapp, allowing users to send and receive crypto privately, with just an URL instead of wallet address.",
     image: GhostPay,
     externalLink: "https://github.com/porco-rosso-j/eth-rome-2023",
+    externalLabel: "Explore ↗",
     link: "https://taikai.network/ethrome/hackathons/ethrome-23/projects/clnfwynab00eswu01pbnmnjif/idea",
     details:[
       'Built with Railgun, a private payment protocol enabling end-to-end encrypted transactions',
@@ -127,6 +130,7 @@ export const PROJECTS = [
     image: JsSandwich,
     link: "/projects/javascript-concept-sandwich",
     externalLink: "https://www.tenlong.com.tw/products/9789864347575",
+    externalLabel: "Explore ↗",
     details: [
       "Explaining how JavaScript works through illustrations.",
       "Making it easier for people who want to learn JavaScript.",
@@ -139,6 +143,7 @@ export const PROJECTS = [
     description: "Leo is an Astro theme built with Tailwind that gives you a sense of exploration in the universe and is designed to make writing posts easy.",
     image: AstroLeo,
     externalLink: "https://astro.build/themes/details/astro-theme-leo/",
+    externalLabel: "Explore ↗",
     link: "/en/posts/how-i-build-this-blog",
     details:[
       'The astro theme that is built for my blog, which is this website',
