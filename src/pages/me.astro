@@ -1,18 +1,16 @@
 ---
 import Layout from "../components/layout.astro";
 import Button from "../components/button.astro";
+import PortfolioGrid from "../components/react/PortfolioGrid";
 import "@fontsource-variable/jetbrains-mono";
 import { ME_DESCRIPTION, CV_LINK } from "../config";
 import ContactRow from "../components/contact-row.astro";
 import { WORK_EXPERIENCE } from "../config";
-import { Image } from "astro:assets";
-import { PROJECTS } from "../config";
-import { Icon } from "astro-icon/components";
 ---
 
 <Layout hideFooter title="About Me">
   <div class="max-w-screen-lg mx-auto pb-24">
-    <div class="bg-neutral-900/60 rounded-lg p-4 mt-[60px] md:mt-[80px] mb-6">
+    <div class="bg-neutral-900/60 rounded-lg p-4 mt-[60px] md:mt-[80px] mb-6 md:mb-12">
       <div class="flex-col md:flex-row flex items-center justify-center gap-6 md:gap-10 h-full text-white">
         <div>
           <h3 class="text-white text-2xl font-logo">Hello, I am Mu Jing!</h3>
@@ -50,44 +48,7 @@ import { Icon } from "astro-icon/components";
     </div>
 
     <div class="p-4 flex gap-4 bg-neutral-900/60 rounded-lg">
-      <div class="flex flex-col flex-1">
-        <h3 class="text-white text-2xl font-logo mb-6 scroll-mt-40" id="projects">My Projects</h3>
-        <ul class="flex flex-col gap-8 text-slate-400 m-0">
-          {
-            PROJECTS.map((item) => (
-              <li
-                class="project flex gap-4 md:flex-row flex-col cursor-pointer rounded-lg p-4 hover:bg-white/10 transition-colors relative"
-                id={item.id}
-              >
-                <a href={item.link} target="_blank" class="absolute inset-0 z-10" aria-label={item.title} />
-                <div class="max-w-full md:max-w-40 w-full aspect-[4/3] overflow-hidden rounded-lg bg-white">
-                  <Image src={item.image} alt={item.title} class="object-cover h-full w-full" />
-                </div>
-                <div class="relative">
-                  {item.externalLink ? (
-                    <a
-                      href={item.externalLink}
-                      target="_blank"
-                      class="z-20 relative hover:text-white text-slate-200 text-lg flex items-center gap-1 transition-colors"
-                    >
-                      <h4 class="text-lg">{item.title}</h4>
-                      <Icon name="mdi:external-link" class="w-3 h-3" />
-                    </a>
-                  ) : (
-                    <h4 class="text-lg text-slate-200">{item.title}</h4>
-                  )}
-                  <p class="text-sm mb-4">{item.description}</p>
-                  <ul class="list-disc list-inside flex-col gap-1">
-                    {item.details.map((detail) => (
-                      <li class="text-sm">{detail}</li>
-                    ))}
-                  </ul>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      <PortfolioGrid client:load showTitle={true} />
     </div>
   </div>
 </Layout>
