@@ -1,39 +1,8 @@
 ---
 import Layout from "../components/layout.astro";
-import Button from "../components/button.astro";
-import { PROJECTS } from "../config";
-import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
+import PortfolioComponent from "../components/react/Portfolio";
 ---
 
 <Layout title="Portfolio">
-  <div class="max-w-screen-lg mx-auto pb-24">
-    <div class="bg-neutral-900/60 rounded-lg p-4 mt-[60px] md:mt-[80px] mb-6">
-      <h2 class="text-white text-2xl font-logo mb-12">My Projects</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {
-          PROJECTS.map((item) => (
-            <div class="bg-zinc-800/60 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative flex flex-col h-full">
-              <a href={item.link} target="_blank" class="absolute inset-0 z-10" aria-label={item.title} />
-              <div class="aspect-[4/3] overflow-hidden">
-                <Image src={item.image} alt={item.title} class="object-cover w-full h-full" />
-              </div>
-              <div class="p-4 flex flex-col gap-2 z-20 relative flex-grow">
-                <h4 class="text-lg font-semibold text-slate-200">{item.title}</h4>
-                <p class="text-sm text-slate-400">{item.description}</p>
-                <p class="text-sm text-slate-400 flex-grow">{item.details.join(". ")}.</p>
-                <div class="flex gap-2 w-full">
-                  {item.externalLink && (
-                    <Button href={item.externalLink} class="mt-auto rounded-md flex-1">
-                      {item.externalLabel ?? "Explore ↗"}
-                    </Button>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </div>
+  <PortfolioComponent client:load />
 </Layout>
