@@ -92,10 +92,9 @@ export const PROJECTS = [
     externalLabel: "Project Details",
     link: "/projects/portto-blocto-web",
     details:[
+      'A multi-chain crypto wallet web app on on Web',
       'Built with React, Next.js, TypeScript, and Tailwind CSS', 
-      'A multi-chain crypto wallet web app on on Web', 'Support for multiple chains and tokens', 
-      'Support for multiple wallets and transactions', 'Support for multiple networks and transactions', 
-      'Support for multiple networks and transactions'
+      'Implemented user interface for an experimental inscription project, reaching 2.1M transactions and 26K users in days.',
     ]
   },
   {

@@ -60,9 +60,10 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({ variant = "grid", showTit
                   )}
                 </div>
                 <p className="text-sm mb-4">{item.description}</p>
-                <ul className="list-disc list-inside flex-col gap-1">
+                <ul className="flex-col gap-1">
                   {item.details.map((detail, index) => (
-                    <li key={index} className="text-sm">
+                    <li key={index} className="text-sm flex items-start gap-1">
+                      <span className="text-blue-400 mt-0.5">→</span>
                       {detail}
                     </li>
                   ))}
@@ -95,7 +96,14 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({ variant = "grid", showTit
             <div className="cursor-pointer p-4 flex flex-col gap-2 z-20 relative flex-grow">
               <h4 className="text-lg font-semibold text-slate-200">{item.title}</h4>
               <p className="text-sm text-slate-400">{item.description}</p>
-              <p className="text-sm text-slate-400 flex-grow">{item.details.join(". ")}.</p>
+              <ul className="flex-col gap-1 flex-grow ml-1">
+                {item.details.map((detail, index) => (
+                  <li key={index} className="text-sm text-slate-400 flex items-start gap-2">
+                    <span className="text-blue-400 mt-0.5">→</span>
+                    {detail}
+                  </li>
+                ))}
+              </ul>
               <div className="flex gap-2 w-full">
                 {item.externalLink && (
                   <Button
