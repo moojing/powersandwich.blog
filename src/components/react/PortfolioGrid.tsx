@@ -40,7 +40,7 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({ variant = "grid", showTit
           {PROJECTS.map((item) => (
             <li
               key={item.id}
-              className="project flex gap-4 md:flex-row flex-col cursor-pointer rounded-lg p-4 hover:bg-white/10 transition-colors relative"
+              className="cursor-pointer flex gap-4 md:flex-row flex-col rounded-lg p-4 hover:bg-white/10 transition-colors relative"
               onClick={() => handleCardClick(item)}
             >
               <div className="max-w-full md:max-w-40 w-full aspect-[4/3] overflow-hidden rounded-lg bg-white">
@@ -92,7 +92,7 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({ variant = "grid", showTit
                 className="object-cover w-full h-full"
               />
             </div>
-            <div className="p-4 flex flex-col gap-2 z-20 relative flex-grow">
+            <div className="cursor-pointer p-4 flex flex-col gap-2 z-20 relative flex-grow">
               <h4 className="text-lg font-semibold text-slate-200">{item.title}</h4>
               <p className="text-sm text-slate-400">{item.description}</p>
               <p className="text-sm text-slate-400 flex-grow">{item.details.join(". ")}.</p>
