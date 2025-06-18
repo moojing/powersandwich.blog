@@ -44,11 +44,10 @@ export const CONTACTS = {
 
 export const SLOGAN = "A bite a day keeps bugs away.";
 export const ME_DESCRIPTION =
-  `I am a passionate front-end developer with 4 years of experience in JavaScript and the author of a book on the
-      subject. I enjoy exploring new advancements in software engineering. After transitioning from backend to frontend
-      development, I have reignited my passion for new technologies. <br/> <br/> Currently, as a front-end programmer with a deep
-      interest in blockchain, I am committed to contributing to this rapidly evolving field. I’ve successfully
-      collaborated with developers in a Growth Squad to build experimental and innovative projects.`;
+  `I am a frontend developer with 5 years of experience, including 2 years in the Web3 space. I love exploring emerging technology and collaborating with highly creative teams, where ideas are challenged and elevated.
+\n Currently seeking opportunities at the intersection of Fintech, AI, and Web3, where innovation and engineering meet real-world challenges. I’ve worked closely with experimental teams to build and launch products that attracted meaningful user engagement.  I’ve also authored a JavaScript book, sharing technical insights and foundational knowledge through clear and structured explanations.
+\n Building on these contributions, I continue to deepen my expertise and push the boundaries of software engineering across multiple domains.`;
+
 
 export const CV_LINK = 'https://docs.google.com/document/d/1JhVOhgh6XH0A7Zx3q-ZDohVwFpwSqGHq/edit?usp=sharing&ouid=101957875106380816752&rtpof=true&sd=true'
 export const WORK_EXPERIENCE = [
