@@ -3,6 +3,7 @@ import RaycastExt from './assets/projects/raycast-plugin.png'
 import AstroLeo from './assets/projects/astro-leo-theme-preview.png'
 import GhostPay from './assets/projects/ghostpay-screenshot.png'
 import MyProGuide from './assets/projects/my-pro-guide.png'
+import BloctoWeb from './assets/projects/portto-blocto-web/blocto-cover.png'
 
 export const SITE_FAVICON = "/favicon.png";
 export const SITE_LOGO = "/logo.png";
@@ -82,6 +83,21 @@ export const WORK_EXPERIENCE = [
 
 
 export const PROJECTS = [
+  {
+    id: "portto-blocto-web",
+    title: "Crypto Wallet Web App - Blocto",
+    description: "A multi-chain crypto wallet web app on on Web, built with React, Next.js, TypeScript, and Tailwind CSS.",
+    image: BloctoWeb,
+    externalLink: "",
+    externalLabel: "Project Details",
+    link: "/projects/portto-blocto-web",
+    details:[
+      'Built with React, Next.js, TypeScript, and Tailwind CSS', 
+      'A multi-chain crypto wallet web app on on Web', 'Support for multiple chains and tokens', 
+      'Support for multiple wallets and transactions', 'Support for multiple networks and transactions', 
+      'Support for multiple networks and transactions'
+    ]
+  },
   {
     id: "my-pro-guide",
     title: "My Pro Guide",
