@@ -83,7 +83,7 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({ variant = "grid", showTit
         {PROJECTS.map((item) => (
           <div
             key={item.id}
-            className="bg-zinc-800/60 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative flex flex-col h-full cursor-pointer"
+            className="bg-zinc-800/80 hover:bg-zinc-700/60 overflow-hidden transition-[background-color,box-shadow] duration-300 relative flex flex-col h-full cursor-pointer"
             onClick={() => handleCardClick(item)}
           >
             <div className="aspect-[4/3] overflow-hidden">
