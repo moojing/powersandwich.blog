@@ -6,6 +6,10 @@ cover: '../../assets/projects/portto-blocto-web/blocto-example.png'
 tags: ['project']
 ---
  
+## Tech Stack
+
+React / TypeScript / TailwindCSS / Xstate / Ethers.js / i18next / web3.js 
+
 
 ## What is Blocto Wallet?
 
@@ -21,7 +25,7 @@ As a Frontend Engineer, I was responsible for key user-facing flows that made th
 <Notation type="underline" color="yellow"> I also maintained the wallet's design system and worked closely with designers and backend engineers </Notation> to support complex workflows such as chain switching and transaction previews.
 My contributions helped streamline wallet interactions, reduce user drop-off, and improve the reliability of core user journeys.
 
- 
+
 ## Key responsibilities:
 - Contributed to frontend development for multi-chain wallet architecture and core user flows.
 - Collaborated with PM, designers and blockchain engineers to deliver scalable and user-friendly crypto wallet UIs.
@@ -32,16 +36,23 @@ My contributions helped streamline wallet interactions, reduce user drop-off, an
 
 
 ## Core Features I Contributed To
+### Xstate state management
+
+![state chart of login process](../../assets/projects/portto-blocto-web/xstate-state-management.png)
+
+- Architected state management using XState to handle complex navigation and user flows, resulting in more maintainable code and easier debugging.
+- Designed multiple error handling states with proper state transitions and recovery paths for different failure scenarios
+
 ###  Email & Social Login
 
-![](../../assets/projects/portto-blocto-web/login-flow.png)
+![pages of login process](../../assets/projects/portto-blocto-web/login-flow.png)
 - Designed & implemented the UI & state flow for email & social login.
 - Integrated Social login with oauth flow like Google, Apple, etc.
 
 
 ### Transaction & Gas Estimation
 
-![](../../assets/projects/portto-blocto-web/send-transaction.png)
+![pages of sending transaction](../../assets/projects/portto-blocto-web/send-transaction.png)
 
 - Enabled users to pay transaction fees using in-house points, replacing the traditional gas fees required by other wallets.
 - Organized transaction data according to each chain's structure to ensure compatibility when sending transactions.
@@ -50,7 +61,7 @@ My contributions helped streamline wallet interactions, reduce user drop-off, an
 
 ### Chain & Account Switching
 
-![](../../assets/projects/portto-blocto-web/account-settings.png)
+![pages of switch between accounts and blockchains](../../assets/projects/portto-blocto-web/account-settings.png)
 
 - Built user interface and state handling for EVM chain switching (e.g., from Ethereum to Arbitrum).
 - Ensured consistency between on-screen account states and background session data.
@@ -66,10 +77,6 @@ My contributions helped streamline wallet interactions, reduce user drop-off, an
 - Helped scale wallet frontend to support 600K+ users across 5+ EVM chains.
 
 
-
-## Tech Stack
-
-React / TypeScript / TailwindCSS / Xstate / Ethers.js / i18next / web3.js 
 
 
 
