@@ -103,7 +103,7 @@ export const PROJECTS = [
     image: MyProGuide,
     externalLink: "https://guide.myproguide.com/",
     externalLabel: "Explore ↗",
-    link: "https://guide.myproguide.com/",
+    link: "/projects/my-pro-guide",
     details:[
       'Built with Nuxt.js, Shadcn Vue, Tailwind, and TypeScript',
       'Allow guides to register and receive reviews and tips from travelers',
